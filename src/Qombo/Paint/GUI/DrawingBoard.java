@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -50,6 +51,10 @@ public class DrawingBoard extends JComponent {
                         shapes.add(shape);
                     } else if (gui.currentAction == 2) {
                         Shape shape = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
+                        shapes.add(shape);
+                    }
+                    else if (gui.currentAction == 0) {
+                        Shape shape = drawLine(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(shape);
                     }
 
@@ -99,7 +104,10 @@ public class DrawingBoard extends JComponent {
                     shape = drawEllipse(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                 }
-
+                if (gui.currentAction == 1) {
+                    shape = drawLine(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    graphicsSettings.draw(shape);
+                }
             }
         }
 
@@ -120,6 +128,10 @@ public class DrawingBoard extends JComponent {
             int width = Math.abs(x1 - x2);
             int height = Math.abs(y1 - y2);
             return new Ellipse2D.Float(x, y, width, height);
+        }
+        private Line2D.Float drawLine(int x1,int y1, int x2,int y2)
+        {
+            return new Line2D.Float(x1,y1,x2,y2);
         }
 
 }

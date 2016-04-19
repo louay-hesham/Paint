@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,8 +28,8 @@ import javax.swing.JPanel;
  * @author lo2ay
  */
 public class DrawingBoard extends JPanel {
-    
-    private void log(String str){
+
+    private void log(String str) {
         System.out.println(str);
     }
 
@@ -123,6 +124,10 @@ public class DrawingBoard extends JPanel {
         int width = Math.abs(x1 - x2);
         int height = Math.abs(y1 - y2);
         return new Ellipse2D.Float(x, y, width, height);
+    }
+
+    private Line2D.Float drawLine(int x1, int y1, int x2, int y2) {
+        return new Line2D.Float(x1, y1, x2, y2);
     }
 
 }

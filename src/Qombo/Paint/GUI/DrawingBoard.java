@@ -32,8 +32,10 @@ public class DrawingBoard extends JComponent {
         ArrayList<Color> shapeFill = new ArrayList<Color>();
         ArrayList<Color> shapeStroke = new ArrayList<Color>();
         Point drawStart, drawEnd;
+        MainGUI gui;
 
-        public DrawingBoard() {
+        public DrawingBoard(MainGUI gui) {
+            this.gui = gui;
             this.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     drawStart = new Point(e.getX(), e.getY());
@@ -43,16 +45,16 @@ public class DrawingBoard extends JComponent {
                 }
 
                 public void mouseReleased(MouseEvent e) {
-                    if (currentAction == 1) {
+                    if (gui.currentAction == 1) {
                         Shape shape = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(shape);
-                    } else if (currentAction == 2) {
+                    } else if (gui.currentAction == 2) {
                         Shape shape = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(shape);
                     }
 
-                    shapeFill.add(fillColor);
-                    shapeStroke.add(strokeColor);
+                    shapeFill.add(gui.fillColor);
+                    shapeStroke.add(gui.strokeColor);
                     drawStart = null;
                     drawEnd = null;
 
@@ -90,10 +92,10 @@ public class DrawingBoard extends JComponent {
                 graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.40f));
                 graphicsSettings.setPaint(Color.lightGray);
                 Shape shape = null;
-                if (currentAction == 1) {
+                if (gui.currentAction == 1) {
                     shape = drawRectangle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
-                } else if (currentAction == 2) {
+                } else if (gui.currentAction == 2) {
                     shape = drawEllipse(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                 }

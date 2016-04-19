@@ -33,9 +33,9 @@ public class DrawingBoard extends JPanel {
         System.out.println(str);
     }
 
-    ArrayList<Shape> shapes = new ArrayList<Shape>();
-    ArrayList<Color> shapeFill = new ArrayList<Color>();
-    ArrayList<Color> shapeStroke = new ArrayList<Color>();
+    ArrayList<Shape> shapes = new ArrayList();
+    ArrayList<Color> shapeFill = new ArrayList();
+    ArrayList<Color> shapeStroke = new ArrayList();
     Point drawStart, drawEnd;
     MainGUI gui;
 
@@ -43,6 +43,7 @@ public class DrawingBoard extends JPanel {
         this.gui = gui;
         this.setBackground(Color.white);
         this.addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent e) {
                 drawStart = new Point(e.getX(), e.getY());
                 drawEnd = drawStart;
@@ -50,13 +51,29 @@ public class DrawingBoard extends JPanel {
                 log("Mouse pressed.");
             }
 
+            @Override
             public void mouseReleased(MouseEvent e) {
-                if (gui.currentAction == 1) {
-                    Shape shape = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
-                    shapes.add(shape);
-                } else if (gui.currentAction == 2) {
-                    Shape shape = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
-                    shapes.add(shape);
+                switch (gui.currentAction) {
+                    case 1:
+                        {
+                            Shape shape = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            shapes.add(shape);
+                            break;
+                        }
+                    case 2:
+                        {
+                            Shape shape = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            shapes.add(shape);
+                            break;
+                        }
+                    case 3:
+                        {
+                            Shape shape = drawLine(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            shapes.add(shape);
+                            break;
+                        }
+                    default:
+                        break;
                 }
 
                 shapeFill.add(gui.fillColor);
@@ -68,6 +85,7 @@ public class DrawingBoard extends JPanel {
             }
         }); // end of addMouseListener
         this.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
             public void mouseDragged(MouseEvent e) {
                 drawEnd = new Point(e.getX(), e.getY());
                 repaint();
@@ -75,6 +93,7 @@ public class DrawingBoard extends JPanel {
         }); // end of addMouseMotionListener
     } // end of constructor
 
+    @Override
     public void paint(Graphics g) {
 
         Graphics2D graphicsSettings = (Graphics2D) g;
@@ -96,12 +115,21 @@ public class DrawingBoard extends JPanel {
             graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.40f));
             graphicsSettings.setPaint(Color.lightGray);
             Shape shape = null;
-            if (gui.currentAction == 1) {
-                shape = drawRectangle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
-                graphicsSettings.draw(shape);
-            } else if (gui.currentAction == 2) {
-                shape = drawEllipse(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
-                graphicsSettings.draw(shape);
+            switch (gui.currentAction) {
+                case 1:
+                    shape = drawRectangle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    graphicsSettings.draw(shape);
+                    break;
+                case 2:
+                    shape = drawEllipse(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    graphicsSettings.draw(shape);
+                    break;
+                case 3:
+                    shape = drawLine(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    graphicsSettings.draw(shape);
+                    break;
+                default:
+                    break;
             }
 
         }

@@ -14,7 +14,7 @@ import javax.swing.JButton;
  */
 public class MainGUI extends javax.swing.JFrame {
     
-    protected JButton brushButton, lineButton, ellipseButton, rectangleButton, strokeButton, fillButton;
+    protected JButton brushButton, strokeButton, fillButton;
     protected int currentAction = 1;
     protected Color strokeColor = Color.black, fillColor = Color.black;
     protected DrawingBoard drawingBoard;
@@ -30,7 +30,10 @@ public class MainGUI extends javax.swing.JFrame {
         this.strokeColor = Color.black;
         this.drawingBoard = new DrawingBoard(this);
         this.drawingBoard.setSize(500,500);
-        this.add(drawingBoard);
+        this.drawingBoard.setBackground(Color.CYAN);
+        this.drawingBoard.setSize(1191,447);
+        this.CanvasPanel.add(drawingBoard);
+        this.setResizable(false);
     }
 
     /**
@@ -42,21 +45,91 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rectangleButton = new javax.swing.JButton();
+        ellipseButton = new javax.swing.JButton();
+        lineButton = new javax.swing.JButton();
+        CanvasPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        rectangleButton.setText("Rectangle");
+        rectangleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rectangleButtonActionPerformed(evt);
+            }
+        });
+
+        ellipseButton.setText("Ellipse");
+        ellipseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ellipseButtonActionPerformed(evt);
+            }
+        });
+
+        lineButton.setText("Line");
+        lineButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lineButtonActionPerformed(evt);
+            }
+        });
+
+        CanvasPanel.setBackground(java.awt.Color.white);
+
+        javax.swing.GroupLayout CanvasPanelLayout = new javax.swing.GroupLayout(CanvasPanel);
+        CanvasPanel.setLayout(CanvasPanelLayout);
+        CanvasPanelLayout.setHorizontalGroup(
+            CanvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        CanvasPanelLayout.setVerticalGroup(
+            CanvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 447, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(505, 505, 505)
+                .addComponent(rectangleButton)
+                .addGap(27, 27, 27)
+                .addComponent(ellipseButton)
+                .addGap(38, 38, 38)
+                .addComponent(lineButton)
+                .addContainerGap(465, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CanvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rectangleButton)
+                    .addComponent(ellipseButton)
+                    .addComponent(lineButton))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void rectangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectangleButtonActionPerformed
+        this.currentAction=1;
+    }//GEN-LAST:event_rectangleButtonActionPerformed
+
+    private void ellipseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ellipseButtonActionPerformed
+        this.currentAction=2;
+    }//GEN-LAST:event_ellipseButtonActionPerformed
+
+    private void lineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineButtonActionPerformed
+        this.currentAction=3;
+    }//GEN-LAST:event_lineButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,5 +168,9 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CanvasPanel;
+    private javax.swing.JButton ellipseButton;
+    private javax.swing.JButton lineButton;
+    private javax.swing.JButton rectangleButton;
     // End of variables declaration//GEN-END:variables
 }

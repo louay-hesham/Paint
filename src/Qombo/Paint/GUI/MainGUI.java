@@ -11,4 +11,6 @@ package Qombo.Paint.GUI;
  */
 public class MainGUI {
     
+    protected int currentAction;
+    
 }

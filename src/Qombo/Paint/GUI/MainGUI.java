@@ -17,12 +17,19 @@ public class MainGUI extends javax.swing.JFrame {
     protected JButton brushButton, lineButton, ellipseButton, rectangleButton, strokeButton, fillButton;
     protected int currentAction = 1;
     protected Color strokeColor = Color.black, fillColor = Color.black;
+    protected DrawingBoard drawingBoard;
 
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
         initComponents();
+        this.currentAction=1;
+        this.fillColor=Color.cyan;
+        this.strokeColor = Color.black;
+        this.drawingBoard = new DrawingBoard(this);
+        this.drawingBoard.setSize(500,500);
+        this.add(drawingBoard);
     }
 
     /**

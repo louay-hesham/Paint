@@ -15,8 +15,8 @@ import javax.swing.JButton;
 public class MainGUI extends javax.swing.JFrame {
     
     protected JButton brushButton, lineButton, ellipseButton, rectangleButton, strokeButton, fillButton;
-    protected int currentAction = 1;
-    protected Color strokeColor = Color.black, fillColor = Color.black;
+    protected int currentAction = 0;
+    protected Color strokeColor = Color.black, fillColor = Color.WHITE;
 
     /**
      * Creates new form MainGUI

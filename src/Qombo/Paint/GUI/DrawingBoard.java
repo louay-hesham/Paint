@@ -5,6 +5,9 @@
  */
 package Qombo.Paint.GUI;
 
+import Qombo.Paint.Shapes.*;
+import Qombo.Paint.Shapes.Line2D.*;
+import Qombo.Paint.Shapes.Line2D.*;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -12,13 +15,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JPanel;
@@ -145,13 +146,13 @@ public class DrawingBoard extends JPanel {
         }
     }
 
-    private Rectangle2D.Float drawRectangle(int x1, int y1, int x2, int y2) {
+    private Qombo.Paint.Shapes.Rectangle2D.Float drawRectangle(int x1, int y1, int x2, int y2) {
         int x = Math.min(x1, x2);
         int y = Math.min(y1, y2);
 
         int width = Math.abs(x1 - x2);
         int height = Math.abs(y1 - y2);
-        return new Rectangle2D.Float(x, y, width, height);
+        return new Qombo.Paint.Shapes.Rectangle2D.Float(x, y, width, height);
 
     }
 
@@ -164,8 +165,8 @@ public class DrawingBoard extends JPanel {
         return new Ellipse2D.Float(x, y, width, height);
     }
 
-    private Line2D.Float drawLine(int x1, int y1, int x2, int y2) {
-        return new Line2D.Float(x1, y1, x2, y2);
+    private Qombo.Paint.Shapes.Line2D.Float drawLine(int x1, int y1, int x2, int y2) {
+        return new Qombo.Paint.Shapes.Line2D.Float(x1, y1, x2, y2);
     }
     
     private Ellipse2D.Float drawCircle(int x1, int y1, int x2, int y2) {

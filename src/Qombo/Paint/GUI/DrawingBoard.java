@@ -72,6 +72,12 @@ public class DrawingBoard extends JPanel {
                             shapes.add(shape);
                             break;
                         }
+                        case 4:
+                        {
+                            Shape shape = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            shapes.add(shape);
+                            break;
+                        }
                     default:
                         break;
                 }
@@ -128,6 +134,10 @@ public class DrawingBoard extends JPanel {
                     shape = drawLine(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                     break;
+                case 4:
+                    shape = drawCircle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    graphicsSettings.draw(shape);
+                    break;
                 default:
                     break;
             }
@@ -156,6 +166,16 @@ public class DrawingBoard extends JPanel {
 
     private Line2D.Float drawLine(int x1, int y1, int x2, int y2) {
         return new Line2D.Float(x1, y1, x2, y2);
+    }
+    
+    private Ellipse2D.Float drawCircle(int x1, int y1, int x2, int y2) {
+        int x = Math.min(x1, x2);
+        int y = Math.min(y1, y2);
+
+        int width = Math.abs(x1 - x2);
+        int height = Math.abs(y1 - y2);
+        int radius = Math.max(width, height);
+        return new Ellipse2D.Float(x, y, radius, radius);
     }
 
 }

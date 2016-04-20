@@ -38,9 +38,9 @@ public class MainGUI extends javax.swing.JFrame {
         this.fillColor=Color.cyan;
         this.strokeColor = Color.black;
         this.drawingBoard = new DrawingBoard(this);
-        this.drawingBoard.setBackground(Color.CYAN);
-        this.drawingBoard.setSize(1064,447);
+        this.drawingBoard.setBackground(Color.WHITE);
         this.CanvasPanel.add(drawingBoard);
+        this.drawingBoard.setSize(CanvasPanel.getSize().width-1,CanvasPanel.getSize().height-1);
         this.setResizable(false);
     }
 
@@ -57,6 +57,7 @@ public class MainGUI extends javax.swing.JFrame {
         ellipseButton = new javax.swing.JButton();
         lineButton = new javax.swing.JButton();
         CanvasPanel = new javax.swing.JPanel();
+        circleButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,21 +95,30 @@ public class MainGUI extends javax.swing.JFrame {
         );
         CanvasPanelLayout.setVerticalGroup(
             CanvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
+
+        circleButton.setText("Circle");
+        circleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                circleButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(385, 385, 385)
+                .addGap(220, 220, 220)
                 .addComponent(rectangleButton)
-                .addGap(69, 69, 69)
+                .addGap(83, 83, 83)
                 .addComponent(ellipseButton)
-                .addGap(41, 41, 41)
+                .addGap(54, 54, 54)
+                .addComponent(circleButton)
+                .addGap(35, 35, 35)
                 .addComponent(lineButton)
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -123,7 +133,8 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rectangleButton)
                     .addComponent(ellipseButton)
-                    .addComponent(lineButton))
+                    .addComponent(lineButton)
+                    .addComponent(circleButton))
                 .addContainerGap())
         );
 
@@ -141,6 +152,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void lineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineButtonActionPerformed
         this.currentAction=3;
     }//GEN-LAST:event_lineButtonActionPerformed
+
+    private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
+        this.currentAction=4;
+    }//GEN-LAST:event_circleButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +195,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CanvasPanel;
+    private javax.swing.JButton circleButton;
     private javax.swing.JButton ellipseButton;
     private javax.swing.JButton lineButton;
     private javax.swing.JButton rectangleButton;

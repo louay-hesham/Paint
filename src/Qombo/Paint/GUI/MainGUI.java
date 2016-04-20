@@ -6,6 +6,8 @@
 package Qombo.Paint.GUI;
 
 import Qombo.Logging.Logging;
+import static Qombo.Paint.GUI.DrawingBoard.oldShapes;
+import static Qombo.Paint.GUI.DrawingBoard.shapes;
 import java.awt.Color;
 import java.net.URL;
 import javax.swing.ImageIcon;
@@ -54,6 +56,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         squareButton = new javax.swing.JButton();
         circleButton = new javax.swing.JButton();
         triangleButton = new javax.swing.JButton();
+        deletButton = new javax.swing.JButton();
+        undoButton = new javax.swing.JButton();
+        RedoButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,6 +123,34 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        deletButton.setText("Delete");
+        deletButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletButtonActionPerformed(evt);
+            }
+        });
+
+        undoButton.setText("Undo");
+        undoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoButtonActionPerformed(evt);
+            }
+        });
+
+        RedoButton.setText("Redo");
+        RedoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RedoButtonActionPerformed(evt);
+            }
+        });
+
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,10 +160,20 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(triangleButton)
-                        .addGap(75, 75, 75)
-                        .addComponent(squareButton)
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(RedoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(deletButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(triangleButton)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(squareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(resetButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(45, 45, 45)
                         .addComponent(rectangleButton)
                         .addGap(60, 60, 60)
@@ -146,14 +190,20 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CanvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(undoButton)
+                    .addComponent(RedoButton)
+                    .addComponent(resetButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(squareButton)
                     .addComponent(rectangleButton)
                     .addComponent(ellipseButton)
                     .addComponent(circleButton)
                     .addComponent(lineButton)
-                    .addComponent(triangleButton))
+                    .addComponent(triangleButton)
+                    .addComponent(deletButton))
                 .addContainerGap())
         );
 
@@ -183,6 +233,37 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
         this.currentAction=6;
     }//GEN-LAST:event_triangleButtonActionPerformed
+
+    private void deletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletButtonActionPerformed
+        // TODO add your handling code here:
+        this.currentAction=7;
+    }//GEN-LAST:event_deletButtonActionPerformed
+
+    private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
+        // TODO add your handling code here:
+        this.currentAction=8;
+    }//GEN-LAST:event_undoButtonActionPerformed
+
+    private void RedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoButtonActionPerformed
+        // TODO add your handling code here:
+        this.currentAction=9;
+        if(oldShapes.size()>0){
+                        try
+                        {
+                        shapes.add(oldShapes.get(oldShapes.size()-1));
+                        oldShapes.remove(oldShapes.get(oldShapes.size()-1));
+                        }
+                        catch(ArrayIndexOutOfBoundsException ai){
+                            System.out.println(ai.getCause());
+                            ai.printStackTrace();
+                        }
+                        }
+    }//GEN-LAST:event_RedoButtonActionPerformed
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        // TODO add your handling code here:
+        this.currentAction=10;
+    }//GEN-LAST:event_resetButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,11 +303,15 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CanvasPanel;
+    private javax.swing.JButton RedoButton;
     private javax.swing.JButton circleButton;
+    private javax.swing.JButton deletButton;
     private javax.swing.JButton ellipseButton;
     private javax.swing.JButton lineButton;
     private javax.swing.JButton rectangleButton;
+    private javax.swing.JButton resetButton;
     private javax.swing.JButton squareButton;
     private javax.swing.JButton triangleButton;
+    private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,7 +18,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.MouseAdapter;
@@ -26,14 +25,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 
 /**
  *
  * @author lo2ay
  */
-public class DrawingBoard extends JPanel implements Logging {
+public class DrawingBoard extends JComponent implements Logging {
 
     public static final ArrayList<Shape> shapes = new ArrayList();
     private ArrayList<Color> shapeFill = new ArrayList();

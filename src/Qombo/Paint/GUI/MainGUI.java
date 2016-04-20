@@ -51,8 +51,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         ellipseButton = new javax.swing.JButton();
         lineButton = new javax.swing.JButton();
         CanvasPanel = new javax.swing.JPanel();
-        circleButton = new javax.swing.JButton();
         squareButton = new javax.swing.JButton();
+        circleButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,19 +86,12 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         CanvasPanel.setLayout(CanvasPanelLayout);
         CanvasPanelLayout.setHorizontalGroup(
             CanvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1044, Short.MAX_VALUE)
         );
         CanvasPanelLayout.setVerticalGroup(
             CanvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 544, Short.MAX_VALUE)
         );
-
-        circleButton.setText("Circle");
-        circleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                circleButtonActionPerformed(evt);
-            }
-        });
 
         squareButton.setText("Square");
         squareButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,40 +99,49 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                 squareButtonActionPerformed(evt);
             }
         });
+        squareButton.setIcon(new ImageIcon(MainGUI.class.getResource("Square.png")));
+
+        circleButton.setText("Circle");
+        circleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                circleButtonActionPerformed(evt);
+            }
+        });
+        circleButton.setIcon(new ImageIcon(MainGUI.class.getResource("Circle.png")));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(squareButton)
-                .addGap(71, 71, 71)
-                .addComponent(rectangleButton)
-                .addGap(83, 83, 83)
-                .addComponent(ellipseButton)
-                .addGap(54, 54, 54)
-                .addComponent(circleButton)
-                .addGap(35, 35, 35)
-                .addComponent(lineButton)
-                .addContainerGap(226, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(squareButton)
+                .addGap(85, 85, 85)
+                .addComponent(rectangleButton)
+                .addGap(94, 94, 94)
+                .addComponent(ellipseButton)
+                .addGap(93, 93, 93)
+                .addComponent(circleButton)
+                .addGap(81, 81, 81)
+                .addComponent(lineButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CanvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(squareButton)
                     .addComponent(rectangleButton)
                     .addComponent(ellipseButton)
-                    .addComponent(lineButton)
                     .addComponent(circleButton)
-                    .addComponent(squareButton))
+                    .addComponent(lineButton))
                 .addContainerGap())
         );
 

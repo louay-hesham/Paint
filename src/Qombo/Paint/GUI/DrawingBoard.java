@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import javax.swing.JPanel;
 
 /**
@@ -130,10 +131,14 @@ public class DrawingBoard extends JPanel implements Logging {
         graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
         for (Shape s : shapes) {
+            try{
             graphicsSettings.setPaint(strokeCounter.next());
             graphicsSettings.draw(s);
             graphicsSettings.setPaint(fillCounter.next());
             graphicsSettings.fill(s);
+            }catch(NoSuchElementException ne){
+                System.out.println(ne.getCause());
+            }
 
         }
         if (drawStart != null && drawEnd != null) {

@@ -6,8 +6,11 @@
 package Qombo.Paint.GUI;
 
 import Qombo.Logging.Logging;
-import Qombo.Paint.Shapes.*;
 import Qombo.Paint.Shapes.Circle;
+import Qombo.Paint.Shapes.Ellipse;
+import Qombo.Paint.Shapes.Line;
+import Qombo.Paint.Shapes.Rectangle;
+import Qombo.Paint.Shapes.Square;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -15,6 +18,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -52,32 +56,27 @@ public class DrawingBoard extends JPanel implements Logging {
                     case 1: {
                         Rectangle rectangle = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(rectangle);
-                        Shape.shapes.add(rectangle);
                         break;
                     }
                     case 2: {
                         Ellipse ellipse = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(ellipse);
-                        Shape.shapes.add(ellipse);
                         break;
                     }
                     case 3: {
                         Line line = drawLine(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(line);
-                        Shape.shapes.add(line);
                         
                         break;
                     }
                     case 4: {
                         Circle circle = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(circle);
-                        Shape.shapes.add(circle);
                         break;
                     }
                     case 5: {
                         Square square = drawSquare(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(square);
-                        Shape.shapes.add(square);
                         break;
                     }
                     default:

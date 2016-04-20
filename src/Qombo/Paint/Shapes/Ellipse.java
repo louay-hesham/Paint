@@ -6,13 +6,12 @@
 package Qombo.Paint.Shapes;
 
 import Qombo.Paint.GUI.DrawingBoard;
-import Qombo.Paint.Shapes.Shape;
 
 /**
  *
  * @author lo2ay
  */
-public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape{
+public class Ellipse extends java.awt.geom.Ellipse2D.Float{
     
     public final int ORDER;
     public Ellipse(int x, int y, int width, int height){

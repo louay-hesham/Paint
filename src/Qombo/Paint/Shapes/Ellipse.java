@@ -13,6 +13,7 @@ import Qombo.Paint.Shapes.Shape;
  */
 public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape{
     
+    
     public Ellipse(int x, int y, int width, int height){
         super(x, y, width, height);
     }

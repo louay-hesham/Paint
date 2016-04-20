@@ -5,6 +5,7 @@
  */
 package Qombo.Paint.Shapes;
 
+import Qombo.Paint.GUI.DrawingBoard;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,9 @@ public interface Shape extends java.awt.Shape {
     public default void log(String str){
         System.out.println(str);
     }
+    public default void log(int n){
+        System.out.println(n);
+    }
     static ArrayList<Shape> shapes = new ArrayList();
-    int ORDER=Shape.shapes.size();
+    int ORDER=DrawingBoard.shapes.size()+1;
 }

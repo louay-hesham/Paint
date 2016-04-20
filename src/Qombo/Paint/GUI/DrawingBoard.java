@@ -30,8 +30,11 @@ public class DrawingBoard extends JPanel {
     private void log(String str) {
         System.out.println(str);
     }
+    private void log(int n) {
+        System.out.println(n);
+    }
 
-    ArrayList<Shape> shapes = new ArrayList();
+    public static final ArrayList<Shape> shapes = new ArrayList();
     ArrayList<Color> shapeFill = new ArrayList();
     ArrayList<Color> shapeStroke = new ArrayList();
     Point drawStart, drawEnd;
@@ -56,24 +59,29 @@ public class DrawingBoard extends JPanel {
                         Shape shape = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(shape);
                         Shape.shapes.add(shape);
+                        log(shape.ORDER);
                         break;
                     }
                     case 2: {
                         Shape shape = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(shape);
                         Shape.shapes.add(shape);
+                        log(shape.ORDER);
                         break;
                     }
                     case 3: {
                         Shape shape = drawLine(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(shape);
                         Shape.shapes.add(shape);
+                        
+                        log(shape.ORDER);
                         break;
                     }
                     case 4: {
                         Shape shape = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(shape);
                         Shape.shapes.add(shape);
+                        log(shape.ORDER);
                         break;
                     }
                     default:
@@ -123,22 +131,18 @@ public class DrawingBoard extends JPanel {
                 case 1:
                     shape = drawRectangle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
-                    log(shape.ORDER + "");
                     break;
                 case 2:
                     shape = drawEllipse(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
-                    log(shape.ORDER + "");
                     break;
                 case 3:
                     shape = drawLine(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
-                    log(shape.ORDER + "");
                     break;
                 case 4:
                     shape = drawCircle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
-                    log(shape.ORDER + "");
                     break;
                 default:
                     break;

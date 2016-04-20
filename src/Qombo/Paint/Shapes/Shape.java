@@ -20,5 +20,4 @@ public interface Shape extends java.awt.Shape {
         System.out.println(n);
     }
     static ArrayList<Shape> shapes = new ArrayList();
-    int ORDER=DrawingBoard.shapes.size()+1;
 }

@@ -56,32 +56,32 @@ public class DrawingBoard extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 switch (gui.currentAction) {
                     case 1: {
-                        Shape shape = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
-                        shapes.add(shape);
-                        Shape.shapes.add(shape);
-                        log(shape.ORDER);
+                        Rectangle rectangle = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
+                        shapes.add(rectangle);
+                        Shape.shapes.add(rectangle);
+                        log(rectangle.ORDER);
                         break;
                     }
                     case 2: {
-                        Shape shape = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
-                        shapes.add(shape);
-                        Shape.shapes.add(shape);
-                        log(shape.ORDER);
+                        Ellipse ellipse = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
+                        shapes.add(ellipse);
+                        Shape.shapes.add(ellipse);
+                        log(ellipse.ORDER);
                         break;
                     }
                     case 3: {
-                        Shape shape = drawLine(drawStart.x, drawStart.y, e.getX(), e.getY());
-                        shapes.add(shape);
-                        Shape.shapes.add(shape);
+                        Line line = drawLine(drawStart.x, drawStart.y, e.getX(), e.getY());
+                        shapes.add(line);
+                        Shape.shapes.add(line);
                         
-                        log(shape.ORDER);
+                        log(line.ORDER);
                         break;
                     }
                     case 4: {
-                        Shape shape = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
-                        shapes.add(shape);
-                        Shape.shapes.add(shape);
-                        log(shape.ORDER);
+                        Circle circle = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
+                        shapes.add(circle);
+                        Shape.shapes.add(circle);
+                        log(circle.ORDER);
                         break;
                     }
                     default:

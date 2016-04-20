@@ -9,7 +9,7 @@ package Qombo.Paint.Shapes;
  *
  * @author lo2ay
  */
-public class Circle extends Qombo.Paint.Shapes.Ellipse {
+public class Circle extends Ellipse {
     public Circle (int x, int y, int radius){
         super(x, y, radius, radius);
     }

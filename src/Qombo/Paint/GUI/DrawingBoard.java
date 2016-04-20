@@ -50,7 +50,7 @@ public class DrawingBoard extends JPanel implements Logging {
             @Override
             public void mousePressed(MouseEvent e) {
                 drawStart = new Point(e.getX(), e.getY());
-                drawEnd = drawStart;
+                drawEnd = null;
                 repaint();
                 log("Mouse pressed.");
             }
@@ -132,7 +132,6 @@ public class DrawingBoard extends JPanel implements Logging {
         Iterator<Color> fillCounter = shapeFill.iterator();
 
         graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-
         for (Shape s : shapes) {
             graphicsSettings.setPaint(strokeCounter.next());
             graphicsSettings.draw(s);

@@ -143,26 +143,26 @@ public class DrawingBoard extends JPanel {
         }
     }
 
-    private Qombo.Paint.Shapes.Rectangle drawRectangle(int x1, int y1, int x2, int y2) {
+    private Rectangle drawRectangle(int x1, int y1, int x2, int y2) {
         int x = Math.min(x1, x2);
         int y = Math.min(y1, y2);
 
         int width = Math.abs(x1 - x2);
         int height = Math.abs(y1 - y2);
-        return new Qombo.Paint.Shapes.Rectangle(x, y, width, height);
+        return new Rectangle(x, y, width, height);
 
     }
 
-    private Qombo.Paint.Shapes.Ellipse drawEllipse(int x1, int y1, int x2, int y2) {
+    private Ellipse drawEllipse(int x1, int y1, int x2, int y2) {
         int x = Math.min(x1, x2);
         int y = Math.min(y1, y2);
 
         int width = Math.abs(x1 - x2);
         int height = Math.abs(y1 - y2);
-        return new Qombo.Paint.Shapes.Ellipse(x, y, width, height);
+        return new Ellipse(x, y, width, height);
     }
 
-    private Qombo.Paint.Shapes.Line drawLine(int x1, int y1, int x2, int y2) {
+    private Line drawLine(int x1, int y1, int x2, int y2) {
         return new Qombo.Paint.Shapes.Line(x1, y1, x2, y2);
     }
     

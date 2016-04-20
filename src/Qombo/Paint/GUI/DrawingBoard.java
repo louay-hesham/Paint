@@ -53,14 +53,12 @@ public class DrawingBoard extends JPanel implements Logging {
                         Rectangle rectangle = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(rectangle);
                         Shape.shapes.add(rectangle);
-                        log(rectangle.ORDER);
                         break;
                     }
                     case 2: {
                         Ellipse ellipse = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(ellipse);
                         Shape.shapes.add(ellipse);
-                        log(ellipse.ORDER);
                         break;
                     }
                     case 3: {
@@ -68,21 +66,18 @@ public class DrawingBoard extends JPanel implements Logging {
                         shapes.add(line);
                         Shape.shapes.add(line);
                         
-                        log(line.ORDER);
                         break;
                     }
                     case 4: {
                         Circle circle = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(circle);
                         Shape.shapes.add(circle);
-                        log(circle.ORDER);
                         break;
                     }
                     case 5: {
                         Square square = drawSquare(drawStart.x, drawStart.y, e.getX(), e.getY());
                         shapes.add(square);
                         Shape.shapes.add(square);
-                        log(square.ORDER);
                         break;
                     }
                     default:

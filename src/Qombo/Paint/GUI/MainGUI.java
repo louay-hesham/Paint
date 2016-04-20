@@ -53,6 +53,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         CanvasPanel = new javax.swing.JPanel();
         squareButton = new javax.swing.JButton();
         circleButton = new javax.swing.JButton();
+        triangleButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,26 +110,36 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         });
         circleButton.setIcon(new ImageIcon(MainGUI.class.getResource("Circle.png")));
 
+        triangleButton.setText("Triangle");
+        triangleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                triangleButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(triangleButton)
+                        .addGap(75, 75, 75)
+                        .addComponent(squareButton)
+                        .addGap(45, 45, 45)
+                        .addComponent(rectangleButton)
+                        .addGap(60, 60, 60)
+                        .addComponent(ellipseButton)
+                        .addGap(65, 65, 65)
+                        .addComponent(circleButton)
+                        .addGap(38, 38, 38)
+                        .addComponent(lineButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(squareButton)
-                .addGap(85, 85, 85)
-                .addComponent(rectangleButton)
-                .addGap(94, 94, 94)
-                .addComponent(ellipseButton)
-                .addGap(93, 93, 93)
-                .addComponent(circleButton)
-                .addGap(81, 81, 81)
-                .addComponent(lineButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +152,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                     .addComponent(rectangleButton)
                     .addComponent(ellipseButton)
                     .addComponent(circleButton)
-                    .addComponent(lineButton))
+                    .addComponent(lineButton)
+                    .addComponent(triangleButton))
                 .addContainerGap())
         );
 
@@ -167,6 +179,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
         this.currentAction=5;
     }//GEN-LAST:event_squareButtonActionPerformed
+
+    private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
+        this.currentAction=6;
+    }//GEN-LAST:event_triangleButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,5 +227,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton lineButton;
     private javax.swing.JButton rectangleButton;
     private javax.swing.JButton squareButton;
+    private javax.swing.JButton triangleButton;
     // End of variables declaration//GEN-END:variables
 }

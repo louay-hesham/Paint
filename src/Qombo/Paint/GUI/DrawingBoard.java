@@ -95,18 +95,21 @@ public class DrawingBoard extends JPanel implements Logging {
                 repaint();
                 log("Mouse released.");
             }
+
             @Override
             public void mouseClicked(MouseEvent e) {
-                triangleVertices[triangleClicks++] = e.getPoint();
-                log("vertex #"+triangleClicks+" registered.");
-                if (triangleClicks == 3){
-                    triangleClicks=0;
-                    Triangle triangle = drawTriangle(triangleVertices);
-                    log("Triangle registered");
-                    shapes.add(triangle);
-                    log("Triangle added to array list.");
-                    repaint();
-                    log("Triangle painted.");
+                if (gui.currentAction == 6) {
+                    triangleVertices[triangleClicks++] = e.getPoint();
+                    log("vertex #" + triangleClicks + " registered.");
+                    if (triangleClicks == 3) {
+                        triangleClicks = 0;
+                        Triangle triangle = drawTriangle(triangleVertices);
+                        log("Triangle registered");
+                        shapes.add(triangle);
+                        log("Triangle added to array list.");
+                        repaint();
+                        log("Triangle painted.");
+                    }
                 }
             }
         }); // end of addMouseListener
@@ -131,15 +134,10 @@ public class DrawingBoard extends JPanel implements Logging {
         graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 
         for (Shape s : shapes) {
-            try{
             graphicsSettings.setPaint(strokeCounter.next());
             graphicsSettings.draw(s);
             graphicsSettings.setPaint(fillCounter.next());
             graphicsSettings.fill(s);
-            }catch(NoSuchElementException ne){
-                System.out.println(ne.getCause());
-            }
-
         }
         if (drawStart != null && drawEnd != null) {
             graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.40f));
@@ -165,11 +163,15 @@ public class DrawingBoard extends JPanel implements Logging {
                 case 5:
                     shape = drawSquare(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
-                    break;              
-                default:
-                    shape = drawTriangle(triangleVertices);
-                    graphicsSettings.draw(shape);
                     break;
+                case 6:
+                    if (triangleClicks == 3) {
+                        shape = drawTriangle(triangleVertices);
+                        graphicsSettings.draw(shape);
+                    }
+                    break;
+                default:
+                    shape = null;
             }
 
         }
@@ -218,11 +220,11 @@ public class DrawingBoard extends JPanel implements Logging {
         int radius = Math.max(width, height);
         return new Circle(x, y, radius);
     }
-    
-     private Triangle drawTriangle(Point[] v) {
-        int[] x = new int[]{(int)v[0].getX(), (int)v[1].getX(), (int)v[2].getX()};
-                    int[] y = new int[]{(int)v[0].getY(), (int)v[1].getY(), (int)v[2].getY()};
-         return new Triangle(x,y);
+
+    private Triangle drawTriangle(Point[] v) {
+        int[] x = new int[]{(int) v[0].getX(), (int) v[1].getX(), (int) v[2].getX()};
+        int[] y = new int[]{(int) v[0].getY(), (int) v[1].getY(), (int) v[2].getY()};
+        return new Triangle(x, y);
     }
 
 }

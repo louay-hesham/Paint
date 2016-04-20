@@ -5,6 +5,7 @@
  */
 package Qombo.Paint.GUI;
 
+import Qombo.Logging.Logging;
 import java.awt.Color;
 import java.net.URL;
 import javax.swing.ImageIcon;
@@ -14,14 +15,7 @@ import javax.swing.JButton;
  *
  * @author lo2ay
  */
-public class MainGUI extends javax.swing.JFrame {
-    
-    private void log(String str) {
-        System.out.println(str);
-    }
-    private void log(URL url) {
-        System.out.println(url);
-    }
+public class MainGUI extends javax.swing.JFrame implements Logging {
     
     protected JButton brushButton, strokeButton, fillButton;
     protected int currentAction = 1;

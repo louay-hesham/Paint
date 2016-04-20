@@ -5,6 +5,7 @@
  */
 package Qombo.Paint.GUI;
 
+import Qombo.Logging.Logging;
 import Qombo.Paint.Shapes.*;
 import Qombo.Paint.Shapes.Circle;
 import java.awt.AlphaComposite;
@@ -25,14 +26,7 @@ import javax.swing.JPanel;
  *
  * @author lo2ay
  */
-public class DrawingBoard extends JPanel {
-
-    private void log(String str) {
-        System.out.println(str);
-    }
-    private void log(int n) {
-        System.out.println(n);
-    }
+public class DrawingBoard extends JPanel implements Logging {
 
     public static final ArrayList<Shape> shapes = new ArrayList();
     ArrayList<Color> shapeFill = new ArrayList();

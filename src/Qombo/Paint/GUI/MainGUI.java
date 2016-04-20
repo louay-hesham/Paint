@@ -52,6 +52,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         lineButton = new javax.swing.JButton();
         CanvasPanel = new javax.swing.JPanel();
         circleButton = new javax.swing.JButton();
+        squareButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,12 +100,21 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        squareButton.setText("Square");
+        squareButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                squareButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(220, 220, 220)
+                .addGap(77, 77, 77)
+                .addComponent(squareButton)
+                .addGap(71, 71, 71)
                 .addComponent(rectangleButton)
                 .addGap(83, 83, 83)
                 .addComponent(ellipseButton)
@@ -112,7 +122,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                 .addComponent(circleButton)
                 .addGap(35, 35, 35)
                 .addComponent(lineButton)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,7 +138,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                     .addComponent(rectangleButton)
                     .addComponent(ellipseButton)
                     .addComponent(lineButton)
-                    .addComponent(circleButton))
+                    .addComponent(circleButton)
+                    .addComponent(squareButton))
                 .addContainerGap())
         );
 
@@ -150,6 +161,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
         this.currentAction=4;
     }//GEN-LAST:event_circleButtonActionPerformed
+
+    private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
+        this.currentAction=5;
+    }//GEN-LAST:event_squareButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,5 +208,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton ellipseButton;
     private javax.swing.JButton lineButton;
     private javax.swing.JButton rectangleButton;
+    private javax.swing.JButton squareButton;
     // End of variables declaration//GEN-END:variables
 }

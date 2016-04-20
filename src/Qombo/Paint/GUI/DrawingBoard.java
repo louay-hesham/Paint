@@ -78,6 +78,13 @@ public class DrawingBoard extends JPanel implements Logging {
                         log(circle.ORDER);
                         break;
                     }
+                    case 5: {
+                        Square square = drawSquare(drawStart.x, drawStart.y, e.getX(), e.getY());
+                        shapes.add(square);
+                        Shape.shapes.add(square);
+                        log(square.ORDER);
+                        break;
+                    }
                     default:
                         break;
                 }
@@ -138,6 +145,10 @@ public class DrawingBoard extends JPanel implements Logging {
                     shape = drawCircle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                     break;
+                    case 5:
+                    shape = drawSquare(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    graphicsSettings.draw(shape);
+                    break;
                 default:
                     break;
             }
@@ -152,6 +163,17 @@ public class DrawingBoard extends JPanel implements Logging {
         int width = Math.abs(x1 - x2);
         int height = Math.abs(y1 - y2);
         return new Rectangle(x, y, width, height);
+
+    }
+    
+    private Square drawSquare(int x1, int y1, int x2, int y2) {
+        int x = Math.min(x1, x2);
+        int y = Math.min(y1, y2);
+
+        int width = Math.abs(x1 - x2);
+        int height = Math.abs(y1 - y2);
+        int side = Math.max(width, height);
+        return new Square(x, y, side);
 
     }
 

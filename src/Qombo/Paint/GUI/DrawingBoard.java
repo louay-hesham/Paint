@@ -11,12 +11,14 @@ import Qombo.Paint.Shapes.Ellipse;
 import Qombo.Paint.Shapes.Line;
 import Qombo.Paint.Shapes.Rectangle;
 import Qombo.Paint.Shapes.Square;
+import Qombo.Paint.Shapes.Triangle;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.MouseAdapter;
@@ -33,10 +35,12 @@ import javax.swing.JPanel;
 public class DrawingBoard extends JPanel implements Logging {
 
     public static final ArrayList<Shape> shapes = new ArrayList();
-    ArrayList<Color> shapeFill = new ArrayList();
-    ArrayList<Color> shapeStroke = new ArrayList();
-    Point drawStart, drawEnd;
-    MainGUI gui;
+    private ArrayList<Color> shapeFill = new ArrayList();
+    private ArrayList<Color> shapeStroke = new ArrayList();
+    private Point drawStart, drawEnd;
+    private MainGUI gui;
+    private int triangleClicks = 0;
+    private Point[] triangleVertices = new Point[3];
 
     public DrawingBoard(MainGUI gui) {
         this.gui = gui;
@@ -64,9 +68,9 @@ public class DrawingBoard extends JPanel implements Logging {
                         break;
                     }
                     case 3: {
-                        Line line = drawLine(drawStart.x, drawStart.y, e.getX(), e.getY());
+                        Line line = drawLine(drawStart, e.getPoint());
                         shapes.add(line);
-                        
+
                         break;
                     }
                     case 4: {
@@ -89,6 +93,20 @@ public class DrawingBoard extends JPanel implements Logging {
                 drawEnd = null;
                 repaint();
                 log("Mouse released.");
+            }
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                triangleVertices[triangleClicks++] = e.getPoint();
+                log("vertex #"+triangleClicks+" registered.");
+                if (triangleClicks == 3){
+                    triangleClicks=0;
+                    Triangle triangle = drawTriangle(triangleVertices);
+                    log("Triangle registered");
+                    shapes.add(triangle);
+                    log("Triangle added to array list.");
+                    repaint();
+                    log("Triangle painted.");
+                }
             }
         }); // end of addMouseListener
         this.addMouseMotionListener(new MouseMotionAdapter() {
@@ -132,18 +150,20 @@ public class DrawingBoard extends JPanel implements Logging {
                     graphicsSettings.draw(shape);
                     break;
                 case 3:
-                    shape = drawLine(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = drawLine(drawStart, drawEnd);
                     graphicsSettings.draw(shape);
                     break;
                 case 4:
                     shape = drawCircle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                     break;
-                    case 5:
+                case 5:
                     shape = drawSquare(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
-                    break;
+                    break;              
                 default:
+                    shape = drawTriangle(triangleVertices);
+                    graphicsSettings.draw(shape);
                     break;
             }
 
@@ -159,7 +179,7 @@ public class DrawingBoard extends JPanel implements Logging {
         return new Rectangle(x, y, width, height);
 
     }
-    
+
     private Square drawSquare(int x1, int y1, int x2, int y2) {
         int x = Math.min(x1, x2);
         int y = Math.min(y1, y2);
@@ -180,8 +200,8 @@ public class DrawingBoard extends JPanel implements Logging {
         return new Ellipse(x, y, width, height);
     }
 
-    private Line drawLine(int x1, int y1, int x2, int y2) {
-        return new Qombo.Paint.Shapes.Line(x1, y1, x2, y2);
+    private Line drawLine(Point p1, Point p2) {
+        return new Line(p1, p2);
     }
 
     private Circle drawCircle(int x1, int y1, int x2, int y2) {
@@ -192,6 +212,12 @@ public class DrawingBoard extends JPanel implements Logging {
         int height = Math.abs(y1 - y2);
         int radius = Math.max(width, height);
         return new Circle(x, y, radius);
+    }
+    
+     private Triangle drawTriangle(Point[] v) {
+        int[] x = new int[]{(int)v[0].getX(), (int)v[1].getX(), (int)v[2].getX()};
+                    int[] y = new int[]{(int)v[0].getY(), (int)v[1].getY(), (int)v[2].getY()};
+         return new Triangle(x,y);
     }
 
 }

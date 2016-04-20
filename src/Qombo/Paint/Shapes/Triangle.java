@@ -5,18 +5,23 @@
  */
 package Qombo.Paint.Shapes;
 
-import Qombo.Paint.GUI.DrawingBoard;
 import java.awt.Point;
+import java.awt.Polygon;
 
 /**
  *
  * @author lo2ay
  */
-public class Line extends java.awt.geom.Line2D.Float {
-       
-    public final int ORDER;
-    public Line(Point p1, Point p2){
-        super(p1, p2);
-        ORDER = DrawingBoard.shapes.size()+1;
+public class Triangle extends Polygon{
+    private Point[] vertices;
+
+    public Point[] getVertices() {
+        return vertices;
     }
+    public Triangle (int[] xpoints, int[] ypoints){
+        super(xpoints, ypoints, 3);
+        
+    }
+    
+    
 }

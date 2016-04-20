@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Qombo.Paint.Shapes.Rectangle2D;
+package Qombo.Paint.Shapes;
 
 import Qombo.Paint.Shapes.Shape;
-
 
 /**
  *
  * @author lo2ay
  */
-public class Float extends java.awt.geom.Rectangle2D.Float implements Shape {
-    
-    public Float(int x, int y, int width, int height){
-        super(x,y,width,height);
+public class Line extends java.awt.geom.Line2D.Float implements Shape {
+   
+    public Line(int x1,int y1,int x2,int y2){
+        super(x1, y1, x2, y2);
     }
-    
 }

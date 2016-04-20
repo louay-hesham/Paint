@@ -84,47 +84,44 @@ public class DrawingBoard extends JComponent implements Logging {
                         shapes.add(square);
                         break;
                     }
-                    case 7:{
-                        if(shapes.size()>0){
-                            try{
-                        for(Shape s:shapes){
-                            if(s.contains(e.getPoint())){
-                            shapes.remove(s);
-                            oldShapes.add(s);
-                            }
-                        }
-                            }
-                            catch(ConcurrentModificationException cm){
+                    case 7: {
+                        if (shapes.size() > 0) {
+                            try {
+                                for (Shape s : shapes) {
+                                    if (s.contains(e.getPoint())) {
+                                        shapes.remove(s);
+                                        oldShapes.add(s);
+                                    }
+                                }
+                            } catch (ConcurrentModificationException cm) {
                                 System.out.println(cm.getCause());
-                            }catch(ArrayIndexOutOfBoundsException aii){
+                            } catch (ArrayIndexOutOfBoundsException aii) {
                                 System.out.println(aii.getCause());
                             }
                         }
                         break;
                     }
-                    case 8:{
-                         if(shapes.size()>0){
-                        try
-                        {
-                            oldShapes.add(shapes.get(shapes.size()-1));
-                            shapes.remove(shapes.get(shapes.size()-1));
+                    case 8: {
+                        if (shapes.size() > 0) {
+                            try {
+                                oldShapes.add(shapes.get(shapes.size() - 1));
+                                shapes.remove(shapes.get(shapes.size() - 1));
+                            } catch (ArrayIndexOutOfBoundsException ai) {
+                                System.out.println(ai.getCause());
+                                ai.printStackTrace();
+                            }
                         }
-                        catch(ArrayIndexOutOfBoundsException ai){
-                            System.out.println(ai.getCause());
-                            ai.printStackTrace();
-                        }
-                        }
-                         break;
-                    }
-                    case 9:{
-                        
                         break;
-                        
                     }
-                    case 10:{
+                    case 9: {
+
+                        break;
+
+                    }
+                    case 10: {
                         shapes.clear();
                     }
-                    
+
                     default:
                         break;
                 }

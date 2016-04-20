@@ -6,6 +6,8 @@
 package Qombo.Paint.GUI;
 
 import java.awt.Color;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -13,6 +15,13 @@ import javax.swing.JButton;
  * @author lo2ay
  */
 public class MainGUI extends javax.swing.JFrame {
+    
+    private void log(String str) {
+        System.out.println(str);
+    }
+    private void log(URL url) {
+        System.out.println(url);
+    }
     
     protected JButton brushButton, strokeButton, fillButton;
     protected int currentAction = 1;
@@ -29,9 +38,8 @@ public class MainGUI extends javax.swing.JFrame {
         this.fillColor=Color.cyan;
         this.strokeColor = Color.black;
         this.drawingBoard = new DrawingBoard(this);
-        this.drawingBoard.setSize(500,500);
         this.drawingBoard.setBackground(Color.CYAN);
-        this.drawingBoard.setSize(1191,447);
+        this.drawingBoard.setSize(1064,447);
         this.CanvasPanel.add(drawingBoard);
         this.setResizable(false);
     }
@@ -58,6 +66,7 @@ public class MainGUI extends javax.swing.JFrame {
                 rectangleButtonActionPerformed(evt);
             }
         });
+        rectangleButton.setIcon(new ImageIcon(MainGUI.class.getResource("Rectangle.png")));
 
         ellipseButton.setText("Ellipse");
         ellipseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +74,7 @@ public class MainGUI extends javax.swing.JFrame {
                 ellipseButtonActionPerformed(evt);
             }
         });
+        ellipseButton.setIcon(new ImageIcon(MainGUI.class.getResource("Ellipse.png")));
 
         lineButton.setText("Line");
         lineButton.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +82,7 @@ public class MainGUI extends javax.swing.JFrame {
                 lineButtonActionPerformed(evt);
             }
         });
+        lineButton.setIcon(new ImageIcon(MainGUI.class.getResource("Line.png")));
 
         CanvasPanel.setBackground(java.awt.Color.white);
 
@@ -91,13 +102,13 @@ public class MainGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(505, 505, 505)
+                .addGap(385, 385, 385)
                 .addComponent(rectangleButton)
-                .addGap(27, 27, 27)
+                .addGap(69, 69, 69)
                 .addComponent(ellipseButton)
-                .addGap(38, 38, 38)
+                .addGap(41, 41, 41)
                 .addComponent(lineButton)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addContainerGap(413, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

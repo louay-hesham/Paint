@@ -143,7 +143,7 @@ public class DrawingBoard extends JComponent implements Logging {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if (gui.currentAction == 11 || gui.currentAction == 12) {
+                if (gui.currentAction == 11) {
                     int x = e.getX();
                     int y = e.getY();
 
@@ -151,14 +151,8 @@ public class DrawingBoard extends JComponent implements Logging {
                     gui.strokeColor = gui.fillColor;
                     shape = drawBrush(x, y, 5, 5);
                     shapes.add(shape);
-                    if (gui.currentAction == 11) {
-                        shapeFill.add(gui.fillColor);
-                        shapeStroke.add(gui.strokeColor);
-                    } else {
-                        shapeFill.add(Color.WHITE);
-                        shapeStroke.add(Color.WHITE);
-                    }
-
+                    shapeFill.add(gui.fillColor);
+                    shapeStroke.add(gui.strokeColor);
                 }
                 drawEnd = new Point(e.getX(), e.getY());
                 repaint();

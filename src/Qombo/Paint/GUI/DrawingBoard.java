@@ -101,26 +101,6 @@ public class DrawingBoard extends JComponent implements Logging {
                         }
                         break;
                     }
-                    case 8: {
-                        if (shapes.size() > 0) {
-                            try {
-                                oldShapes.add(shapes.get(shapes.size() - 1));
-                                shapes.remove(shapes.get(shapes.size() - 1));
-                            } catch (ArrayIndexOutOfBoundsException ai) {
-                                System.out.println(ai.getCause());
-                                ai.printStackTrace();
-                            }
-                        }
-                        break;
-                    }
-                    case 9: {
-
-                        break;
-
-                    }
-                    case 10: {
-                        shapes.clear();
-                    }
 
                     default:
                         break;

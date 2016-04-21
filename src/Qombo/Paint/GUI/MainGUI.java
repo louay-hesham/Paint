@@ -129,6 +129,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        deletButton.setBackground(java.awt.Color.red);
         deletButton.setText("Delete");
         deletButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

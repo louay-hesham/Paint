@@ -65,6 +65,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        rectangleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Rectangle.png"))); // NOI18N
         rectangleButton.setText("Rectangle");
         rectangleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +74,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         });
         rectangleButton.setIcon(new ImageIcon(MainGUI.class.getResource("Rectangle.png")));
 
+        ellipseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Ellipse.png"))); // NOI18N
         ellipseButton.setText("Ellipse");
         ellipseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,13 +83,13 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         });
         ellipseButton.setIcon(new ImageIcon(MainGUI.class.getResource("Ellipse.png")));
 
+        lineButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Line.png"))); // NOI18N
         lineButton.setText("Line");
         lineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lineButtonActionPerformed(evt);
             }
         });
-        lineButton.setIcon(new ImageIcon(MainGUI.class.getResource("Line.png")));
 
         CanvasPanel.setBackground(java.awt.Color.white);
 
@@ -102,6 +104,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        squareButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Square.png"))); // NOI18N
         squareButton.setText("Square");
         squareButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +113,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         });
         squareButton.setIcon(new ImageIcon(MainGUI.class.getResource("Square.png")));
 
+        circleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Circle.png"))); // NOI18N
         circleButton.setText("Circle");
         circleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -34,8 +34,9 @@ import javax.swing.JComponent;
  */
 public class DrawingBoard extends JComponent implements Logging {
 
-    public static final ArrayList<Shape> shapes = new ArrayList();
-    public static final ArrayList<Shape> oldShapes = new ArrayList();
+    public static  ArrayList<Shape> shapes = new ArrayList();
+    public static  ArrayList<Shape> oldShapes = new ArrayList();
+    
     private ArrayList<Color> shapeFill = new ArrayList();
     private ArrayList<Color> shapeStroke = new ArrayList();
     private Point drawStart, drawEnd;
@@ -49,14 +50,21 @@ public class DrawingBoard extends JComponent implements Logging {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                
+                if (gui.currentAction != 11){
                 drawStart = new Point(e.getX(), e.getY());
                 drawEnd = null;
                 repaint();
                 log("Mouse pressed.");
             }
+            }
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                
+                if (gui.currentAction != 11){
+                    Shape shape = null;
+                
                 switch (gui.currentAction) {
                     case 1: {
                         Rectangle rectangle = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
@@ -105,6 +113,7 @@ public class DrawingBoard extends JComponent implements Logging {
                     default:
                         break;
                 }
+                }
 
                 shapeFill.add(gui.fillColor);
                 shapeStroke.add(gui.strokeColor);
@@ -134,6 +143,17 @@ public class DrawingBoard extends JComponent implements Logging {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
+                if (gui.currentAction == 11){
+                    int x = e.getX();
+                    int y = e.getY();
+                    
+                    Shape shape = null;
+                    gui.strokeColor = gui.fillColor;
+                    shape = drawBrush(x, y, 5, 5);
+                    shapes.add(shape);
+                    shapeFill.add(gui.fillColor);
+                    shapeStroke.add(gui.strokeColor);
+                }
                 drawEnd = new Point(e.getX(), e.getY());
                 repaint();
             }
@@ -242,6 +262,10 @@ public class DrawingBoard extends JComponent implements Logging {
         int[] x = new int[]{(int) v[0].getX(), (int) v[1].getX(), (int) v[2].getX()};
         int[] y = new int[]{(int) v[0].getY(), (int) v[1].getY(), (int) v[2].getY()};
         return new Triangle(x, y);
+    }
+    
+    private Ellipse drawBrush(int x, int y, int brushStrokeWidth, int brushStrokeHeight){
+        return new Ellipse(x, y, brushStrokeWidth, brushStrokeHeight);
     }
 
 }

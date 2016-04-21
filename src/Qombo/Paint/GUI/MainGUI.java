@@ -10,7 +10,6 @@ import static Qombo.Paint.GUI.DrawingBoard.oldShapes;
 import static Qombo.Paint.GUI.DrawingBoard.shapes;
 import java.awt.Color;
 import java.awt.Shape;
-import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 

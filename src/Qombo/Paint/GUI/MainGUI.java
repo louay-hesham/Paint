@@ -9,6 +9,7 @@ import Qombo.Logging.Logging;
 import static Qombo.Paint.GUI.DrawingBoard.oldShapes;
 import static Qombo.Paint.GUI.DrawingBoard.shapes;
 import java.awt.Color;
+import java.awt.Shape;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -240,6 +241,16 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         // TODO add your handling code here:
         this.currentAction=8;
+        if (shapes.size() > 0) {
+                            try {
+                                oldShapes.add(shapes.get(shapes.size() - 1));
+                                shapes.remove(shapes.get(shapes.size() - 1));
+                                repaint();
+                            } catch (ArrayIndexOutOfBoundsException ai) {
+                                System.out.println(ai.getCause());
+                                ai.printStackTrace();
+                            }
+                        }
     }//GEN-LAST:event_undoButtonActionPerformed
 
     private void RedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoButtonActionPerformed
@@ -250,6 +261,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         {
                         shapes.add(oldShapes.get(oldShapes.size()-1));
                         oldShapes.remove(oldShapes.get(oldShapes.size()-1));
+                        repaint();
                         }
                         catch(ArrayIndexOutOfBoundsException ai){
                             System.out.println(ai.getCause());
@@ -261,6 +273,11 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
         this.currentAction=10;
+        for(Shape s : shapes){
+            oldShapes.add(s);
+        }
+        shapes.clear();
+        repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 
     /**

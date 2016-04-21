@@ -92,24 +92,6 @@ public class DrawingBoard extends JComponent implements Logging {
                             shapes.add(square);
                             break;
                         }
-                        case 7: {
-                            if (shapes.size() > 0) {
-                                try {
-                                    for (Shape s : shapes) {
-                                        if (s.contains(e.getPoint())) {
-                                            shapes.remove(s);
-                                            oldShapes.add(s);
-                                        }
-                                    }
-                                } catch (ConcurrentModificationException cm) {
-                                    System.out.println(cm.getCause());
-                                } catch (ArrayIndexOutOfBoundsException aii) {
-                                    System.out.println(aii.getCause());
-                                }
-                            }
-                            break;
-                        }
-
                         default:
                             break;
                     }
@@ -125,6 +107,7 @@ public class DrawingBoard extends JComponent implements Logging {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                log ("Mouse clicked.");
                 if (gui.currentAction == 6) {
                     triangleVertices[triangleClicks++] = e.getPoint();
                     log("vertex #" + triangleClicks + " registered.");
@@ -137,6 +120,19 @@ public class DrawingBoard extends JComponent implements Logging {
                         repaint();
                         log("Triangle painted.");
                     }
+                } else if (gui.currentAction == 7) {
+                    Shape shapeToDelete = null;
+                    for (int i = shapes.size() - 1; i >= 0; i--) {
+                        if (shapes.get(i).contains(e.getPoint())) {
+                            shapeToDelete = shapes.get(i);
+                            log("Shape to delete found");
+                            break;
+                        }
+                    }
+                    if (shapeToDelete != null){
+                        shapes.remove(shapeToDelete);
+                    }
+                    repaint();
                 }
             }
         }); // end of addMouseListener

@@ -45,6 +45,8 @@ public class DrawingBoard extends JComponent implements Logging {
     private Point[] triangleVertices = new Point[3];
 
     public DrawingBoard(MainGUI gui) {
+        shapes = new ArrayList();
+        oldShapes = new ArrayList();
         this.gui = gui;
         this.setBackground(Color.white);
         this.addMouseListener(new MouseAdapter() {

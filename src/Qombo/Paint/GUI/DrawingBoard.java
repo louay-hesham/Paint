@@ -10,6 +10,7 @@ import Qombo.Paint.Shapes.Circle;
 import Qombo.Paint.Shapes.Ellipse;
 import Qombo.Paint.Shapes.Line;
 import Qombo.Paint.Shapes.Rectangle;
+import Qombo.Paint.Shapes.ShapeFactory;
 import Qombo.Paint.Shapes.Square;
 import Qombo.Paint.Shapes.Triangle;
 import java.awt.AlphaComposite;
@@ -24,7 +25,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import javax.swing.JComponent;
 
@@ -40,11 +40,13 @@ public class DrawingBoard extends JComponent implements Logging {
     private ArrayList<Color> shapeFill = new ArrayList();
     private ArrayList<Color> shapeStroke = new ArrayList();
     private Point drawStart, drawEnd;
-    private MainGUI gui;
+    private final MainGUI gui;
     private int triangleClicks = 0;
     private Point[] triangleVertices = new Point[3];
+    private ShapeFactory shapeFactory = new ShapeFactory();
 
     public DrawingBoard(MainGUI gui) {
+        super();
         shapes = new ArrayList();
         oldShapes = new ArrayList();
         this.gui = gui;
@@ -65,32 +67,30 @@ public class DrawingBoard extends JComponent implements Logging {
             public void mouseReleased(MouseEvent e) {
 
                 if (gui.currentAction != 11) {
-                    Shape shape = null;
-
                     switch (gui.currentAction) {
                         case 1: {
-                            Rectangle rectangle = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            Rectangle rectangle = shapeFactory.drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
                             shapes.add(rectangle);
                             break;
                         }
                         case 2: {
-                            Ellipse ellipse = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            Ellipse ellipse = shapeFactory.drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
                             shapes.add(ellipse);
                             break;
                         }
                         case 3: {
-                            Line line = drawLine(drawStart, e.getPoint());
+                            Line line = shapeFactory.drawLine(drawStart, e.getPoint());
                             shapes.add(line);
 
                             break;
                         }
                         case 4: {
-                            Circle circle = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            Circle circle = shapeFactory.drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
                             shapes.add(circle);
                             break;
                         }
                         case 5: {
-                            Square square = drawSquare(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            Square square = shapeFactory.drawSquare(drawStart.x, drawStart.y, e.getX(), e.getY());
                             shapes.add(square);
                             break;
                         }
@@ -98,7 +98,6 @@ public class DrawingBoard extends JComponent implements Logging {
                             break;
                     }
                 }
-
                 shapeFill.add(gui.fillColor);
                 shapeStroke.add(gui.strokeColor);
                 drawStart = null;
@@ -115,7 +114,7 @@ public class DrawingBoard extends JComponent implements Logging {
                     log("vertex #" + triangleClicks + " registered.");
                     if (triangleClicks == 3) {
                         triangleClicks = 0;
-                        Triangle triangle = drawTriangle(triangleVertices);
+                        Triangle triangle = shapeFactory.drawTriangle(triangleVertices);
                         log("Triangle registered");
                         shapes.add(triangle);
                         log("Triangle added to array list.");
@@ -147,7 +146,7 @@ public class DrawingBoard extends JComponent implements Logging {
 
                     Shape shape = null;
                     gui.strokeColor = gui.fillColor;
-                    shape = drawBrush(x, y, 5, 5);
+                    shape = shapeFactory.drawBrush(x, y, 5, 5);
                     shapes.add(shape);
                     shapeFill.add(gui.fillColor);
                     shapeStroke.add(gui.strokeColor);
@@ -181,28 +180,28 @@ public class DrawingBoard extends JComponent implements Logging {
             Shape shape = null;
             switch (gui.currentAction) {
                 case 1:
-                    shape = drawRectangle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = shapeFactory.drawRectangle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                     break;
                 case 2:
-                    shape = drawEllipse(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = shapeFactory.drawEllipse(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                     break;
                 case 3:
-                    shape = drawLine(drawStart, drawEnd);
+                    shape = shapeFactory.drawLine(drawStart, drawEnd);
                     graphicsSettings.draw(shape);
                     break;
                 case 4:
-                    shape = drawCircle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = shapeFactory.drawCircle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                     break;
                 case 5:
-                    shape = drawSquare(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = shapeFactory.drawSquare(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
                     graphicsSettings.draw(shape);
                     break;
                 case 6:
                     if (triangleClicks == 3) {
-                        shape = drawTriangle(triangleVertices);
+                        shape = shapeFactory.drawTriangle(triangleVertices);
                         graphicsSettings.draw(shape);
                     }
                     break;
@@ -211,60 +210,5 @@ public class DrawingBoard extends JComponent implements Logging {
             }
 
         }
-    }
-
-    private Rectangle drawRectangle(int x1, int y1, int x2, int y2) {
-        int x = Math.min(x1, x2);
-        int y = Math.min(y1, y2);
-
-        int width = Math.abs(x1 - x2);
-        int height = Math.abs(y1 - y2);
-        return new Rectangle(x, y, width, height);
-
-    }
-
-    private Square drawSquare(int x1, int y1, int x2, int y2) {
-        int x = Math.min(x1, x2);
-        int y = Math.min(y1, y2);
-
-        int width = Math.abs(x1 - x2);
-        int height = Math.abs(y1 - y2);
-        int side = Math.max(width, height);
-        return new Square(x, y, side);
-
-    }
-
-    private Ellipse drawEllipse(int x1, int y1, int x2, int y2) {
-        int x = Math.min(x1, x2);
-        int y = Math.min(y1, y2);
-
-        int width = Math.abs(x1 - x2);
-        int height = Math.abs(y1 - y2);
-        return new Ellipse(x, y, width, height);
-    }
-
-    private Line drawLine(Point p1, Point p2) {
-        return new Line(p1, p2);
-    }
-
-    private Circle drawCircle(int x1, int y1, int x2, int y2) {
-        int x = Math.min(x1, x2);
-        int y = Math.min(y1, y2);
-
-        int width = Math.abs(x1 - x2);
-        int height = Math.abs(y1 - y2);
-        int radius = Math.max(width, height);
-        return new Circle(x, y, radius);
-    }
-
-    private Triangle drawTriangle(Point[] v) {
-        int[] x = new int[]{(int) v[0].getX(), (int) v[1].getX(), (int) v[2].getX()};
-        int[] y = new int[]{(int) v[0].getY(), (int) v[1].getY(), (int) v[2].getY()};
-        return new Triangle(x, y);
-    }
-
-    private Ellipse drawBrush(int x, int y, int brushStrokeWidth, int brushStrokeHeight) {
-        return new Ellipse(x, y, brushStrokeWidth, brushStrokeHeight);
-    }
-
+    }    
 }

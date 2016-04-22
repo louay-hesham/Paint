@@ -34,9 +34,9 @@ import javax.swing.JComponent;
  */
 public class DrawingBoard extends JComponent implements Logging {
 
-    public static  ArrayList<Shape> shapes = new ArrayList();
-    public static  ArrayList<Shape> oldShapes = new ArrayList();
-    
+    public static ArrayList<Shape> shapes = new ArrayList();
+    public static ArrayList<Shape> oldShapes = new ArrayList();
+
     private ArrayList<Color> shapeFill = new ArrayList();
     private ArrayList<Color> shapeStroke = new ArrayList();
     private Point drawStart, drawEnd;
@@ -50,69 +50,51 @@ public class DrawingBoard extends JComponent implements Logging {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                
-                if (gui.currentAction != 11){
-                drawStart = new Point(e.getX(), e.getY());
-                drawEnd = null;
-                repaint();
-                log("Mouse pressed.");
-            }
+
+                if (gui.currentAction != 11) {
+                    drawStart = new Point(e.getX(), e.getY());
+                    drawEnd = null;
+                    repaint();
+                    log("Mouse pressed.");
+                }
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                
-                if (gui.currentAction != 11){
+
+                if (gui.currentAction != 11) {
                     Shape shape = null;
-                
-                switch (gui.currentAction) {
-                    case 1: {
-                        Rectangle rectangle = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
-                        shapes.add(rectangle);
-                        break;
-                    }
-                    case 2: {
-                        Ellipse ellipse = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
-                        shapes.add(ellipse);
-                        break;
-                    }
-                    case 3: {
-                        Line line = drawLine(drawStart, e.getPoint());
-                        shapes.add(line);
 
-                        break;
-                    }
-                    case 4: {
-                        Circle circle = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
-                        shapes.add(circle);
-                        break;
-                    }
-                    case 5: {
-                        Square square = drawSquare(drawStart.x, drawStart.y, e.getX(), e.getY());
-                        shapes.add(square);
-                        break;
-                    }
-                    case 7: {
-                        if (shapes.size() > 0) {
-                            try {
-                                for (Shape s : shapes) {
-                                    if (s.contains(e.getPoint())) {
-                                        shapes.remove(s);
-                                        oldShapes.add(s);
-                                    }
-                                }
-                            } catch (ConcurrentModificationException cm) {
-                                System.out.println(cm.getCause());
-                            } catch (ArrayIndexOutOfBoundsException aii) {
-                                System.out.println(aii.getCause());
-                            }
+                    switch (gui.currentAction) {
+                        case 1: {
+                            Rectangle rectangle = drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            shapes.add(rectangle);
+                            break;
                         }
-                        break;
-                    }
+                        case 2: {
+                            Ellipse ellipse = drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            shapes.add(ellipse);
+                            break;
+                        }
+                        case 3: {
+                            Line line = drawLine(drawStart, e.getPoint());
+                            shapes.add(line);
 
-                    default:
-                        break;
-                }
+                            break;
+                        }
+                        case 4: {
+                            Circle circle = drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            shapes.add(circle);
+                            break;
+                        }
+                        case 5: {
+                            Square square = drawSquare(drawStart.x, drawStart.y, e.getX(), e.getY());
+                            shapes.add(square);
+                            break;
+                        }
+                        default:
+                            break;
+                    }
                 }
 
                 shapeFill.add(gui.fillColor);
@@ -125,6 +107,7 @@ public class DrawingBoard extends JComponent implements Logging {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                log ("Mouse clicked.");
                 if (gui.currentAction == 6) {
                     triangleVertices[triangleClicks++] = e.getPoint();
                     log("vertex #" + triangleClicks + " registered.");
@@ -137,16 +120,29 @@ public class DrawingBoard extends JComponent implements Logging {
                         repaint();
                         log("Triangle painted.");
                     }
+                } else if (gui.currentAction == 7) {
+                    Shape shapeToDelete = null;
+                    for (int i = shapes.size() - 1; i >= 0; i--) {
+                        if (shapes.get(i).contains(e.getPoint())) {
+                            shapeToDelete = shapes.get(i);
+                            log("Shape to delete found");
+                            break;
+                        }
+                    }
+                    if (shapeToDelete != null){
+                        shapes.remove(shapeToDelete);
+                    }
+                    repaint();
                 }
             }
         }); // end of addMouseListener
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if (gui.currentAction == 11){
+                if (gui.currentAction == 11) {
                     int x = e.getX();
                     int y = e.getY();
-                    
+
                     Shape shape = null;
                     gui.strokeColor = gui.fillColor;
                     shape = drawBrush(x, y, 5, 5);
@@ -264,8 +260,8 @@ public class DrawingBoard extends JComponent implements Logging {
         int[] y = new int[]{(int) v[0].getY(), (int) v[1].getY(), (int) v[2].getY()};
         return new Triangle(x, y);
     }
-    
-    private Ellipse drawBrush(int x, int y, int brushStrokeWidth, int brushStrokeHeight){
+
+    private Ellipse drawBrush(int x, int y, int brushStrokeWidth, int brushStrokeHeight) {
         return new Ellipse(x, y, brushStrokeWidth, brushStrokeHeight);
     }
 

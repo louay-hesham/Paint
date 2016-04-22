@@ -10,34 +10,33 @@ import static Qombo.Paint.GUI.DrawingBoard.oldShapes;
 import static Qombo.Paint.GUI.DrawingBoard.shapes;
 import java.awt.Color;
 import java.awt.Shape;
-import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 
 /**
  *
  * @author lo2ay
  */
 public class MainGUI extends javax.swing.JFrame implements Logging {
-    
-    protected JButton strokeButton, fillButton;
+
+   
     protected int currentAction = 1;
     protected Color strokeColor = Color.black, fillColor = Color.black;
     protected DrawingBoard drawingBoard;
-
 
     /**
      * Creates new form MainGUI2
      */
     public MainGUI() {
         initComponents();
-        this.currentAction=1;
-        this.fillColor=Color.cyan;
+        this.currentAction = 1;
+        this.fillColor = Color.cyan;
         this.strokeColor = Color.black;
         this.drawingBoard = new DrawingBoard(this);
         this.drawingBoard.setBackground(Color.WHITE);
         this.CanvasPanel.add(drawingBoard);
-        this.drawingBoard.setSize(CanvasPanel.getSize().width-1,CanvasPanel.getSize().height-1);
+        this.drawingBoard.setSize(CanvasPanel.getSize().width - 1, CanvasPanel.getSize().height - 1);
         this.setResizable(false);
     }
 
@@ -62,10 +61,12 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         RedoButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
         brushButton = new javax.swing.JButton();
-        eraserButton = new javax.swing.JButton();
+        fillColorButton = new javax.swing.JButton();
+        strokeColorButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        rectangleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Rectangle.png"))); // NOI18N
         rectangleButton.setText("Rectangle");
         rectangleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +75,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         });
         rectangleButton.setIcon(new ImageIcon(MainGUI.class.getResource("Rectangle.png")));
 
+        ellipseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Ellipse.png"))); // NOI18N
         ellipseButton.setText("Ellipse");
         ellipseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,13 +84,13 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         });
         ellipseButton.setIcon(new ImageIcon(MainGUI.class.getResource("Ellipse.png")));
 
+        lineButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Line.png"))); // NOI18N
         lineButton.setText("Line");
         lineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lineButtonActionPerformed(evt);
             }
         });
-        lineButton.setIcon(new ImageIcon(MainGUI.class.getResource("Line.png")));
 
         CanvasPanel.setBackground(java.awt.Color.white);
 
@@ -103,6 +105,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        squareButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Square.png"))); // NOI18N
         squareButton.setText("Square");
         squareButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +114,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         });
         squareButton.setIcon(new ImageIcon(MainGUI.class.getResource("Square.png")));
 
+        circleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Circle.png"))); // NOI18N
         circleButton.setText("Circle");
         circleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +130,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        deletButton.setBackground(java.awt.Color.red);
         deletButton.setText("Delete");
         deletButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +138,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        undoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Undo.png"))); // NOI18N
         undoButton.setText("Undo");
         undoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +146,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        RedoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Redo.png"))); // NOI18N
         RedoButton.setText("Redo");
         RedoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,10 +169,17 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
-        eraserButton.setText("Eraser");
-        eraserButton.addActionListener(new java.awt.event.ActionListener() {
+        fillColorButton.setText("Fill Color");
+        fillColorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eraserButtonActionPerformed(evt);
+                fillColorButtonActionPerformed(evt);
+            }
+        });
+
+        strokeColorButton.setText("Stroke Color");
+        strokeColorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                strokeColorButtonActionPerformed(evt);
             }
         });
 
@@ -177,27 +191,30 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(undoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deletButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(615, 615, 615)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(circleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ellipseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(triangleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(squareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rectangleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(brushButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(eraserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 609, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(circleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ellipseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(triangleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(squareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rectangleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(brushButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(fillColorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(strokeColorButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -207,12 +224,17 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(undoButton)
-                            .addComponent(RedoButton)
-                            .addComponent(resetButton)
-                            .addComponent(deletButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                                    .addComponent(resetButton)
+                                    .addComponent(deletButton)
+                                    .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fillColorButton)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(triangleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -227,79 +249,75 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(brushButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(eraserButton, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)))
-                .addGap(19, 19, 19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)))
+                .addComponent(strokeColorButton)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void rectangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectangleButtonActionPerformed
-        this.currentAction=1;
+        this.currentAction = 1;
     }//GEN-LAST:event_rectangleButtonActionPerformed
 
     private void ellipseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ellipseButtonActionPerformed
-        this.currentAction=2;
+        this.currentAction = 2;
     }//GEN-LAST:event_ellipseButtonActionPerformed
 
     private void lineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineButtonActionPerformed
-        this.currentAction=3;
+        this.currentAction = 3;
     }//GEN-LAST:event_lineButtonActionPerformed
 
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
-        this.currentAction=4;
+        this.currentAction = 4;
     }//GEN-LAST:event_circleButtonActionPerformed
 
     private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
-        this.currentAction=5;
+        this.currentAction = 5;
     }//GEN-LAST:event_squareButtonActionPerformed
 
     private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
-        this.currentAction=6;
+        this.currentAction = 6;
     }//GEN-LAST:event_triangleButtonActionPerformed
 
     private void deletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletButtonActionPerformed
         // TODO add your handling code here:
-        this.currentAction=7;
+        this.currentAction = 7;
     }//GEN-LAST:event_deletButtonActionPerformed
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         // TODO add your handling code here:
-        this.currentAction=8;
+        this.currentAction = 8;
         if (shapes.size() > 0) {
-                            try {
-                                oldShapes.add(shapes.get(shapes.size() - 1));
-                                shapes.remove(shapes.get(shapes.size() - 1));
-                                repaint();
-                            } catch (ArrayIndexOutOfBoundsException ai) {
-                                System.out.println(ai.getCause());
-                                ai.printStackTrace();
-                            }
-                        }
+            try {
+                oldShapes.add(shapes.get(shapes.size() - 1));
+                shapes.remove(shapes.get(shapes.size() - 1));
+                repaint();
+            } catch (ArrayIndexOutOfBoundsException ai) {
+                System.out.println(ai.getCause());
+                ai.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_undoButtonActionPerformed
 
     private void RedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoButtonActionPerformed
-        // TODO add your handling code here:
-        this.currentAction=9;
-        if(oldShapes.size()>0){
-                        try
-                        {
-                        shapes.add(oldShapes.get(oldShapes.size()-1));
-                        oldShapes.remove(oldShapes.get(oldShapes.size()-1));
-                        repaint();
-                        }
-                        catch(ArrayIndexOutOfBoundsException ai){
-                            System.out.println(ai.getCause());
-                            ai.printStackTrace();
-                        }
-                        }
+        this.currentAction = 9;
+        if (oldShapes.size() > 0) {
+            try {
+                shapes.add(oldShapes.get(oldShapes.size() - 1));
+                oldShapes.remove(oldShapes.get(oldShapes.size() - 1));
+                repaint();
+            } catch (ArrayIndexOutOfBoundsException ai) {
+                System.out.println(ai.getCause());
+                ai.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_RedoButtonActionPerformed
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
-        // TODO add your handling code here:
-        this.currentAction=10;
-        for(Shape s : shapes){
+        this.currentAction = 10;
+        for (Shape s : shapes) {
             oldShapes.add(s);
         }
         shapes.clear();
@@ -311,10 +329,15 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.currentAction = 11;
     }//GEN-LAST:event_brushButtonActionPerformed
 
-    private void eraserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eraserButtonActionPerformed
+    private void fillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fillColorButtonActionPerformed
         // TODO add your handling code here:
-        this.currentAction = 12;
-    }//GEN-LAST:event_eraserButtonActionPerformed
+        fillColor= JColorChooser.showDialog(null, "Choose Fill Color", fillColor);
+    }//GEN-LAST:event_fillColorButtonActionPerformed
+
+    private void strokeColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strokeColorButtonActionPerformed
+        // TODO add your handling code here:
+        strokeColor=JColorChooser.showDialog(null,"Choose Stroke Color", strokeColor);
+    }//GEN-LAST:event_strokeColorButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,11 +382,12 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton circleButton;
     private javax.swing.JButton deletButton;
     private javax.swing.JButton ellipseButton;
-    private javax.swing.JButton eraserButton;
+    private javax.swing.JButton fillColorButton;
     private javax.swing.JButton lineButton;
     private javax.swing.JButton rectangleButton;
     private javax.swing.JButton resetButton;
     private javax.swing.JButton squareButton;
+    private javax.swing.JButton strokeColorButton;
     private javax.swing.JButton triangleButton;
     private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables

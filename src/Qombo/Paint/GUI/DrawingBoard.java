@@ -169,8 +169,9 @@ public class DrawingBoard extends JComponent implements Logging {
         Iterator<Color> strokeCounter = shapeStroke.iterator();
         Iterator<Color> fillCounter = shapeFill.iterator();
 
-        graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+        
         for (Shape s : shapes) {
+            graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
             graphicsSettings.setPaint(strokeCounter.next());
             graphicsSettings.draw(s);
             graphicsSettings.setPaint(fillCounter.next());

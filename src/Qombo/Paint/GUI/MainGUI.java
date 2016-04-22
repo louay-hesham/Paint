@@ -20,7 +20,6 @@ import javax.swing.JColorChooser;
  */
 public class MainGUI extends javax.swing.JFrame implements Logging {
 
-   
     protected int currentAction = 1;
     protected Color strokeColor = Color.black, fillColor = Color.black;
     protected DrawingBoard drawingBoard;
@@ -38,6 +37,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.CanvasPanel.add(drawingBoard);
         this.drawingBoard.setSize(CanvasPanel.getSize().width - 1, CanvasPanel.getSize().height - 1);
         this.setResizable(false);
+        this.fillColorButton.setBackground(fillColor);
+        this.strokeColorButton.setBackground(strokeColor);
     }
 
     /**
@@ -316,11 +317,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     }//GEN-LAST:event_RedoButtonActionPerformed
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
-        this.currentAction = 10;
-        for (Shape s : shapes) {
-            oldShapes.add(s);
-        }
-        shapes.clear();
+        this.drawingBoard = new DrawingBoard(this);
         repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 
@@ -330,13 +327,13 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     }//GEN-LAST:event_brushButtonActionPerformed
 
     private void fillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fillColorButtonActionPerformed
-        // TODO add your handling code here:
-        fillColor= JColorChooser.showDialog(null, "Choose Fill Color", fillColor);
+        fillColor = JColorChooser.showDialog(null, "Choose Fill Color", fillColor);
+        this.fillColorButton.setBackground(fillColor);
     }//GEN-LAST:event_fillColorButtonActionPerformed
 
     private void strokeColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strokeColorButtonActionPerformed
-        // TODO add your handling code here:
-        strokeColor=JColorChooser.showDialog(null,"Choose Stroke Color", strokeColor);
+        strokeColor = JColorChooser.showDialog(null, "Choose Stroke Color", strokeColor);
+        this.strokeColorButton.setBackground(strokeColor);
     }//GEN-LAST:event_strokeColorButtonActionPerformed
 
     /**

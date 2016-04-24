@@ -9,8 +9,8 @@ import Qombo.Logging.Logging;
 import Qombo.Paint.Shapes.Circle;
 import Qombo.Paint.Shapes.Ellipse;
 import Qombo.Paint.Shapes.Line;
-import Qombo.Paint.Shapes.Rectangle;
 import Qombo.Paint.Shapes.ShapeFactory;
+import static Qombo.Paint.Shapes.ShapeFactory.ShapeType.*;
 import Qombo.Paint.Shapes.Square;
 import Qombo.Paint.Shapes.Triangle;
 import java.awt.AlphaComposite;
@@ -69,29 +69,29 @@ public class DrawingBoard extends JComponent implements Logging {
                 if (gui.currentAction != 11) {
                     switch (gui.currentAction) {
                         case 1: {
-                            Rectangle rectangle = shapeFactory.drawRectangle(drawStart.x, drawStart.y, e.getX(), e.getY());
-                            shapes.add(rectangle);
+                            Shape shape = shapeFactory.drawShape(drawStart.x, drawStart.y, e.getX(), e.getY(),RECTANGLE);
+                            shapes.add(shape);
                             break;
                         }
                         case 2: {
-                            Ellipse ellipse = shapeFactory.drawEllipse(drawStart.x, drawStart.y, e.getX(), e.getY());
-                            shapes.add(ellipse);
+                            Shape shape = shapeFactory.drawShape(drawStart.x, drawStart.y, e.getX(), e.getY(),ELLIPSE);
+                            shapes.add(shape);
                             break;
                         }
                         case 3: {
-                            Line line = shapeFactory.drawLine(drawStart, e.getPoint());
-                            shapes.add(line);
+                            Shape shape = shapeFactory.drawShape(drawEnd, e.getPoint());
+                            shapes.add(shape);
 
                             break;
                         }
                         case 4: {
-                            Circle circle = shapeFactory.drawCircle(drawStart.x, drawStart.y, e.getX(), e.getY());
-                            shapes.add(circle);
+                            Shape shape = shapeFactory.drawShape(drawStart.x, drawStart.y, e.getX(), e.getY(),CIRCLE);
+                            shapes.add(shape);
                             break;
                         }
                         case 5: {
-                            Square square = shapeFactory.drawSquare(drawStart.x, drawStart.y, e.getX(), e.getY());
-                            shapes.add(square);
+                            Shape shape = shapeFactory.drawShape(drawStart.x, drawStart.y, e.getX(), e.getY(),SQUARE);
+                            shapes.add(shape);
                             break;
                         }
                         default:
@@ -114,9 +114,9 @@ public class DrawingBoard extends JComponent implements Logging {
                     log("vertex #" + triangleClicks + " registered.");
                     if (triangleClicks == 3) {
                         triangleClicks = 0;
-                        Triangle triangle = shapeFactory.drawTriangle(triangleVertices);
+                        Shape shape = shapeFactory.drawShape(triangleVertices);
                         log("Triangle registered");
-                        shapes.add(triangle);
+                        shapes.add(shape);
                         log("Triangle added to array list.");
                         repaint();
                         log("Triangle painted.");
@@ -180,28 +180,28 @@ public class DrawingBoard extends JComponent implements Logging {
             Shape shape = null;
             switch (gui.currentAction) {
                 case 1:
-                    shape = shapeFactory.drawRectangle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = shapeFactory.drawShape(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y,RECTANGLE);
                     graphicsSettings.draw(shape);
                     break;
                 case 2:
-                    shape = shapeFactory.drawEllipse(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = shapeFactory.drawShape(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y,ELLIPSE);
                     graphicsSettings.draw(shape);
                     break;
                 case 3:
-                    shape = shapeFactory.drawLine(drawStart, drawEnd);
+                    shape = shapeFactory.drawShape(drawStart, drawEnd);
                     graphicsSettings.draw(shape);
                     break;
                 case 4:
-                    shape = shapeFactory.drawCircle(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = shapeFactory.drawShape(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y,CIRCLE);
                     graphicsSettings.draw(shape);
                     break;
                 case 5:
-                    shape = shapeFactory.drawSquare(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+                    shape = shapeFactory.drawShape(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y,SQUARE);
                     graphicsSettings.draw(shape);
                     break;
                 case 6:
                     if (triangleClicks == 3) {
-                        shape = shapeFactory.drawTriangle(triangleVertices);
+                        shape = shapeFactory.drawShape(triangleVertices);
                         graphicsSettings.draw(shape);
                     }
                     break;

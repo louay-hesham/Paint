@@ -6,6 +6,7 @@
 package Qombo.Paint.Shapes;
 
 import java.awt.Point;
+import java.awt.Shape;
 
 /**
  *
@@ -13,7 +14,28 @@ import java.awt.Point;
  */
 public class ShapeFactory {
     
-    public Rectangle drawRectangle(int x1, int y1, int x2, int y2) {
+    public enum ShapeType {RECTANGLE, SQUARE, ELLIPSE, LINE, CIRCLE, TRIANGLE, BRUSH};
+    
+    public Shape drawShape(int x1, int y1, int x2, int y2, ShapeType type){
+        switch (type){
+            case RECTANGLE:
+                return drawRectangle(x1, y1, x2, y2);
+            case SQUARE:
+                return drawSquare(x1, y1, x2, y2);
+            case ELLIPSE:
+                return drawEllipse(x1, y1, x2, y2);
+            case CIRCLE:
+                return drawCircle(x1, y1, x2, y2);
+        }
+        return null;
+    }
+    public Shape drawShape(Point p1, Point p2){
+        return drawLine(p1, p2);
+    }
+    public Shape drawShape(Point[] v){
+        return drawTriangle(v);
+    }
+    private Rectangle drawRectangle(int x1, int y1, int x2, int y2) {
         int x = Math.min(x1, x2);
         int y = Math.min(y1, y2);
 
@@ -23,7 +45,7 @@ public class ShapeFactory {
 
     }
 
-    public Square drawSquare(int x1, int y1, int x2, int y2) {
+    private Square drawSquare(int x1, int y1, int x2, int y2) {
         int x = Math.min(x1, x2);
         int y = Math.min(y1, y2);
 
@@ -34,7 +56,7 @@ public class ShapeFactory {
 
     }
 
-    public Ellipse drawEllipse(int x1, int y1, int x2, int y2) {
+    private Ellipse drawEllipse(int x1, int y1, int x2, int y2) {
         int x = Math.min(x1, x2);
         int y = Math.min(y1, y2);
 
@@ -43,11 +65,11 @@ public class ShapeFactory {
         return new Ellipse(x, y, width, height);
     }
 
-    public Line drawLine(Point p1, Point p2) {
+    private Line drawLine(Point p1, Point p2) {
         return new Line(p1, p2);
     }
 
-    public Circle drawCircle(int x1, int y1, int x2, int y2) {
+    private Circle drawCircle(int x1, int y1, int x2, int y2) {
         int x = Math.min(x1, x2);
         int y = Math.min(y1, y2);
 
@@ -57,7 +79,7 @@ public class ShapeFactory {
         return new Circle(x, y, radius);
     }
 
-    public Triangle drawTriangle(Point[] v) {
+    private Triangle drawTriangle(Point[] v) {
         int[] x = new int[]{(int) v[0].getX(), (int) v[1].getX(), (int) v[2].getX()};
         int[] y = new int[]{(int) v[0].getY(), (int) v[1].getY(), (int) v[2].getY()};
         return new Triangle(x, y);

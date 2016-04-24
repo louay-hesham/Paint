@@ -6,13 +6,8 @@
 package Qombo.Paint.GUI;
 
 import Qombo.Logging.Logging;
-import Qombo.Paint.Shapes.Circle;
-import Qombo.Paint.Shapes.Ellipse;
-import Qombo.Paint.Shapes.Line;
 import Qombo.Paint.Shapes.ShapeFactory;
 import static Qombo.Paint.Shapes.ShapeFactory.ShapeType.*;
-import Qombo.Paint.Shapes.Square;
-import Qombo.Paint.Shapes.Triangle;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -27,12 +22,13 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JComponent;
+import javax.swing.undo.UndoManager;
 
 /**
  *
  * @author lo2ay
  */
-public class DrawingBoard extends JComponent implements Logging {
+public class DrawingBoard extends JComponent implements Logging{
 
     public static ArrayList<Shape> shapes = new ArrayList();
     public static ArrayList<Shape> oldShapes = new ArrayList();
@@ -155,6 +151,7 @@ public class DrawingBoard extends JComponent implements Logging {
                 repaint();
             }
         }); // end of addMouseMotionListener
+        
     } // end of constructor
 
     @Override

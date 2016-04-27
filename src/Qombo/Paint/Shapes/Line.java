@@ -6,17 +6,29 @@
 package Qombo.Paint.Shapes;
 
 import Qombo.Paint.GUI.DrawingBoard;
+import Qombo.Paint.GUI.MainGUI;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Point;
 
 /**
  *
  * @author lo2ay
  */
-class Line extends java.awt.geom.Line2D.Float {
+public class Line extends java.awt.geom.Line2D.Float {
        
     public final int ORDER;
+     private Color strokeColor;
+     
     public Line(Point p1, Point p2){
         super(p1, p2);
         ORDER = DrawingBoard.shapes.size()+1;
+                this.strokeColor = MainGUI.getStrokeColor();
+    }
+    public void draw (Graphics2D graphicsSettings){
+        graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+            graphicsSettings.setPaint(strokeColor);
+            graphicsSettings.draw(this);
     }
 }

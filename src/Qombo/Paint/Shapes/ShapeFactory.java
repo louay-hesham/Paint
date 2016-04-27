@@ -23,7 +23,7 @@ public class ShapeFactory {
             shapeFactory = new ShapeFactory();
         return shapeFactory;
     }
-    
+        
     private ShapeFactory(){
         
     }

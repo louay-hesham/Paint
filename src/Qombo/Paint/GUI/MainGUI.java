@@ -21,13 +21,24 @@ import javax.swing.JColorChooser;
 public class MainGUI extends javax.swing.JFrame implements Logging {
 
     protected int currentAction = 1;
-    protected Color strokeColor = Color.black, fillColor = Color.black;
+    protected static Color strokeColor = Color.black, fillColor = Color.black;
+
+    public static Color getStrokeColor() {
+        return strokeColor;
+    }
+
+    public static Color getFillColor() {
+        return fillColor;
+    }
     protected DrawingBoard drawingBoard;
+    
+    
 
     /**
      * Creates new form MainGUI2
      */
     public MainGUI() {
+        super("Paint My Ass");
         initComponents();
         this.currentAction = 1;
         this.fillColor = Color.cyan;
@@ -61,7 +72,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         undoButton = new javax.swing.JButton();
         RedoButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
-        brushButton = new javax.swing.JButton();
         fillColorButton = new javax.swing.JButton();
         strokeColorButton = new javax.swing.JButton();
 
@@ -162,14 +172,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
-        brushButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/brush.png"))); // NOI18N
-        brushButton.setText("Brush");
-        brushButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                brushButtonActionPerformed(evt);
-            }
-        });
-
         fillColorButton.setText("Fill Color");
         fillColorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,8 +214,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                             .addComponent(triangleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(squareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(rectangleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(brushButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(fillColorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(strokeColorButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -248,9 +249,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         .addComponent(circleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(brushButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(strokeColorButton)
                 .addContainerGap())
         );
@@ -321,11 +320,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 
-    private void brushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brushButtonActionPerformed
-        // TODO add your handling code here:
-        this.currentAction = 11;
-    }//GEN-LAST:event_brushButtonActionPerformed
-
     private void fillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fillColorButtonActionPerformed
         fillColor = JColorChooser.showDialog(null, "Choose Fill Color", fillColor);
         this.fillColorButton.setBackground(fillColor);
@@ -375,7 +369,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CanvasPanel;
     private javax.swing.JButton RedoButton;
-    private javax.swing.JButton brushButton;
     private javax.swing.JButton circleButton;
     private javax.swing.JButton deletButton;
     private javax.swing.JButton ellipseButton;

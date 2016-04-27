@@ -6,8 +6,14 @@
 package Qombo.Paint.GUI;
 
 import Qombo.Logging.Logging;
+import Qombo.Paint.Shapes.Circle;
+import Qombo.Paint.Shapes.Ellipse;
+import Qombo.Paint.Shapes.Line;
+import Qombo.Paint.Shapes.Rectangle;
 import Qombo.Paint.Shapes.ShapeFactory;
 import static Qombo.Paint.Shapes.ShapeFactory.ShapeType.*;
+import Qombo.Paint.Shapes.Square;
+import Qombo.Paint.Shapes.Triangle;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -22,7 +28,6 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JComponent;
-import javax.swing.undo.UndoManager;
 
 /**
  *
@@ -51,18 +56,16 @@ public class DrawingBoard extends JComponent implements Logging{
             @Override
             public void mousePressed(MouseEvent e) {
 
-                if (gui.currentAction != 11) {
-                    drawStart = new Point(e.getX(), e.getY());
+                    drawStart = e.getPoint();
                     drawEnd = null;
                     repaint();
                     log("Mouse pressed.");
-                }
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
 
-                if (gui.currentAction != 11) {
+                
                     switch (gui.currentAction) {
                         case 1: {
                             Shape shape = shapeFactory.drawShape(drawStart, e.getPoint(), RECTANGLE);
@@ -92,7 +95,7 @@ public class DrawingBoard extends JComponent implements Logging{
                         }
                         default:
                             break;
-                    }
+                    
                 }
                 shapeFill.add(gui.fillColor);
                 shapeStroke.add(gui.strokeColor);
@@ -136,23 +139,28 @@ public class DrawingBoard extends JComponent implements Logging{
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if (gui.currentAction == 11) {
-                    int x = e.getX();
-                    int y = e.getY();
-
-                    Shape shape = null;
-                    gui.strokeColor = gui.fillColor;
-                    shape = shapeFactory.drawBrush(x, y, 5, 5);
-                    shapes.add(shape);
-                    shapeFill.add(gui.fillColor);
-                    shapeStroke.add(gui.strokeColor);
-                }
                 drawEnd = new Point(e.getX(), e.getY());
                 repaint();
             }
         }); // end of addMouseMotionListener
         
     } // end of constructor
+    
+    private void draw (Graphics2D graphicsSettings, Shape s){
+        if (s.getClass() == Circle.class){
+            ((Circle)s).draw(graphicsSettings);
+        } else if (s.getClass() == Ellipse.class){
+            ((Ellipse)s).draw(graphicsSettings);
+        } else if (s.getClass() == Line.class){
+            ((Line)s).draw(graphicsSettings);
+        }else if (s.getClass() == Rectangle.class){
+            ((Rectangle)s).draw(graphicsSettings);
+        }else if (s.getClass() == Square.class){
+            ((Square)s).draw(graphicsSettings);
+        }else if (s.getClass() == Triangle.class){
+            ((Triangle)s).draw(graphicsSettings);
+        }
+    }
 
     @Override
     public void paint(Graphics g) {
@@ -166,10 +174,7 @@ public class DrawingBoard extends JComponent implements Logging{
         
         for (Shape s : shapes) {
             graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-            graphicsSettings.setPaint(strokeCounter.next());
-            graphicsSettings.draw(s);
-            graphicsSettings.setPaint(fillCounter.next());
-            graphicsSettings.fill(s);
+            draw(graphicsSettings, s);
         }
         if (drawStart != null && drawEnd != null) {
             graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.40f));

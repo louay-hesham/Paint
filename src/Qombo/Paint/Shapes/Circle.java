@@ -11,11 +11,9 @@ import Qombo.Paint.GUI.DrawingBoard;
  *
  * @author lo2ay
  */
-class Circle extends Ellipse {
+public class Circle extends Ellipse {
     
-    public final int ORDER;
     public Circle (int x, int y, int radius){
         super(x, y, radius, radius);
-        ORDER = DrawingBoard.shapes.size()+1;
     }
 }

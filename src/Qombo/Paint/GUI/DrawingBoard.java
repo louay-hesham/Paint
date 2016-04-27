@@ -32,7 +32,7 @@ import javax.swing.JComponent;
  *
  * @author lo2ay
  */
-public class DrawingBoard extends JComponent implements Logging{
+public class DrawingBoard extends JComponent implements Logging {
 
     public static ArrayList<Shape> shapes = new ArrayList();
     public static ArrayList<Shape> oldShapes = new ArrayList();
@@ -57,46 +57,45 @@ public class DrawingBoard extends JComponent implements Logging{
             @Override
             public void mousePressed(MouseEvent e) {
 
-                    drawStart = e.getPoint();
-                    drawEnd = null;
-                    repaint();
-                    log("Mouse pressed.");
+                drawStart = e.getPoint();
+                drawEnd = null;
+                repaint();
+                log("Mouse pressed.");
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
 
-                
-                    switch (gui.currentAction) {
-                        case 1: {
-                            Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), RECTANGLE);
-                            shapes.add(shape);
-                            break;
-                        }
-                        case 2: {
-                            Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), ELLIPSE);
-                            shapes.add(shape);
-                            break;
-                        }
-                        case 3: {
-                            Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), LINE);
-                            shapes.add(shape);
+                switch (gui.currentAction) {
+                    case 1: {
+                        Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), RECTANGLE);
+                        shapes.add(shape);
+                        break;
+                    }
+                    case 2: {
+                        Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), ELLIPSE);
+                        shapes.add(shape);
+                        break;
+                    }
+                    case 3: {
+                        Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), LINE);
+                        shapes.add(shape);
 
-                            break;
-                        }
-                        case 4: {
-                            Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), CIRCLE);
-                            shapes.add(shape);
-                            break;
-                        }
-                        case 5: {
-                            Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), SQUARE);
-                            shapes.add(shape);
-                            break;
-                        }
-                        default:
-                            break;
-                    
+                        break;
+                    }
+                    case 4: {
+                        Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), CIRCLE);
+                        shapes.add(shape);
+                        break;
+                    }
+                    case 5: {
+                        Shape shape = shapeFactory.getShape(drawStart, e.getPoint(), SQUARE);
+                        shapes.add(shape);
+                        break;
+                    }
+                    default:
+                        break;
+
                 }
                 drawStart = null;
                 drawEnd = null;
@@ -106,13 +105,14 @@ public class DrawingBoard extends JComponent implements Logging{
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                log ("Mouse clicked.");
+                log("Mouse clicked.");
                 if (gui.currentAction == 6) {
                     triangleVertices[triangleClicks++] = e.getPoint();
+                    gui.helperLabel.setText("Click three times on the canvas. Current click is #" + (triangleClicks == 3? 1:(triangleClicks+1) ));
                     log("vertex #" + triangleClicks + " registered.");
                     if (triangleClicks == 3) {
                         triangleClicks = 0;
-                        Shape shape = shapeFactory.drawShape(triangleVertices);
+                        Shape shape = shapeFactory.getShape(triangleVertices);
                         log("Triangle registered");
                         shapes.add(shape);
                         repaint();
@@ -127,7 +127,7 @@ public class DrawingBoard extends JComponent implements Logging{
                             break;
                         }
                     }
-                    if (shapeToDelete != null){
+                    if (shapeToDelete != null) {
                         shapes.remove(shapeToDelete);
                     }
                     repaint();
@@ -141,37 +141,33 @@ public class DrawingBoard extends JComponent implements Logging{
                 repaint();
             }
         }); // end of addMouseMotionListener
-        
+
     } // end of constructor
-    
-    private void drawShape (Graphics g, Shape s){
+
+    private void drawShape(Graphics g, Shape s) {
         Graphics2D graphicsSettings = (Graphics2D) g;
         graphicsSettings.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphicsSettings.setStroke(new BasicStroke(2));
         graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-        if (s.getClass() == Circle.class){
-            ((Circle)s).draw(graphicsSettings);
-        } else if (s.getClass() == Ellipse.class){
-            ((Ellipse)s).draw(graphicsSettings);
-        } else if (s.getClass() == Line.class){
-            ((Line)s).draw(graphicsSettings);
-        }else if (s.getClass() == Rectangle.class){
-            ((Rectangle)s).draw(graphicsSettings);
-        }else if (s.getClass() == Square.class){
-            ((Square)s).draw(graphicsSettings);
-        }else if (s.getClass() == Triangle.class){
-            ((Triangle)s).draw(graphicsSettings);
+        if (s.getClass() == Circle.class) {
+            ((Circle) s).draw(graphicsSettings);
+        } else if (s.getClass() == Ellipse.class) {
+            ((Ellipse) s).draw(graphicsSettings);
+        } else if (s.getClass() == Line.class) {
+            ((Line) s).draw(graphicsSettings);
+        } else if (s.getClass() == Rectangle.class) {
+            ((Rectangle) s).draw(graphicsSettings);
+        } else if (s.getClass() == Square.class) {
+            ((Square) s).draw(graphicsSettings);
+        } else if (s.getClass() == Triangle.class) {
+            ((Triangle) s).draw(graphicsSettings);
         }
     }
 
     @Override
     public void paint(Graphics g) {
-
-        
-
-        
         for (Shape s : shapes) {
-            
+
             drawShape(g, s);
         }
         if (drawStart != null && drawEnd != null) {
@@ -194,16 +190,16 @@ public class DrawingBoard extends JComponent implements Logging{
                     break;
                 case 6:
                     if (triangleClicks == 3) {
-                        shape = shapeFactory.drawShape(triangleVertices);
+                        shape = shapeFactory.getShape(triangleVertices);
                     }
                     break;
                 default:
                     shape = null;
             }
-            if (shape!=null){
+            if (shape != null) {
                 drawShape(g, shape);
             }
-            
+
         }
-    }    
+    }
 }

@@ -43,7 +43,7 @@ public class ShapeFactory {
         }
         return null;
     }
-    public Shape drawShape(Point[] v){
+    public Shape getShape(Point[] v){
         return drawTriangle(v);
     }
     private Rectangle drawRectangle(Point p1, Point p2) {

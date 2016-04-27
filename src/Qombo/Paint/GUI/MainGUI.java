@@ -29,8 +29,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         return fillColor;
     }
     protected DrawingBoard drawingBoard;
-    
-    
 
     /**
      * Creates new form MainGUI2
@@ -311,7 +309,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.currentAction = 6;
         this.currentModeLabel.setText("Triangle drawing mode.");
         this.helperLabel.setVisible(true);
-        this.helperLabel.setText("Click three times on the canvas. Current click is #"+this.drawingBoard.getTriangleClicks());
+        this.helperLabel.setText("Click three times on the canvas. Current click is #1");
     }//GEN-LAST:event_triangleButtonActionPerformed
 
     private void deletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletButtonActionPerformed
@@ -408,7 +406,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton deletButton;
     private javax.swing.JButton ellipseButton;
     private javax.swing.JButton fillColorButton;
-    private javax.swing.JLabel helperLabel;
+    protected javax.swing.JLabel helperLabel;
     private javax.swing.JButton lineButton;
     private javax.swing.JLabel modeLabel;
     private javax.swing.JButton rectangleButton;

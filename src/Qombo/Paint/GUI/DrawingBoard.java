@@ -39,7 +39,7 @@ public class DrawingBoard extends JComponent implements Logging{
     private final MainGUI gui;
     private int triangleClicks = 0;
     private Point[] triangleVertices = new Point[3];
-    private ShapeFactory shapeFactory = new ShapeFactory();
+    private ShapeFactory shapeFactory = ShapeFactory.getFactory();
 
     public DrawingBoard(MainGUI gui) {
         super();
@@ -65,28 +65,28 @@ public class DrawingBoard extends JComponent implements Logging{
                 if (gui.currentAction != 11) {
                     switch (gui.currentAction) {
                         case 1: {
-                            Shape shape = shapeFactory.drawShape(drawStart.x, drawStart.y, e.getX(), e.getY(),RECTANGLE);
+                            Shape shape = shapeFactory.drawShape(drawStart, e.getPoint(), RECTANGLE);
                             shapes.add(shape);
                             break;
                         }
                         case 2: {
-                            Shape shape = shapeFactory.drawShape(drawStart.x, drawStart.y, e.getX(), e.getY(),ELLIPSE);
+                            Shape shape = shapeFactory.drawShape(drawStart, e.getPoint(), ELLIPSE);
                             shapes.add(shape);
                             break;
                         }
                         case 3: {
-                            Shape shape = shapeFactory.drawShape(drawEnd, e.getPoint());
+                            Shape shape = shapeFactory.drawShape(drawStart, e.getPoint(), LINE);
                             shapes.add(shape);
 
                             break;
                         }
                         case 4: {
-                            Shape shape = shapeFactory.drawShape(drawStart.x, drawStart.y, e.getX(), e.getY(),CIRCLE);
+                            Shape shape = shapeFactory.drawShape(drawStart, e.getPoint(), CIRCLE);
                             shapes.add(shape);
                             break;
                         }
                         case 5: {
-                            Shape shape = shapeFactory.drawShape(drawStart.x, drawStart.y, e.getX(), e.getY(),SQUARE);
+                            Shape shape = shapeFactory.drawShape(drawStart, e.getPoint(), SQUARE);
                             shapes.add(shape);
                             break;
                         }
@@ -177,23 +177,23 @@ public class DrawingBoard extends JComponent implements Logging{
             Shape shape = null;
             switch (gui.currentAction) {
                 case 1:
-                    shape = shapeFactory.drawShape(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y,RECTANGLE);
+                    shape = shapeFactory.drawShape(drawStart, drawEnd, RECTANGLE);
                     graphicsSettings.draw(shape);
                     break;
                 case 2:
-                    shape = shapeFactory.drawShape(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y,ELLIPSE);
+                    shape = shapeFactory.drawShape(drawStart, drawEnd, ELLIPSE);
                     graphicsSettings.draw(shape);
                     break;
                 case 3:
-                    shape = shapeFactory.drawShape(drawStart, drawEnd);
+                    shape = shapeFactory.drawShape(drawStart, drawEnd, LINE);
                     graphicsSettings.draw(shape);
                     break;
                 case 4:
-                    shape = shapeFactory.drawShape(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y,CIRCLE);
+                    shape = shapeFactory.drawShape(drawStart, drawEnd, CIRCLE);
                     graphicsSettings.draw(shape);
                     break;
                 case 5:
-                    shape = shapeFactory.drawShape(drawStart.x, drawStart.y, drawEnd.x, drawEnd.y,SQUARE);
+                    shape = shapeFactory.drawShape(drawStart, drawEnd, SQUARE);
                     graphicsSettings.draw(shape);
                     break;
                 case 6:

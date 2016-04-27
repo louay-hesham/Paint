@@ -12,7 +12,7 @@ import java.awt.Point;
  *
  * @author lo2ay
  */
-public class Line extends java.awt.geom.Line2D.Float {
+class Line extends java.awt.geom.Line2D.Float {
        
     public final int ORDER;
     public Line(Point p1, Point p2){

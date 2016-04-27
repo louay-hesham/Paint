@@ -12,7 +12,7 @@ import Qombo.Paint.GUI.DrawingBoard;
  *
  * @author lo2ay
  */
-public class Rectangle extends java.awt.geom.Rectangle2D.Float {
+class Rectangle extends java.awt.geom.Rectangle2D.Float {
     public final int ORDER;
     public Rectangle(int x, int y, int width, int height){
         super(x,y,width,height);

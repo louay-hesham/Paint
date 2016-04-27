@@ -11,7 +11,7 @@ import Qombo.Paint.GUI.DrawingBoard;
  *
  * @author lo2ay
  */
-public class Circle extends Ellipse {
+class Circle extends Ellipse {
     
     public final int ORDER;
     public Circle (int x, int y, int radius){

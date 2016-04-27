@@ -12,7 +12,7 @@ import java.awt.Polygon;
  *
  * @author lo2ay
  */
-public class Triangle extends Polygon{
+class Triangle extends Polygon{
     private Point[] vertices;
 
     public Point[] getVertices() {

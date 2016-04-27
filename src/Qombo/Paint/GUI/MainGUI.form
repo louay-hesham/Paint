@@ -30,7 +30,7 @@
                       <Component id="CanvasPanel" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="undoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -39,7 +39,16 @@
                       <Component id="resetButton" min="-2" pref="93" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="deletButton" min="-2" pref="108" max="-2" attributes="0"/>
-                      <EmptySpace pref="609" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                      <Component id="modeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="currentModeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="helperLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="394" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -75,6 +84,8 @@
                                   <Component id="deletButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="RedoButton" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                                   <Component id="fillColorButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="modeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="currentModeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -98,7 +109,10 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="strokeColorButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="strokeColorButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="helperLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -159,7 +173,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="572" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="593" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -256,6 +270,24 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="strokeColorButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="modeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Current mode:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="currentModeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Recantgle drawing mode."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="helperLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="helper label"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="helperLabel.setVisible(false);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

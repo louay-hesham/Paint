@@ -26,7 +26,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.JComponent;
 
 /**
@@ -41,6 +40,10 @@ public class DrawingBoard extends JComponent implements Logging{
     private Point drawStart, drawEnd;
     private final MainGUI gui;
     private int triangleClicks = 0;
+
+    public int getTriangleClicks() {
+        return triangleClicks;
+    }
     private Point[] triangleVertices = new Point[3];
     private ShapeFactory shapeFactory = ShapeFactory.getFactory();
 

@@ -38,8 +38,6 @@ public class DrawingBoard extends JComponent implements Logging{
     public static ArrayList<Shape> shapes = new ArrayList();
     public static ArrayList<Shape> oldShapes = new ArrayList();
 
-    private ArrayList<Color> shapeFill = new ArrayList();
-    private ArrayList<Color> shapeStroke = new ArrayList();
     private Point drawStart, drawEnd;
     private final MainGUI gui;
     private int triangleClicks = 0;
@@ -97,8 +95,6 @@ public class DrawingBoard extends JComponent implements Logging{
                             break;
                     
                 }
-                shapeFill.add(gui.fillColor);
-                shapeStroke.add(gui.strokeColor);
                 drawStart = null;
                 drawEnd = null;
                 repaint();
@@ -116,7 +112,6 @@ public class DrawingBoard extends JComponent implements Logging{
                         Shape shape = shapeFactory.drawShape(triangleVertices);
                         log("Triangle registered");
                         shapes.add(shape);
-                        log("Triangle added to array list.");
                         repaint();
                         log("Triangle painted.");
                     }
@@ -139,7 +134,7 @@ public class DrawingBoard extends JComponent implements Logging{
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                drawEnd = new Point(e.getX(), e.getY());
+                drawEnd = e.getPoint();
                 repaint();
             }
         }); // end of addMouseMotionListener
@@ -168,8 +163,6 @@ public class DrawingBoard extends JComponent implements Logging{
         Graphics2D graphicsSettings = (Graphics2D) g;
         graphicsSettings.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphicsSettings.setStroke(new BasicStroke(2));
-        Iterator<Color> strokeCounter = shapeStroke.iterator();
-        Iterator<Color> fillCounter = shapeFill.iterator();
 
         
         for (Shape s : shapes) {
@@ -178,39 +171,35 @@ public class DrawingBoard extends JComponent implements Logging{
         }
         if (drawStart != null && drawEnd != null) {
             graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.40f));
-            graphicsSettings.setPaint(Color.lightGray);
             Shape shape = null;
             switch (gui.currentAction) {
                 case 1:
                     shape = shapeFactory.drawShape(drawStart, drawEnd, RECTANGLE);
-                    graphicsSettings.draw(shape);
                     break;
                 case 2:
                     shape = shapeFactory.drawShape(drawStart, drawEnd, ELLIPSE);
-                    graphicsSettings.draw(shape);
                     break;
                 case 3:
                     shape = shapeFactory.drawShape(drawStart, drawEnd, LINE);
-                    graphicsSettings.draw(shape);
                     break;
                 case 4:
                     shape = shapeFactory.drawShape(drawStart, drawEnd, CIRCLE);
-                    graphicsSettings.draw(shape);
                     break;
                 case 5:
                     shape = shapeFactory.drawShape(drawStart, drawEnd, SQUARE);
-                    graphicsSettings.draw(shape);
                     break;
                 case 6:
                     if (triangleClicks == 3) {
                         shape = shapeFactory.drawShape(triangleVertices);
-                        graphicsSettings.draw(shape);
                     }
                     break;
                 default:
                     shape = null;
             }
-
+            if (shape!=null){
+                draw(graphicsSettings, shape);
+            }
+            
         }
     }    
 }

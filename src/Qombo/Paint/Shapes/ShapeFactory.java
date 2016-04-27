@@ -28,7 +28,7 @@ public class ShapeFactory {
         
     }
     
-    public Shape drawShape(Point p1, Point p2, ShapeType type){
+    public Shape getShape(Point p1, Point p2, ShapeType type){
         switch (type){
             case RECTANGLE:
                 return drawRectangle(p1,p2);

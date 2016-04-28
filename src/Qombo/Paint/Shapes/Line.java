@@ -21,12 +21,12 @@ import java.awt.RenderingHints;
  */
 public class Line extends java.awt.geom.Line2D.Float implements Shape {
 
-    public final int ORDER;
     private Color lineColor;
-
+    Point p1,p2;
     public Line(Point p1, Point p2) {
         super(p1, p2);
-        ORDER = DrawingBoard.shapes.size() + 1;
+        this.p1=p1;
+        this.p2=p2;
         this.lineColor = MainGUI.getOutlineColor();
     }
 
@@ -43,5 +43,12 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
     @Override
     public void setColor(Color newColor) {
         this.lineColor = newColor;
+    }
+
+    @Override
+    public Shape clone() {
+        Line cloneLine = new Line(p1,p2);
+        cloneLine.lineColor=this.lineColor;
+        return cloneLine;
     }
 }

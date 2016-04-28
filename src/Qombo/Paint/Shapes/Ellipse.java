@@ -20,12 +20,14 @@ import java.awt.RenderingHints;
  */
 public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
 
-    public final int ORDER;
     private Color fillColor, outlineColor;
-
+    private int x,y,width,height;
     public Ellipse(int x, int y, int width, int height) {
-        super(x, y, width, height);
-        ORDER = DrawingBoard.shapes.size() + 1;
+        super(x, y, width, height);             
+        this.x=x;
+        this.y=y;
+        this.width=width;
+        this.height=height;
         this.fillColor = MainGUI.getFillColor();
         this.outlineColor = MainGUI.getOutlineColor();
     }
@@ -45,5 +47,13 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
     @Override
     public void setColor(Color newColor) {
         this.fillColor = newColor;
+    }
+
+    @Override
+    public Shape clone() {
+        Ellipse cloneEllipse= new Ellipse(x, y, width, height);
+        cloneEllipse.fillColor=this.fillColor;
+        cloneEllipse.outlineColor=this.outlineColor;
+        return cloneEllipse;
     }
 }

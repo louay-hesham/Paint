@@ -21,10 +21,9 @@ import java.awt.RenderingHints;
  * @author lo2ay
  */
 public class Triangle extends Polygon implements Shape{
-    private final int ORDER;
     private Point[] vertices;
     private Color fillColor,outlineColor;
-    
+    int[] xpoints,ypoints;
     public Point[] getVertices() {
         return vertices;
     }
@@ -32,7 +31,9 @@ public class Triangle extends Polygon implements Shape{
         super(xpoints, ypoints, 3);
         this.fillColor = MainGUI.getFillColor();
         this.outlineColor = MainGUI.getOutlineColor();
-                ORDER = DrawingBoard.shapes.size()+1;
+        this.xpoints=xpoints;
+        this.ypoints=ypoints;
+
     }
     
     @Override
@@ -50,5 +51,13 @@ public class Triangle extends Polygon implements Shape{
     @Override
     public void setColor(Color newColor) {
         this.fillColor=newColor;
+    }
+
+    @Override
+    public Shape clone() {
+        Triangle cloneTriangle = new Triangle(xpoints, ypoints);
+        cloneTriangle.fillColor=this.fillColor;
+        cloneTriangle.outlineColor=this.outlineColor;
+        return cloneTriangle;
     }
 }

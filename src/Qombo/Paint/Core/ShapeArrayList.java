@@ -23,7 +23,11 @@ public class ShapeArrayList<E extends Shape> extends java.util.ArrayList {
             if (shape==null){
                 System.out.println("null 7amada");
             }
+            try{
             newArrayList.add(shape.clone());
+            }catch(NullPointerException n){
+                System.out.println(n.getCause()); 
+           }
         }
         return newArrayList;
     }

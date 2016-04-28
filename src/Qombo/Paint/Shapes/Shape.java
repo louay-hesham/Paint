@@ -17,4 +17,6 @@ public interface Shape extends java.awt.Shape {
     public void draw (Graphics g);
     
     public void setColor (Color newColor);
+    
+    public Shape clone();
 }

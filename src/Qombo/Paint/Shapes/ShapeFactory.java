@@ -94,8 +94,4 @@ public class ShapeFactory {
         int[] y = new int[]{(int) v[0].getY(), (int) v[1].getY(), (int) v[2].getY()};
         return new Triangle(x, y);
     }
-
-    public Ellipse drawBrush(int x, int y, int brushStrokeWidth, int brushStrokeHeight) {
-        return new Ellipse(x, y, brushStrokeWidth, brushStrokeHeight);
-    }
 }

@@ -32,25 +32,24 @@
                           <Component id="undoButton" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="RedoButton" min="-2" pref="89" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="resetButton" min="-2" pref="93" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="deletButton" min="-2" pref="108" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                               <Component id="modeLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="currentModeLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="446" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="314" max="-2" attributes="0"/>
                               <Component id="helperLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="394" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="248" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -111,13 +110,13 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="outlineColorButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="helperLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="outlineColorButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="reColorButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="reColorButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="helperLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
       </Group>

@@ -6,22 +6,12 @@
 package Qombo.Paint.GUI;
 
 import Qombo.Logging.Logging;
-import Qombo.Paint.Shapes.Circle;
-import Qombo.Paint.Shapes.Ellipse;
-import Qombo.Paint.Shapes.Line;
-import Qombo.Paint.Shapes.Rectangle;
 import Qombo.Paint.Shapes.Shape;
 import Qombo.Paint.Shapes.ShapeFactory;
 import static Qombo.Paint.Shapes.ShapeFactory.ShapeType.*;
-import Qombo.Paint.Shapes.Square;
-import Qombo.Paint.Shapes.Triangle;
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -126,6 +116,8 @@ public class DrawingBoard extends JComponent implements Logging {
                     repaint();
                 } else if (gui.currentAction == 10){
                     Shape shapeToColor = getSelectedShape(e.getPoint());
+                    shapeToColor.setColor(MainGUI.getFillColor());
+                    repaint();
                 }
             }
         }); // end of addMouseListener

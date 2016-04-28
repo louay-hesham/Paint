@@ -63,28 +63,33 @@ public class DrawingBoard extends JComponent implements Logging {
                 switch (gui.currentAction) {
                     case 1: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), RECTANGLE);
+                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                         break;
                     }
                     case 2: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), ELLIPSE);
+                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                         break;
                     }
                     case 3: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), LINE);
+                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                         break;
                     }
                     case 4: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), CIRCLE);
+                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                         break;
                     }
                     case 5: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), SQUARE);
+                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                         break;
                     }
                     default:
                         break;
                 }
-                undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                
                 shapes.add(shape);
                 redoHistory.clear();
                 drawStart = null;
@@ -138,15 +143,15 @@ public class DrawingBoard extends JComponent implements Logging {
     } // end of constructor
 
     private Shape getSelectedShape(Point p) {
-        Shape shapeToDelete = null;
+        Shape selectedShape = null;
         for (int i = shapes.size() - 1; i >= 0; i--) {
             if (shapes.get(i)!=null && ((Shape)shapes.get(i)).contains(p)) {
-                shapeToDelete = (Shape)shapes.get(i);
+                selectedShape = (Shape)shapes.get(i);
                 log("Shape to delete found");
                 break;
             }
         }
-        return shapeToDelete;
+        return selectedShape;
     }
 
     @Override

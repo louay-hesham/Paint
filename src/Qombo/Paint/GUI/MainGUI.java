@@ -332,12 +332,12 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         if (!this.drawingBoard.undoHistory.empty()) {
+            log(this.drawingBoard.undoHistory.size());
             ShapeArrayList<Shape> undo = this.drawingBoard.undoHistory.pop();
             this.drawingBoard.shapes.clear();
             this.drawingBoard.shapes = undo;
             this.drawingBoard.redoHistory.push(undo);
             this.drawingBoard.repaint();
-            log(this.drawingBoard.shapes.size());
         }
     }//GEN-LAST:event_undoButtonActionPerformed
 
@@ -348,7 +348,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             this.drawingBoard.shapes = redo;
             this.drawingBoard.undoHistory.push(redo);
             this.drawingBoard.repaint();
-            log(this.drawingBoard.shapes.size());
         }
     }//GEN-LAST:event_RedoButtonActionPerformed
 

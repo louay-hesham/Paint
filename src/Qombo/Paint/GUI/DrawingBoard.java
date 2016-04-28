@@ -6,6 +6,7 @@
 package Qombo.Paint.GUI;
 
 import Qombo.Logging.Logging;
+import Qombo.Paint.Core.ShapeArrayList;
 import Qombo.Paint.Shapes.Shape;
 import Qombo.Paint.Shapes.ShapeFactory;
 import static Qombo.Paint.Shapes.ShapeFactory.ShapeType.*;
@@ -25,10 +26,10 @@ import javax.swing.JComponent;
  */
 public class DrawingBoard extends JComponent implements Logging {
 
-    public static ArrayList<Shape> shapes = new ArrayList();
+    public static ShapeArrayList<Shape> shapes = new ShapeArrayList();
 
-    protected Stack<ArrayList<Shape>> undoHistory = new Stack();
-    protected Stack<ArrayList<Shape>> redoHistory = new Stack();
+    protected Stack<ShapeArrayList<Shape>> undoHistory = new Stack();
+    protected Stack<ShapeArrayList<Shape>> redoHistory = new Stack();
 
     private Point drawStart, drawEnd;
     private final MainGUI gui;
@@ -42,7 +43,7 @@ public class DrawingBoard extends JComponent implements Logging {
 
     public DrawingBoard(MainGUI gui) {
         super();
-        shapes = new ArrayList();
+        shapes = new ShapeArrayList();
         this.gui = gui;
         this.setBackground(Color.white);
         log(undoHistory.size());
@@ -83,7 +84,7 @@ public class DrawingBoard extends JComponent implements Logging {
                     default:
                         break;
                 }
-                undoHistory.push((ArrayList<Shape>) shapes.clone());
+                undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                 shapes.add(shape);
                 redoHistory.clear();
                 drawStart = null;
@@ -103,7 +104,7 @@ public class DrawingBoard extends JComponent implements Logging {
                         triangleClicks = 0;
                         Shape shape = shapeFactory.getShape(triangleVertices);
                         log("Triangle registered");
-                        undoHistory.push((ArrayList<Shape>) shapes.clone());
+                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                         shapes.add(shape);
                         redoHistory.clear();
                         repaint();
@@ -112,14 +113,14 @@ public class DrawingBoard extends JComponent implements Logging {
                 } else if (gui.currentAction == 7) {
                     Shape shapeToDelete = getSelectedShape(e.getPoint());
                     if (shapeToDelete != null) {
-                        undoHistory.push((ArrayList<Shape>) shapes.clone());
+                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                         shapes.remove(shapeToDelete);
                         redoHistory.clear();
                     }
                     repaint();
                 } else if (gui.currentAction == 10) {
                     Shape shapeToColor = getSelectedShape(e.getPoint());
-                    undoHistory.push((ArrayList<Shape>) shapes.clone());
+                    undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
                     shapeToColor.setColor(MainGUI.getFillColor());
                     redoHistory.clear();
                     repaint();
@@ -139,8 +140,8 @@ public class DrawingBoard extends JComponent implements Logging {
     private Shape getSelectedShape(Point p) {
         Shape shapeToDelete = null;
         for (int i = shapes.size() - 1; i >= 0; i--) {
-            if (shapes.get(i)!=null && shapes.get(i).contains(p)) {
-                shapeToDelete = shapes.get(i);
+            if (shapes.get(i)!=null && ((Shape)shapes.get(i)).contains(p)) {
+                shapeToDelete = (Shape)shapes.get(i);
                 log("Shape to delete found");
                 break;
             }
@@ -150,9 +151,9 @@ public class DrawingBoard extends JComponent implements Logging {
 
     @Override
     public void paint(Graphics g) {
-        for (Shape s : shapes) {
+        for (Object s : shapes) {
             try {
-                s.draw(g);
+                ((Shape)s).draw(g);
             } catch (NullPointerException n) {
                 log(n.getCause());
             }

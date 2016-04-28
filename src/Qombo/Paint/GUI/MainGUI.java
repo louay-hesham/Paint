@@ -6,7 +6,7 @@
 package Qombo.Paint.GUI;
 
 import Qombo.Logging.Logging;
-import static Qombo.Paint.GUI.DrawingBoard.shapes;
+import Qombo.Paint.Core.ShapeArrayList;
 import Qombo.Paint.Shapes.Shape;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -332,7 +332,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         if (!this.drawingBoard.undoHistory.empty()) {
-            ArrayList<Shape> undo = this.drawingBoard.undoHistory.pop();
+            ShapeArrayList<Shape> undo = this.drawingBoard.undoHistory.pop();
             this.drawingBoard.shapes.clear();
             this.drawingBoard.shapes = undo;
             this.drawingBoard.redoHistory.push(undo);
@@ -343,7 +343,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
 
     private void RedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoButtonActionPerformed
         if (!this.drawingBoard.redoHistory.empty()) {
-            ArrayList<Shape> redo = this.drawingBoard.redoHistory.pop();
+            ShapeArrayList<Shape> redo = this.drawingBoard.redoHistory.pop();
             this.drawingBoard.shapes.clear();
             this.drawingBoard.shapes = redo;
             this.drawingBoard.undoHistory.push(redo);

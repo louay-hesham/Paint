@@ -18,11 +18,13 @@ public class ShapeArrayList<E extends Shape> extends java.util.ArrayList {
     public ShapeArrayList clone(){
         ShapeArrayList newArrayList = new ShapeArrayList();
 
-        for (Iterator it = this.iterator(); it.hasNext();) {
-            E object = (E) it.next();
-            newArrayList.add(object.clone());
+        for (int i = 0; i<this.size(); i++) {
+            Shape shape = (Shape)super.get(i);
+            if (shape==null){
+                System.out.println("null 7amada");
+            }
+            newArrayList.add(shape.clone());
         }
-
         return newArrayList;
     }
 }

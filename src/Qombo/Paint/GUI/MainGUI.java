@@ -6,9 +6,10 @@
 package Qombo.Paint.GUI;
 
 import Qombo.Logging.Logging;
-import static Qombo.Paint.GUI.DrawingBoard.oldShapes;
 import static Qombo.Paint.GUI.DrawingBoard.shapes;
+import Qombo.Paint.Shapes.Shape;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 
@@ -330,30 +331,24 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     }//GEN-LAST:event_deletButtonActionPerformed
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
-        // TODO add your handling code here:
-        this.currentAction = 8;
-        if (shapes.size() > 0) {
-            try {
-                oldShapes.add(shapes.get(shapes.size() - 1));
-                shapes.remove(shapes.get(shapes.size() - 1));
-                repaint();
-            } catch (ArrayIndexOutOfBoundsException ai) {
-                System.out.println(ai.getCause());
-                ai.printStackTrace();
-            }
+        if (!this.drawingBoard.undoHistory.empty()) {
+            ArrayList<Shape> undo = this.drawingBoard.undoHistory.pop();
+            this.drawingBoard.shapes.clear();
+            this.drawingBoard.shapes = undo;
+            this.drawingBoard.redoHistory.push(undo);
+            this.drawingBoard.repaint();
+            log(this.drawingBoard.shapes.size());
         }
     }//GEN-LAST:event_undoButtonActionPerformed
 
     private void RedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoButtonActionPerformed
-        this.currentAction = 9;
-        if (oldShapes.size() > 0) {
-            try {
-                shapes.add(oldShapes.get(oldShapes.size() - 1));
-                oldShapes.remove(oldShapes.get(oldShapes.size() - 1));
-                repaint();
-            } catch (ArrayIndexOutOfBoundsException ai) {
-                System.out.println(ai.getCause());
-            }
+        if (!this.drawingBoard.redoHistory.empty()) {
+            ArrayList<Shape> redo = this.drawingBoard.redoHistory.pop();
+            this.drawingBoard.shapes.clear();
+            this.drawingBoard.shapes = redo;
+            this.drawingBoard.undoHistory.push(redo);
+            this.drawingBoard.repaint();
+            log(this.drawingBoard.shapes.size());
         }
     }//GEN-LAST:event_RedoButtonActionPerformed
 

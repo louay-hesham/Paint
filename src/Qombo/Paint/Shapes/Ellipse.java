@@ -18,18 +18,18 @@ import java.awt.Graphics2D;
 public class Ellipse extends java.awt.geom.Ellipse2D.Float{
     
     public final int ORDER;
-        private Color fillColor,strokeColor;
+        private Color fillColor,outlineColor;
 
     public Ellipse(int x, int y, int width, int height){
         super(x, y, width, height);
         ORDER = DrawingBoard.shapes.size()+1;
         this.fillColor = MainGUI.getFillColor();
-        this.strokeColor = MainGUI.getStrokeColor();
+        this.outlineColor = MainGUI.getOutlineColor();
     }
     
     public void draw (Graphics2D graphicsSettings){
         graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-            graphicsSettings.setPaint(strokeColor);
+            graphicsSettings.setPaint(outlineColor);
             graphicsSettings.draw(this);
             graphicsSettings.setPaint(fillColor);
             graphicsSettings.fill(this);

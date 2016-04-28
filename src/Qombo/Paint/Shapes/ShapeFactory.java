@@ -14,7 +14,7 @@ import java.awt.Shape;
  */
 public class ShapeFactory {
     
-    public enum ShapeType {RECTANGLE, SQUARE, ELLIPSE, LINE, CIRCLE, TRIANGLE, BRUSH};
+    public enum ShapeType {RECTANGLE, SQUARE, ELLIPSE, LINE, CIRCLE};
     
     private static ShapeFactory shapeFactory;
     

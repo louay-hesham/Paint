@@ -19,10 +19,10 @@ import javax.swing.JColorChooser;
 public class MainGUI extends javax.swing.JFrame implements Logging {
 
     protected int currentAction = 1;
-    protected static Color strokeColor = Color.black, fillColor = Color.black;
+    protected static Color outlineColor = Color.black, fillColor = Color.black;
 
-    public static Color getStrokeColor() {
-        return strokeColor;
+    public static Color getOutlineColor() {
+        return outlineColor;
     }
 
     public static Color getFillColor() {
@@ -38,14 +38,14 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         initComponents();
         this.currentAction = 1;
         this.fillColor = Color.cyan;
-        this.strokeColor = Color.black;
+        this.outlineColor = Color.black;
         this.drawingBoard = new DrawingBoard(this);
         this.drawingBoard.setBackground(Color.WHITE);
         this.CanvasPanel.add(drawingBoard);
         this.drawingBoard.setSize(CanvasPanel.getSize().width - 1, CanvasPanel.getSize().height - 1);
         this.setResizable(false);
         this.fillColorButton.setBackground(fillColor);
-        this.strokeColorButton.setBackground(strokeColor);
+        this.outlineColorButton.setBackground(outlineColor);
     }
 
     /**
@@ -69,7 +69,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         RedoButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
         fillColorButton = new javax.swing.JButton();
-        strokeColorButton = new javax.swing.JButton();
+        outlineColorButton = new javax.swing.JButton();
         modeLabel = new javax.swing.JLabel();
         currentModeLabel = new javax.swing.JLabel();
         helperLabel = new javax.swing.JLabel();
@@ -178,10 +178,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
-        strokeColorButton.setText("Stroke Color");
-        strokeColorButton.addActionListener(new java.awt.event.ActionListener() {
+        outlineColorButton.setText("Stroke Color");
+        outlineColorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                strokeColorButtonActionPerformed(evt);
+                outlineColorButtonActionPerformed(evt);
             }
         });
 
@@ -230,7 +230,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                             .addComponent(rectangleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(fillColorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(strokeColorButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(outlineColorButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -267,7 +267,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(strokeColorButton)
+                    .addComponent(outlineColorButton)
                     .addComponent(helperLabel))
                 .addContainerGap())
         );
@@ -357,10 +357,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.fillColorButton.setBackground(fillColor);
     }//GEN-LAST:event_fillColorButtonActionPerformed
 
-    private void strokeColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strokeColorButtonActionPerformed
-        strokeColor = JColorChooser.showDialog(null, "Choose Stroke Color", strokeColor);
-        this.strokeColorButton.setBackground(strokeColor);
-    }//GEN-LAST:event_strokeColorButtonActionPerformed
+    private void outlineColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outlineColorButtonActionPerformed
+        outlineColor = JColorChooser.showDialog(null, "Choose Stroke Color", outlineColor);
+        this.outlineColorButton.setBackground(outlineColor);
+    }//GEN-LAST:event_outlineColorButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,10 +409,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     protected javax.swing.JLabel helperLabel;
     private javax.swing.JButton lineButton;
     private javax.swing.JLabel modeLabel;
+    private javax.swing.JButton outlineColorButton;
     private javax.swing.JButton rectangleButton;
     private javax.swing.JButton resetButton;
     private javax.swing.JButton squareButton;
-    private javax.swing.JButton strokeColorButton;
     private javax.swing.JButton triangleButton;
     private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables

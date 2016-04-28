@@ -20,7 +20,7 @@ import java.awt.Polygon;
 public class Triangle extends Polygon{
     private final int ORDER;
     private Point[] vertices;
-    private Color fillColor,strokeColor;
+    private Color fillColor,outlineColor;
     
     public Point[] getVertices() {
         return vertices;
@@ -28,13 +28,13 @@ public class Triangle extends Polygon{
     public Triangle (int[] xpoints, int[] ypoints){
         super(xpoints, ypoints, 3);
         this.fillColor = MainGUI.getFillColor();
-        this.strokeColor = MainGUI.getStrokeColor();
+        this.outlineColor = MainGUI.getOutlineColor();
                 ORDER = DrawingBoard.shapes.size()+1;
     }
     
     public void draw (Graphics2D graphicsSettings){
         graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-            graphicsSettings.setPaint(strokeColor);
+            graphicsSettings.setPaint(outlineColor);
             graphicsSettings.draw(this);
             graphicsSettings.setPaint(fillColor);
             graphicsSettings.fill(this);

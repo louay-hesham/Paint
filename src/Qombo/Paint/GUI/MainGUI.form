@@ -63,7 +63,7 @@
                       </Group>
                       <Component id="fillColorButton" alignment="1" min="-2" pref="91" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="strokeColorButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="outlineColorButton" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -110,7 +110,7 @@
                   </Group>
               </Group>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="strokeColorButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="outlineColorButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="helperLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -263,12 +263,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fillColorButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="strokeColorButton">
+    <Component class="javax.swing.JButton" name="outlineColorButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Stroke Color"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="strokeColorButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="outlineColorButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="modeLabel">

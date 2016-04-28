@@ -19,16 +19,16 @@ import java.awt.Point;
 public class Line extends java.awt.geom.Line2D.Float {
        
     public final int ORDER;
-     private Color strokeColor;
+     private Color lineColor;
      
     public Line(Point p1, Point p2){
         super(p1, p2);
         ORDER = DrawingBoard.shapes.size()+1;
-                this.strokeColor = MainGUI.getStrokeColor();
+                this.lineColor = MainGUI.getOutlineColor();
     }
     public void draw (Graphics2D graphicsSettings){
         graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-            graphicsSettings.setPaint(strokeColor);
+            graphicsSettings.setPaint(lineColor);
             graphicsSettings.draw(this);
     }
 }

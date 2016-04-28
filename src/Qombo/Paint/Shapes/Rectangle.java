@@ -20,16 +20,19 @@ import java.awt.RenderingHints;
  */
 public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape {
 
-    public final int ORDER;
     private Color fillColor, outlineColor;
+    int x,y,width,height;
 
     public Rectangle(int x, int y, int width, int height) {
         super(x, y, width, height);
-        ORDER = DrawingBoard.shapes.size() + 1;
         this.fillColor = MainGUI.getFillColor();
         this.outlineColor = MainGUI.getOutlineColor();
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
-
+    
     @Override
     public void draw(Graphics g) {
         Graphics2D graphicsSettings = (Graphics2D) g;
@@ -45,5 +48,13 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
     @Override
     public void setColor(Color newColor) {
         this.fillColor = newColor;
+    }
+    
+    @Override
+    public Shape clone(){
+        Rectangle cloneRec = new Rectangle(x, y, width, height);
+        cloneRec.fillColor = this.fillColor;
+        cloneRec.outlineColor = this.outlineColor;
+        return cloneRec;
     }
 }

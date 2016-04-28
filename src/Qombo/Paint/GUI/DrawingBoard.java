@@ -10,6 +10,7 @@ import Qombo.Paint.Shapes.Circle;
 import Qombo.Paint.Shapes.Ellipse;
 import Qombo.Paint.Shapes.Line;
 import Qombo.Paint.Shapes.Rectangle;
+import Qombo.Paint.Shapes.Shape;
 import Qombo.Paint.Shapes.ShapeFactory;
 import static Qombo.Paint.Shapes.ShapeFactory.ShapeType.*;
 import Qombo.Paint.Shapes.Square;
@@ -21,7 +22,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -108,7 +108,7 @@ public class DrawingBoard extends JComponent implements Logging {
                 log("Mouse clicked.");
                 if (gui.currentAction == 6) {
                     triangleVertices[triangleClicks++] = e.getPoint();
-                    gui.helperLabel.setText("Click three times on the canvas. Current click is #" + (triangleClicks == 3? 1:(triangleClicks+1) ));
+                    gui.helperLabel.setText("Click three times on the canvas. Current click is #" + (triangleClicks == 3 ? 1 : (triangleClicks + 1)));
                     log("vertex #" + triangleClicks + " registered.");
                     if (triangleClicks == 3) {
                         triangleClicks = 0;
@@ -119,18 +119,13 @@ public class DrawingBoard extends JComponent implements Logging {
                         log("Triangle painted.");
                     }
                 } else if (gui.currentAction == 7) {
-                    Shape shapeToDelete = null;
-                    for (int i = shapes.size() - 1; i >= 0; i--) {
-                        if (shapes.get(i).contains(e.getPoint())) {
-                            shapeToDelete = shapes.get(i);
-                            log("Shape to delete found");
-                            break;
-                        }
-                    }
+                    Shape shapeToDelete = getSelectedShape(e.getPoint());
                     if (shapeToDelete != null) {
                         shapes.remove(shapeToDelete);
                     }
                     repaint();
+                } else if (gui.currentAction == 10){
+                    Shape shapeToColor = getSelectedShape(e.getPoint());
                 }
             }
         }); // end of addMouseListener
@@ -144,31 +139,22 @@ public class DrawingBoard extends JComponent implements Logging {
 
     } // end of constructor
 
-    private void drawShape(Graphics g, Shape s) {
-        Graphics2D graphicsSettings = (Graphics2D) g;
-        graphicsSettings.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphicsSettings.setStroke(new BasicStroke(2));
-        graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-        if (s.getClass() == Circle.class) {
-            ((Circle) s).draw(graphicsSettings);
-        } else if (s.getClass() == Ellipse.class) {
-            ((Ellipse) s).draw(graphicsSettings);
-        } else if (s.getClass() == Line.class) {
-            ((Line) s).draw(graphicsSettings);
-        } else if (s.getClass() == Rectangle.class) {
-            ((Rectangle) s).draw(graphicsSettings);
-        } else if (s.getClass() == Square.class) {
-            ((Square) s).draw(graphicsSettings);
-        } else if (s.getClass() == Triangle.class) {
-            ((Triangle) s).draw(graphicsSettings);
+    private Shape getSelectedShape(Point p) {
+        Shape shapeToDelete = null;
+        for (int i = shapes.size() - 1; i >= 0; i--) {
+            if (shapes.get(i).contains(p)) {
+                shapeToDelete = shapes.get(i);
+                log("Shape to delete found");
+                break;
+            }
         }
+        return shapeToDelete;
     }
 
     @Override
     public void paint(Graphics g) {
         for (Shape s : shapes) {
-
-            drawShape(g, s);
+            s.draw(g);
         }
         if (drawStart != null && drawEnd != null) {
             Shape shape = null;
@@ -197,7 +183,7 @@ public class DrawingBoard extends JComponent implements Logging {
                     shape = null;
             }
             if (shape != null) {
-                drawShape(g, shape);
+                shape.draw(g);
             }
 
         }

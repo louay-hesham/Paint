@@ -8,29 +8,42 @@ package Qombo.Paint.Shapes;
 import Qombo.Paint.GUI.DrawingBoard;
 import Qombo.Paint.GUI.MainGUI;
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.awt.RenderingHints;
 
 /**
  *
  * @author lo2ay
  */
-public class Rectangle extends java.awt.geom.Rectangle2D.Float {
-    public final int ORDER;
-            private Color fillColor,outlineColor;
+public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape {
 
-    public Rectangle(int x, int y, int width, int height){
-        super(x,y,width,height);
-        ORDER = DrawingBoard.shapes.size()+1;
+    public final int ORDER;
+    private Color fillColor, outlineColor;
+
+    public Rectangle(int x, int y, int width, int height) {
+        super(x, y, width, height);
+        ORDER = DrawingBoard.shapes.size() + 1;
         this.fillColor = MainGUI.getFillColor();
         this.outlineColor = MainGUI.getOutlineColor();
     }
-    public void draw (Graphics2D graphicsSettings){
+
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D graphicsSettings = (Graphics2D) g;
+        graphicsSettings.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphicsSettings.setStroke(new BasicStroke(2));
         graphicsSettings.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-            graphicsSettings.setPaint(outlineColor);
-            graphicsSettings.draw(this);
-            graphicsSettings.setPaint(fillColor);
-            graphicsSettings.fill(this);
+        graphicsSettings.setPaint(outlineColor);
+        graphicsSettings.draw(this);
+        graphicsSettings.setPaint(fillColor);
+        graphicsSettings.fill(this);
+    }
+
+    @Override
+    public void setColor(Color newColor) {
+        this.fillColor = newColor;
     }
 }

@@ -6,7 +6,6 @@
 package Qombo.Paint.Shapes;
 
 import java.awt.Point;
-import java.awt.Shape;
 
 /**
  *

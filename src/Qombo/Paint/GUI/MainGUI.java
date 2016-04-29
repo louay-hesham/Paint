@@ -358,7 +358,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             this.drawingBoard.redoHistory.push(this.drawingBoard.shapes);
             ShapeArrayList<Shape> undo = this.drawingBoard.undoHistory.pop();
             this.drawingBoard.shapes = undo;
-            this.drawingBoard.redoHistory.push(undo);
             this.drawingBoard.repaint();
         }
     }//GEN-LAST:event_undoButtonActionPerformed
@@ -368,7 +367,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             this.drawingBoard.undoHistory.push(this.drawingBoard.shapes);
             ShapeArrayList<Shape> redo = this.drawingBoard.redoHistory.pop();
             this.drawingBoard.shapes = redo;
-            this.drawingBoard.undoHistory.push(redo);
             this.drawingBoard.repaint();
         }
     }//GEN-LAST:event_RedoButtonActionPerformed

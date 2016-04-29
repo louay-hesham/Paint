@@ -49,8 +49,9 @@ public class Triangle extends Polygon implements Shape{
     }
 
     @Override
-    public void setColor(Color newColor) {
-        this.fillColor=newColor;
+    public void setColor() {
+        this.fillColor = MainGUI.getFillColor();
+        this.outlineColor = MainGUI.getOutlineColor();
     }
 
     @Override

@@ -42,8 +42,8 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
     }
 
     @Override
-    public void setColor(Color newColor) {
-        this.lineColor = newColor;
+    public void setColor() {
+        this.lineColor = MainGUI.getOutlineColor();
     }
 
     @Override

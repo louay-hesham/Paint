@@ -131,7 +131,7 @@ public class DrawingBoard extends JComponent implements Logging {
                 } else if (gui.currentAction == 8) {
                     Shape shapeToColor = getSelectedShape(e.getPoint());
                     registerUserAction();
-                    shapeToColor.setColor(MainGUI.getFillColor());
+                    shapeToColor.setColor();
                     repaint();
                 }
             }

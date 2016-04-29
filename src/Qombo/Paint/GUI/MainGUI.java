@@ -334,7 +334,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         if (!this.drawingBoard.undoHistory.empty()) {
             log(this.drawingBoard.undoHistory.size());
             ShapeArrayList<Shape> undo = this.drawingBoard.undoHistory.pop();
-            this.drawingBoard.shapes.clear();
             this.drawingBoard.shapes = undo;
             this.drawingBoard.redoHistory.push(undo);
             this.drawingBoard.repaint();
@@ -344,7 +343,6 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private void RedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoButtonActionPerformed
         if (!this.drawingBoard.redoHistory.empty()) {
             ShapeArrayList<Shape> redo = this.drawingBoard.redoHistory.pop();
-            this.drawingBoard.shapes.clear();
             this.drawingBoard.shapes = redo;
             this.drawingBoard.undoHistory.push(redo);
             this.drawingBoard.repaint();

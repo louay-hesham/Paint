@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.Point2D;
 
 /**
  *
@@ -54,6 +55,29 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
 
     @Override
     public void setPosition(Point p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Point newP1 = new Point (   (int)(p.getX() - (this.p2.getX() - this.p1.getX())/2 ),
+                                    (int)(p.getY() - (this.p2.getY() - this.p1.getY())/2 ));
+        
+        Point newP2 = new Point (   (int)(p.getX() + (this.p2.getX() - this.p1.getX())/2 ),
+                                    (int)(p.getY() + (this.p2.getY() - this.p1.getY())/2 ));
+        this.p1=newP1;
+        this.p2=newP2;
+        this.setLine(newP1, newP2);
     }
+
+    @Override
+    public boolean contains(Point2D pd) {
+        double lineSlope = (p2.getY() - p1.getY())/(p2.getX() - p1.getX());
+        double pointSlope = (pd.getY() - p1.getY())/(pd.getX() - p1.getX());
+        if (    Math.abs(lineSlope - pointSlope) <= 0.1 &&
+                Math.min(p1.getX(), p2.getX()) <= pd.getX() &&
+                Math.max(p1.getX(), p2.getX()) >= pd.getX() &&
+                Math.min(p1.getY(), p2.getY()) <= pd.getY() &&
+                Math.max(p1.getY(), p2.getY()) >= pd.getY() ){
+            return true;
+        }
+        return false;
+    }
+    
+    
 }

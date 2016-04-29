@@ -6,7 +6,6 @@
 package Qombo.Paint.Core;
 
 import Qombo.Paint.Shapes.Shape;
-import java.util.Iterator;
 
 /**
  *

@@ -12,6 +12,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 
 /**
@@ -55,5 +56,12 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         cloneEllipse.fillColor=this.fillColor;
         cloneEllipse.outlineColor=this.outlineColor;
         return cloneEllipse;
+    }
+
+    @Override
+    public void setPosition(Point p) {
+        this.x = (int)p.getX() - width/2;
+        this.y = (int)p.getY() - height/2;
+        this.setFrame(new Rectangle(x,y,width,height));
     }
 }

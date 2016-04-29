@@ -60,4 +60,11 @@ public class Triangle extends Polygon implements Shape{
         cloneTriangle.outlineColor=this.outlineColor;
         return cloneTriangle;
     }
+
+    @Override
+    public void setPosition(Point p) {
+        int xCor= (int) this.getBounds2D().getCenterX();
+        int yCor= (int) this.getBounds2D().getCenterY();
+        this.translate((int)p.getX()-xCor, (int)p.getY()-yCor);
+    }
 }

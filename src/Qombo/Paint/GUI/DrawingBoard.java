@@ -40,6 +40,7 @@ public class DrawingBoard extends JComponent implements Logging {
     }
     private Point[] triangleVertices = new Point[3];
     private ShapeFactory shapeFactory = ShapeFactory.getFactory();
+    private Shape shapeToCopyOrMove = null;
 
     public DrawingBoard(MainGUI gui) {
         super();
@@ -55,6 +56,14 @@ public class DrawingBoard extends JComponent implements Logging {
                 drawEnd = null;
                 repaint();
                 log("Mouse pressed.");
+                if (gui.currentAction==9){
+                    shapeToCopyOrMove = getSelectedShape(drawStart);
+                    registerUserAction();
+                } else if (gui.currentAction==10){
+                    shapeToCopyOrMove = getSelectedShape(drawStart).clone();
+                    registerUserAction();
+                    shapes.add(shapeToCopyOrMove);
+                }
             }
 
             @Override
@@ -63,35 +72,33 @@ public class DrawingBoard extends JComponent implements Logging {
                 switch (gui.currentAction) {
                     case 1: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), RECTANGLE);
-                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                        registerUserAction();
                         break;
                     }
                     case 2: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), ELLIPSE);
-                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                        registerUserAction();
                         break;
                     }
                     case 3: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), LINE);
-                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                        registerUserAction();
                         break;
                     }
                     case 4: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), CIRCLE);
-                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                        registerUserAction();
                         break;
                     }
                     case 5: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), SQUARE);
-                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                        registerUserAction();
                         break;
                     }
                     default:
                         break;
                 }
-                
                 shapes.add(shape);
-                redoHistory.clear();
                 drawStart = null;
                 drawEnd = null;
                 repaint();
@@ -109,25 +116,22 @@ public class DrawingBoard extends JComponent implements Logging {
                         triangleClicks = 0;
                         Shape shape = shapeFactory.getShape(triangleVertices);
                         log("Triangle registered");
-                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                        registerUserAction();
                         shapes.add(shape);
-                        redoHistory.clear();
                         repaint();
                         log("Triangle painted.");
                     }
                 } else if (gui.currentAction == 7) {
                     Shape shapeToDelete = getSelectedShape(e.getPoint());
                     if (shapeToDelete != null) {
-                        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                        registerUserAction();
                         shapes.remove(shapeToDelete);
-                        redoHistory.clear();
                     }
                     repaint();
-                } else if (gui.currentAction == 10) {
+                } else if (gui.currentAction == 8) {
                     Shape shapeToColor = getSelectedShape(e.getPoint());
-                    undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+                    registerUserAction();
                     shapeToColor.setColor(MainGUI.getFillColor());
-                    redoHistory.clear();
                     repaint();
                 }
             }
@@ -135,19 +139,28 @@ public class DrawingBoard extends JComponent implements Logging {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                drawEnd = e.getPoint();
+                if ((gui.currentAction == 9 || gui.currentAction == 10) && shapeToCopyOrMove!=null){
+                    shapeToCopyOrMove.setPosition(e.getPoint());
+                } else {
+                    drawEnd = e.getPoint();
+                }
                 repaint();
             }
         }); // end of addMouseMotionListener
 
     } // end of constructor
+    
+    private void registerUserAction(){
+        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+        redoHistory.clear();
+    }
 
     private Shape getSelectedShape(Point p) {
         Shape selectedShape = null;
         for (int i = shapes.size() - 1; i >= 0; i--) {
             if (shapes.get(i)!=null && ((Shape)shapes.get(i)).contains(p)) {
                 selectedShape = (Shape)shapes.get(i);
-                log("Shape to delete found");
+                log(selectedShape.getClass() + " is at " + p);
                 break;
             }
         }

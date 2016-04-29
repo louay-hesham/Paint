@@ -75,6 +75,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         currentModeLabel = new javax.swing.JLabel();
         helperLabel = new javax.swing.JLabel();
         reColorButton = new javax.swing.JButton();
+        moveButton = new javax.swing.JButton();
+        copyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,6 +203,20 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        moveButton.setText("Move");
+        moveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveButtonActionPerformed(evt);
+            }
+        });
+
+        copyButton.setText("Copy");
+        copyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,22 +228,26 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(reColorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(undoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(RedoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                            .addComponent(moveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(copyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(resetButton, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deletButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(55, 55, 55)
+                                .addComponent(deletButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
                                 .addComponent(modeLabel)
-                                .addGap(27, 27, 27)
+                                .addGap(18, 18, 18)
                                 .addComponent(currentModeLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(314, 314, 314)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(120, 120, 120)
                                 .addComponent(helperLabel)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -252,15 +272,26 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(CanvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(resetButton)
                             .addComponent(deletButton)
-                            .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fillColorButton)
                             .addComponent(modeLabel)
-                            .addComponent(currentModeLabel)
-                            .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(currentModeLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(fillColorButton)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(reColorButton)
+                                    .addComponent(moveButton)
+                                    .addComponent(helperLabel)
+                                    .addComponent(copyButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(triangleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -273,14 +304,9 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         .addComponent(circleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(outlineColorButton)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(reColorButton)
-                        .addComponent(helperLabel))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)))
+                .addComponent(outlineColorButton)
+                .addContainerGap())
         );
 
         pack();
@@ -333,6 +359,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         if (!this.drawingBoard.undoHistory.empty()) {
             log(this.drawingBoard.undoHistory.size());
+            this.drawingBoard.redoHistory.push(this.drawingBoard.shapes);
             ShapeArrayList<Shape> undo = this.drawingBoard.undoHistory.pop();
             this.drawingBoard.shapes = undo;
             this.drawingBoard.redoHistory.push(undo);
@@ -342,6 +369,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
 
     private void RedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoButtonActionPerformed
         if (!this.drawingBoard.redoHistory.empty()) {
+            this.drawingBoard.undoHistory.push(this.drawingBoard.shapes);
             ShapeArrayList<Shape> redo = this.drawingBoard.redoHistory.pop();
             this.drawingBoard.shapes = redo;
             this.drawingBoard.undoHistory.push(redo);
@@ -365,11 +393,25 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     }//GEN-LAST:event_outlineColorButtonActionPerformed
 
     private void reColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reColorButtonActionPerformed
-        this.currentAction = 10;
-        this.currentModeLabel.setText("recoloring mode.");
+        this.currentAction = 8;
+        this.currentModeLabel.setText("Recoloring mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Choose a color first then click on shape to recolor it.");
     }//GEN-LAST:event_reColorButtonActionPerformed
+
+    private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
+        this.currentAction = 9;
+        this.currentModeLabel.setText("Move mode.");
+        this.helperLabel.setVisible(true);
+        this.helperLabel.setText("Press on a shape and drag to move.");
+    }//GEN-LAST:event_moveButtonActionPerformed
+
+    private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
+        this.currentAction = 10;
+        this.currentModeLabel.setText("copy mode.");
+        this.helperLabel.setVisible(true);
+        this.helperLabel.setText("Press on a shape and drag to copy.");
+    }//GEN-LAST:event_copyButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,6 +453,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JPanel CanvasPanel;
     private javax.swing.JButton RedoButton;
     private javax.swing.JButton circleButton;
+    private javax.swing.JButton copyButton;
     private javax.swing.JLabel currentModeLabel;
     private javax.swing.JButton deletButton;
     private javax.swing.JButton ellipseButton;
@@ -418,6 +461,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     protected javax.swing.JLabel helperLabel;
     private javax.swing.JButton lineButton;
     private javax.swing.JLabel modeLabel;
+    private javax.swing.JButton moveButton;
     private javax.swing.JButton outlineColorButton;
     private javax.swing.JButton reColorButton;
     private javax.swing.JButton rectangleButton;

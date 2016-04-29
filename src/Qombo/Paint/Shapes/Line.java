@@ -51,4 +51,9 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
         cloneLine.lineColor=this.lineColor;
         return cloneLine;
     }
+
+    @Override
+    public void setPosition(Point p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

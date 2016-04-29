@@ -12,6 +12,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 
 /**
@@ -56,5 +57,12 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         cloneRec.fillColor = this.fillColor;
         cloneRec.outlineColor = this.outlineColor;
         return cloneRec;
+    }
+    
+    @Override
+    public void setPosition(Point p) {
+        this.x = (int)p.getX() - width/2;
+        this.y = (int)p.getY() - height/2;
+        this.setRect(x, y, width, height);
     }
 }

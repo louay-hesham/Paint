@@ -7,6 +7,7 @@ package Qombo.Paint.Shapes;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 /**
  *
@@ -19,4 +20,6 @@ public interface Shape extends java.awt.Shape {
     public void setColor (Color newColor);
     
     public Shape clone();
+    
+    public void setPosition(Point p);
 }

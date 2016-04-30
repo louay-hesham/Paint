@@ -22,7 +22,7 @@ import java.awt.RenderingHints;
 public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
 
     private Color fillColor, outlineColor;
-    private int x,y,width,height;
+    //private int x,y,width,height;
     public Ellipse(int x, int y, int width, int height) {
         super(x, y, width, height);             
         this.x=x;
@@ -53,7 +53,7 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
 
     @Override
     public Shape clone() {
-        Ellipse cloneEllipse= new Ellipse(x, y, width, height);
+        Ellipse cloneEllipse= new Ellipse((int)x, (int)y, (int)width, (int)height);
         cloneEllipse.fillColor=this.fillColor;
         cloneEllipse.outlineColor=this.outlineColor;
         return cloneEllipse;
@@ -63,6 +63,5 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
     public void setPosition(Point p) {
         this.x = (int)p.getX() - width/2;
         this.y = (int)p.getY() - height/2;
-        this.setFrame(new Rectangle(x,y,width,height));
     }
 }

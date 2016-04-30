@@ -21,19 +21,13 @@ import java.awt.RenderingHints;
  * @author lo2ay
  */
 public class Triangle extends Polygon implements Shape{
-    private Point[] vertices;
+
     private Color fillColor,outlineColor;
-    int[] xpoints,ypoints;
-    public Point[] getVertices() {
-        return vertices;
-    }
+    
     public Triangle (int[] xpoints, int[] ypoints){
         super(xpoints, ypoints, 3);
         this.fillColor = MainGUI.getFillColor();
         this.outlineColor = MainGUI.getOutlineColor();
-        this.xpoints=xpoints;
-        this.ypoints=ypoints;
-
     }
     
     @Override

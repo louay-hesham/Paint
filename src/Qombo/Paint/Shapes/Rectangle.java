@@ -22,7 +22,6 @@ import java.awt.RenderingHints;
 public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape {
 
     private Color fillColor, outlineColor;
-    int x,y,width,height;
 
     public Rectangle(int x, int y, int width, int height) {
         super(x, y, width, height);
@@ -54,7 +53,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
     
     @Override
     public Shape clone(){
-        Rectangle cloneRec = new Rectangle(x, y, width, height);
+        Rectangle cloneRec = new Rectangle((int)x, (int)y, (int)width, (int)height);
         cloneRec.fillColor = this.fillColor;
         cloneRec.outlineColor = this.outlineColor;
         return cloneRec;
@@ -64,6 +63,5 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
     public void setPosition(Point p) {
         this.x = (int)p.getX() - width/2;
         this.y = (int)p.getY() - height/2;
-        this.setRect(x, y, width, height);
     }
 }

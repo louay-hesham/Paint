@@ -40,10 +40,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.drawingBoard = new DrawingBoard(this);
         this.drawingBoard.setBackground(Color.WHITE);
         this.CanvasPanel.add(drawingBoard);
-        this.drawingBoard.setSize(CanvasPanel.getSize().width - 1, CanvasPanel.getSize().height - 1);
-        this.setResizable(false);
+        this.drawingBoard.setSize(CanvasPanel.getSize());
         this.fillColorButton.setBackground(fillColor);
         this.outlineColorButton.setBackground(outlineColor);
+        this.setExtendedState(MAXIMIZED_BOTH | this.getExtendedState());
     }
 
     /**
@@ -104,6 +104,11 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         });
 
         CanvasPanel.setBackground(java.awt.Color.white);
+        CanvasPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                CanvasPanelComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout CanvasPanelLayout = new javax.swing.GroupLayout(CanvasPanel);
         CanvasPanel.setLayout(CanvasPanelLayout);
@@ -113,7 +118,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         );
         CanvasPanelLayout.setVerticalGroup(
             CanvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 643, Short.MAX_VALUE)
         );
 
         squareButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/Square.png"))); // NOI18N
@@ -264,7 +269,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(triangleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -278,28 +283,25 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fillColorButton))
-                    .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(fillColorButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(outlineColorButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(resetButton)
-                            .addComponent(deletButton)
-                            .addComponent(modeLabel)
-                            .addComponent(currentModeLabel))
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(reColorButton)
-                            .addComponent(moveButton)
-                            .addComponent(helperLabel)
-                            .addComponent(copyButton))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(CanvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resetButton)
+                    .addComponent(deletButton)
+                    .addComponent(modeLabel)
+                    .addComponent(currentModeLabel))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(reColorButton)
+                    .addComponent(moveButton)
+                    .addComponent(helperLabel)
+                    .addComponent(copyButton))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -403,6 +405,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Press on a shape and drag to copy.");
     }//GEN-LAST:event_copyButtonActionPerformed
+
+    private void CanvasPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_CanvasPanelComponentResized
+        this.drawingBoard.setSize(this.CanvasPanel.getSize());
+    }//GEN-LAST:event_CanvasPanelComponentResized
 
     /**
      * @param args the command line arguments

@@ -44,7 +44,9 @@ public class DrawingBoard extends JComponent implements Logging {
 
     public DrawingBoard(MainGUI gui) {
         super();
-        shapes = new ShapeArrayList();
+        this.shapes = new ShapeArrayList();
+        this.undoHistory = new Stack();
+        this.redoHistory = new Stack();
         this.gui = gui;
         this.setBackground(Color.white);
         log(undoHistory.size());
@@ -147,7 +149,7 @@ public class DrawingBoard extends JComponent implements Logging {
                 repaint();
             }
         }); // end of addMouseMotionListener
-
+        repaint();
     } // end of constructor
     
     private void registerUserAction(){

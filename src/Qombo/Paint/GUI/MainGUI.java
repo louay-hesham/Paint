@@ -371,8 +371,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     }//GEN-LAST:event_RedoButtonActionPerformed
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
-        this.drawingBoard = new DrawingBoard(this);
-        repaint();
+        this.drawingBoard.shapes.clear();
+        this.drawingBoard.undoHistory.clear();
+        this.drawingBoard.redoHistory.clear();
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_resetButtonActionPerformed
 
     private void fillColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fillColorButtonActionPerformed
@@ -440,6 +442,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainGUI().setVisible(true);
             }

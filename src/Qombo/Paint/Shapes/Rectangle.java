@@ -5,7 +5,6 @@
  */
 package Qombo.Paint.Shapes;
 
-import Qombo.Paint.GUI.DrawingBoard;
 import Qombo.Paint.GUI.MainGUI;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;

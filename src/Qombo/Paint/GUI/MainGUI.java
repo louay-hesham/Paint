@@ -9,7 +9,6 @@ import Qombo.Logging.Logging;
 import Qombo.Paint.Core.ShapeArrayList;
 import Qombo.Paint.Shapes.Shape;
 import java.awt.Color;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 
@@ -20,7 +19,7 @@ import javax.swing.JColorChooser;
 public class MainGUI extends javax.swing.JFrame implements Logging {
 
     protected int currentAction = 1;
-    protected static Color outlineColor = Color.black, fillColor = Color.black;
+    protected static Color outlineColor = Color.black, fillColor = Color.cyan;
 
     public static Color getOutlineColor() {
         return outlineColor;
@@ -35,11 +34,9 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
      * Creates new form MainGUI2
      */
     public MainGUI() {
-        super("Paint My Ass");
+        super("Paint");
         initComponents();
         this.currentAction = 1;
-        this.fillColor = Color.cyan;
-        this.outlineColor = Color.black;
         this.drawingBoard = new DrawingBoard(this);
         this.drawingBoard.setBackground(Color.WHITE);
         this.CanvasPanel.add(drawingBoard);

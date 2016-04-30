@@ -26,7 +26,7 @@ import javax.swing.JComponent;
  */
 public class DrawingBoard extends JComponent implements Logging {
 
-    public static ShapeArrayList<Shape> shapes = new ShapeArrayList();
+    protected ShapeArrayList<Shape> shapes = new ShapeArrayList();
 
     protected Stack<ShapeArrayList<Shape>> undoHistory = new Stack();
     protected Stack<ShapeArrayList<Shape>> redoHistory = new Stack();

@@ -181,12 +181,14 @@ public class DrawingBoard extends JComponent implements Logging {
             
             @Override
             public void mouseMoved (MouseEvent e){
-                Shape shape = getSelectedShape(e.getLocationOnScreen());
+                Shape shape = null;
+                shape = getSelectedShape(e.getLocationOnScreen());
                 Cursor moveCursor = new Cursor(Cursor.MOVE_CURSOR);
                 Cursor defaultCursor = new Cursor (Cursor.DEFAULT_CURSOR);
-                if((gui.currentAction == 9) && (shape == shapeToCopyOrMove) ){
+                if((gui.currentAction == 9) && (shape != null) ){
                     System.out.println("this is mouse moved!");
                     setCursor(moveCursor);
+                    shape = null;
                 }
                 else {
                     setCursor(defaultCursor);

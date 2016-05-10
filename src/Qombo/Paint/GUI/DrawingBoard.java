@@ -11,6 +11,7 @@ import Qombo.Paint.Shapes.Shape;
 import Qombo.Paint.Shapes.ShapeFactory;
 import static Qombo.Paint.Shapes.ShapeFactory.ShapeType.*;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -177,8 +178,25 @@ public class DrawingBoard extends JComponent implements Logging {
                 }
                 repaint();
             }
+            
+            @Override
+            public void mouseMoved (MouseEvent e){
+                Shape shape = getSelectedShape(e.getLocationOnScreen());
+                Cursor moveCursor = new Cursor(Cursor.MOVE_CURSOR);
+                Cursor defaultCursor = new Cursor (Cursor.DEFAULT_CURSOR);
+                if((gui.currentAction == 9) && (shape == shapeToCopyOrMove) ){
+                    System.out.println("this is mouse moved!");
+                    setCursor(moveCursor);
+                }
+                else {
+                    setCursor(defaultCursor);
+                }
+                
+            }
         }); // end of addMouseMotionListener
         repaint();
+        
+       
     } // end of constructor
 
     private void registerUserAction() {

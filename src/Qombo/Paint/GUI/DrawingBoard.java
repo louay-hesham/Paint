@@ -16,7 +16,6 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.geom.AffineTransform;
 import java.util.Stack;
 import javax.swing.JComponent;
 
@@ -81,7 +80,7 @@ public class DrawingBoard extends JComponent implements Logging {
                         if (shapeToRotate != null) {
                             selectedShapeCenter = shapeToRotate.getCenter();
                             startSlope = (e.getY() - selectedShapeCenter.getY()) / (e.getX() - selectedShapeCenter.getX());
-                            registerUserAction();
+                            //registerUserAction();
                         }
                         break;
                     default:
@@ -183,7 +182,7 @@ public class DrawingBoard extends JComponent implements Logging {
     } // end of constructor
 
     private void registerUserAction() {
-        undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
+        undoHistory.push(shapes.clone());
         redoHistory.clear();
     }
 

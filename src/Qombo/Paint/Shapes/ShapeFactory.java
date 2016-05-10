@@ -6,6 +6,7 @@
 package Qombo.Paint.Shapes;
 
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -45,6 +46,19 @@ public class ShapeFactory {
     public Shape getShape(Point[] v){
         return drawTriangle(v);
     }
+    
+    public Shape rotateShape(Shape shape, double angle){
+        AffineTransform a = new AffineTransform();
+        a.rotate(angle, shape.getCenter().getX(), shape.getCenter().getY());
+        java.awt.Shape tempShape = a.createTransformedShape(shape);
+        Shape newShape;
+        
+        if (shape instanceof Rectangle){
+            
+        }
+        return newShape;
+    }
+    
     private Rectangle drawRectangle(Point p1, Point p2) {
         int x = Math.min(p1.x, p2.x);
         int y = Math.min(p1.y, p2.y);

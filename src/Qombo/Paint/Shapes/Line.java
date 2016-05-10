@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
 /**
@@ -23,12 +24,20 @@ import java.awt.geom.Point2D;
 public class Line extends java.awt.geom.Line2D.Float implements Shape {
 
     private Color lineColor;
-    Point p1,p2;
+    private Point p1,p2;
+    private Point center;
+    
     public Line(Point p1, Point p2) {
         super(p1, p2);
         this.p1=p1;
         this.p2=p2;
         this.lineColor = MainGUI.getOutlineColor();
+        this.center = new Point ( (int)(p1.getX()+p2.getX())/2 , (int)(p1.getY()+p2.getY())/2 );
+    }
+    
+    @Override
+    public Point getCenter() {
+        return this.center;
     }
 
     @Override
@@ -63,6 +72,7 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
         this.p1=newP1;
         this.p2=newP2;
         this.setLine(newP1, newP2);
+        this.center = new Point ( (int)(p1.getX()+p2.getX())/2 , (int)(p1.getY()+p2.getY())/2 );
     }
 
     @Override
@@ -79,5 +89,15 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
         return false;
     }
     
+    
+    @Override
+    public void rotate(Graphics g, double angle) {
+        AffineTransform a = new AffineTransform();
+        a.rotate(angle, center.getX(), center.getY());
+        java.awt.Shape tempShape = a.createTransformedShape(this);
+        System.out.println(tempShape.getClass());
+        Graphics2D graphicsSettings = (Graphics2D) g;
+        graphicsSettings.draw(tempShape);
+    }
     
 }

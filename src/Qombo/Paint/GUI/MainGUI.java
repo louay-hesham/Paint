@@ -74,6 +74,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         reColorButton = new javax.swing.JButton();
         moveButton = new javax.swing.JButton();
         copyButton = new javax.swing.JButton();
+        rotateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,6 +222,13 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        rotateButton.setText("Rotate");
+        rotateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rotateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,16 +249,18 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(copyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rotateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deletButton, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deletButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(44, 44, 44)
                                 .addComponent(modeLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(currentModeLabel))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
+                                .addGap(258, 258, 258)
                                 .addComponent(helperLabel)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -300,7 +310,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                     .addComponent(reColorButton)
                     .addComponent(moveButton)
                     .addComponent(helperLabel)
-                    .addComponent(copyButton))
+                    .addComponent(copyButton)
+                    .addComponent(rotateButton))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -412,6 +423,13 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.drawingBoard.setSize(this.CanvasPanel.getSize());
     }//GEN-LAST:event_CanvasPanelComponentResized
 
+    private void rotateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotateButtonActionPerformed
+        this.currentAction = 11;
+        this.currentModeLabel.setText("Rotate mode.");
+        this.helperLabel.setVisible(true);
+        this.helperLabel.setText("Press on a shape and drag mouse to rotate.");
+    }//GEN-LAST:event_rotateButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,6 +484,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton reColorButton;
     private javax.swing.JButton rectangleButton;
     private javax.swing.JButton resetButton;
+    private javax.swing.JButton rotateButton;
     private javax.swing.JButton squareButton;
     private javax.swing.JButton triangleButton;
     private javax.swing.JButton undoButton;

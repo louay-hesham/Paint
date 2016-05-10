@@ -22,4 +22,8 @@ public interface Shape extends java.awt.Shape {
     public Shape clone();
     
     public void setPosition(Point p);
+    
+    public void rotate(Graphics g, double angle);
+    
+    public Point getCenter();
 }

@@ -42,17 +42,20 @@
                           <Component id="copyButton" max="32767" attributes="0"/>
                           <Component id="resetButton" min="-2" pref="93" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="rotateButton" max="32767" attributes="0"/>
+                          <Component id="deletButton" pref="93" max="32767" attributes="0"/>
+                      </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="deletButton" min="-2" pref="93" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="modeLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="currentModeLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="258" max="-2" attributes="0"/>
                               <Component id="helperLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -113,6 +116,7 @@
                   <Component id="moveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="helperLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="copyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rotateButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
@@ -322,6 +326,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="rotateButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rotate"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rotateButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

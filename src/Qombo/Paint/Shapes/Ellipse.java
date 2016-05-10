@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -22,7 +23,8 @@ import java.awt.RenderingHints;
 public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
 
     private Color fillColor, outlineColor;
-    //private int x,y,width,height;
+    private Point center;
+
     public Ellipse(int x, int y, int width, int height) {
         super(x, y, width, height);             
         this.x=x;
@@ -31,6 +33,7 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         this.height=height;
         this.fillColor = MainGUI.getFillColor();
         this.outlineColor = MainGUI.getOutlineColor();
+        this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
     }
 
     @Override
@@ -43,6 +46,11 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         graphicsSettings.draw(this);
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(this);
+    }
+    
+    @Override
+    public Point getCenter() {
+        return this.center;
     }
 
     @Override
@@ -63,5 +71,16 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
     public void setPosition(Point p) {
         this.x = (int)p.getX() - width/2;
         this.y = (int)p.getY() - height/2;
+        this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
+    }
+    
+    @Override
+    public void rotate(Graphics g, double angle) {
+        AffineTransform a = new AffineTransform();
+        a.rotate(angle, center.getX(), center.getY());
+        java.awt.Shape tempShape = a.createTransformedShape(this);
+        System.out.println(tempShape.getClass());
+        Graphics2D graphicsSettings = (Graphics2D) g;
+        graphicsSettings.draw(tempShape);
     }
 }

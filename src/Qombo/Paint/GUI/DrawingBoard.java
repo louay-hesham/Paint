@@ -16,7 +16,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.ArrayList;
+import java.awt.geom.AffineTransform;
 import java.util.Stack;
 import javax.swing.JComponent;
 
@@ -41,6 +41,10 @@ public class DrawingBoard extends JComponent implements Logging {
     private Point[] triangleVertices = new Point[3];
     private ShapeFactory shapeFactory = ShapeFactory.getFactory();
     private Shape shapeToCopyOrMove = null;
+    private Shape shapeToRotate = null;
+    private double startSlope;
+    private double angleOfRotation;
+    private Point selectedShapeCenter;
 
     public DrawingBoard(MainGUI gui) {
         super();
@@ -58,13 +62,30 @@ public class DrawingBoard extends JComponent implements Logging {
                 drawEnd = null;
                 repaint();
                 log("Mouse pressed.");
-                if (gui.currentAction==9){
-                    shapeToCopyOrMove = getSelectedShape(drawStart);
-                    registerUserAction();
-                } else if (gui.currentAction==10){
-                    shapeToCopyOrMove = getSelectedShape(drawStart).clone();
-                    registerUserAction();
-                    shapes.add(shapeToCopyOrMove);
+                switch (gui.currentAction) {
+                    case 9:
+                        shapeToCopyOrMove = getSelectedShape(drawStart);
+                        if (shapeToCopyOrMove != null) {
+                            registerUserAction();
+                        }
+                        break;
+                    case 10:
+                        shapeToCopyOrMove = getSelectedShape(drawStart).clone();
+                        if (shapeToCopyOrMove != null) {
+                            registerUserAction();
+                            shapes.add(shapeToCopyOrMove);
+                        }
+                        break;
+                    case 11:
+                        shapeToRotate = getSelectedShape(drawStart);
+                        if (shapeToRotate != null) {
+                            selectedShapeCenter = shapeToRotate.getCenter();
+                            startSlope = (e.getY() - selectedShapeCenter.getY()) / (e.getX() - selectedShapeCenter.getX());
+                            registerUserAction();
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -110,39 +131,48 @@ public class DrawingBoard extends JComponent implements Logging {
             @Override
             public void mouseClicked(MouseEvent e) {
                 log("Mouse clicked.");
-                if (gui.currentAction == 6) {
-                    triangleVertices[triangleClicks++] = e.getPoint();
-                    gui.helperLabel.setText("Click three times on the canvas. Current click is #" + (triangleClicks == 3 ? 1 : (triangleClicks + 1)));
-                    log("vertex #" + triangleClicks + " registered.");
-                    if (triangleClicks == 3) {
-                        triangleClicks = 0;
-                        Shape shape = shapeFactory.getShape(triangleVertices);
-                        log("Triangle registered");
-                        registerUserAction();
-                        shapes.add(shape);
+                switch (gui.currentAction) {
+                    case 6:
+                        triangleVertices[triangleClicks++] = e.getPoint();
+                        gui.helperLabel.setText("Click three times on the canvas. Current click is #" + (triangleClicks == 3 ? 1 : (triangleClicks + 1)));
+                        log("vertex #" + triangleClicks + " registered.");
+                        if (triangleClicks == 3) {
+                            triangleClicks = 0;
+                            Shape shape = shapeFactory.getShape(triangleVertices);
+                            log("Triangle registered");
+                            registerUserAction();
+                            shapes.add(shape);
+                            repaint();
+                            log("Triangle painted.");
+                        }
+                        break;
+                    case 7:
+                        Shape shapeToDelete = getSelectedShape(e.getPoint());
+                        if (shapeToDelete != null) {
+                            registerUserAction();
+                            shapes.remove(shapeToDelete);
+                        }
                         repaint();
-                        log("Triangle painted.");
-                    }
-                } else if (gui.currentAction == 7) {
-                    Shape shapeToDelete = getSelectedShape(e.getPoint());
-                    if (shapeToDelete != null) {
+                        break;
+                    case 8:
+                        Shape shapeToColor = getSelectedShape(e.getPoint());
                         registerUserAction();
-                        shapes.remove(shapeToDelete);
-                    }
-                    repaint();
-                } else if (gui.currentAction == 8) {
-                    Shape shapeToColor = getSelectedShape(e.getPoint());
-                    registerUserAction();
-                    shapeToColor.setColor();
-                    repaint();
+                        shapeToColor.setColor();
+                        repaint();
+                        break;
+                    default:
+                        break;
                 }
             }
         }); // end of addMouseListener
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if ((gui.currentAction == 9 || gui.currentAction == 10) && shapeToCopyOrMove!=null){
+                if ((gui.currentAction == 9 || gui.currentAction == 10) && shapeToCopyOrMove != null) {
                     shapeToCopyOrMove.setPosition(e.getPoint());
+                } else if (gui.currentAction == 11 && shapeToRotate != null) {
+                    double slope = (e.getY() - selectedShapeCenter.getY()) / (e.getX() - selectedShapeCenter.getX());
+                    angleOfRotation = Math.atan(slope - startSlope);
                 } else {
                     drawEnd = e.getPoint();
                 }
@@ -151,8 +181,8 @@ public class DrawingBoard extends JComponent implements Logging {
         }); // end of addMouseMotionListener
         repaint();
     } // end of constructor
-    
-    private void registerUserAction(){
+
+    private void registerUserAction() {
         undoHistory.push((ShapeArrayList<Shape>) shapes.clone());
         redoHistory.clear();
     }
@@ -160,8 +190,8 @@ public class DrawingBoard extends JComponent implements Logging {
     private Shape getSelectedShape(Point p) {
         Shape selectedShape = null;
         for (int i = shapes.size() - 1; i >= 0; i--) {
-            if (shapes.get(i)!=null && ((Shape)shapes.get(i)).contains(p)) {
-                selectedShape = (Shape)shapes.get(i);
+            if (shapes.get(i) != null && ((Shape) shapes.get(i)).contains(p)) {
+                selectedShape = (Shape) shapes.get(i);
                 log(selectedShape.getClass() + " is at " + p);
                 break;
             }
@@ -171,11 +201,14 @@ public class DrawingBoard extends JComponent implements Logging {
 
     @Override
     public void paint(Graphics g) {
+        if (gui.currentAction == 11 && shapeToRotate != null) {
+            shapeToRotate.rotate(g, angleOfRotation);
+            log("Angle is " + angleOfRotation);
+        }
         for (Object s : shapes) {
             try {
-                ((Shape)s).draw(g);
+                ((Shape) s).draw(g);
             } catch (NullPointerException n) {
-                log(n.getCause());
             }
         }
 

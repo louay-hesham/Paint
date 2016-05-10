@@ -14,6 +14,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -22,11 +23,18 @@ import java.awt.RenderingHints;
 public class Triangle extends Polygon implements Shape{
 
     private Color fillColor,outlineColor;
+    private Point center;
     
     public Triangle (int[] xpoints, int[] ypoints){
         super(xpoints, ypoints, 3);
         this.fillColor = MainGUI.getFillColor();
         this.outlineColor = MainGUI.getOutlineColor();
+        this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
+    }
+    
+    @Override
+    public Point getCenter() {
+        return this.center;
     }
     
     @Override
@@ -60,5 +68,16 @@ public class Triangle extends Polygon implements Shape{
         int xCor= (int) this.getBounds2D().getCenterX();
         int yCor= (int) this.getBounds2D().getCenterY();
         this.translate((int)p.getX()-xCor, (int)p.getY()-yCor);
+        this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
+    }
+    
+    @Override
+    public void rotate(Graphics g, double angle) {
+        AffineTransform a = new AffineTransform();
+        a.rotate(angle, center.getX(), center.getY());
+        java.awt.Shape tempShape = a.createTransformedShape(this);
+        System.out.println(tempShape.getClass());
+        Graphics2D graphicsSettings = (Graphics2D) g;
+        graphicsSettings.draw(tempShape);
     }
 }

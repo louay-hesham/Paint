@@ -21,6 +21,9 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
 
     private Color fillColor, outlineColor;
     private Point center;
+    
+    public Rectangle(){
+    }
 
     public Rectangle(int x, int y, int width, int height) {
         super(x, y, width, height);
@@ -74,5 +77,8 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         AffineTransform a = new AffineTransform();
         a.rotate(angle, center.getX(), center.getY());
         java.awt.Shape tempShape = a.createTransformedShape(this);
+        System.out.println(tempShape.getClass());
+        Graphics2D graphicsSettings = (Graphics2D) g;
+        graphicsSettings.draw(tempShape);
     }
 }

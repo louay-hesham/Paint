@@ -51,10 +51,11 @@ public class ShapeFactory {
         AffineTransform a = new AffineTransform();
         a.rotate(angle, shape.getCenter().getX(), shape.getCenter().getY());
         java.awt.Shape tempShape = a.createTransformedShape(shape);
-        Shape newShape;
+        Shape newShape=null;
         
         if (shape instanceof Rectangle){
-            
+            newShape = new Rectangle();
+            ((Rectangle)newShape).setRect(tempShape);
         }
         return newShape;
     }*/

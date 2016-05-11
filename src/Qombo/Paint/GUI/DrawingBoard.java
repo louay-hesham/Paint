@@ -134,6 +134,7 @@ public class DrawingBoard extends JComponent implements Logging {
                     }
                     case 11:
                         rotateDone = true;
+                        registerUserAction();
                         break;
                     default:
                         break;

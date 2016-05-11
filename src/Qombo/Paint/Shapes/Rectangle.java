@@ -12,6 +12,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
 
 /**
  *
@@ -21,8 +23,9 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
 
     private Color fillColor, outlineColor;
     private Point center;
-    
-    public Rectangle(){
+    private Path2D.Double rotatedShape = null;
+
+    public Rectangle() {
     }
 
     public Rectangle(int x, int y, int width, int height) {
@@ -43,12 +46,13 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
 
     @Override
     public void draw(Graphics g) {
+        java.awt.Shape shape = (this.rotatedShape == null ? this : rotatedShape);
         Graphics2D graphicsSettings = (Graphics2D) g;
-        graphicsSettings.setStroke(new BasicStroke(2));
+        graphicsSettings.setStroke(new BasicStroke(3));
         graphicsSettings.setPaint(outlineColor);
-        graphicsSettings.draw(this);
+        graphicsSettings.draw(shape);
         graphicsSettings.setPaint(fillColor);
-        graphicsSettings.fill(this);
+        graphicsSettings.fill(shape);
     }
 
     @Override
@@ -62,26 +66,37 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         Rectangle cloneRec = new Rectangle((int) x, (int) y, (int) width, (int) height);
         cloneRec.fillColor = this.fillColor;
         cloneRec.outlineColor = this.outlineColor;
+        cloneRec.rotatedShape = (Path2D.Double)this.rotatedShape.clone();
         return cloneRec;
     }
 
     @Override
     public void setPosition(Point p) {
+        if (this.rotatedShape != null) {
+            AffineTransform transform = new AffineTransform();
+            transform.translate(p.getX() - center.getX(), p.getY() - center.getY());
+            this.rotatedShape.transform(transform);
+        }
         this.x = (int) p.getX() - width / 2;
         this.y = (int) p.getY() - height / 2;
         this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
     }
 
     @Override
+    public boolean contains(Point2D pd) {
+        return this.rotatedShape==null? super.contains(pd):rotatedShape.contains(pd);
+    }
+
+    @Override
     public void rotate(Graphics g, double angle) {
-        AffineTransform a = new AffineTransform();
-        a.rotate(angle, center.getX(), center.getY());
-        java.awt.Shape tempShape = a.createTransformedShape(this);
+        AffineTransform transform = new AffineTransform();
+        transform.rotate(angle, center.getX(), center.getY());
+        this.rotatedShape = (Path2D.Double) transform.createTransformedShape(this);
         Graphics2D graphicsSettings = (Graphics2D) g;
         graphicsSettings.setStroke(new BasicStroke(2));
         graphicsSettings.setPaint(outlineColor);
-        graphicsSettings.draw(tempShape);
+        graphicsSettings.draw(rotatedShape);
         graphicsSettings.setPaint(fillColor);
-        graphicsSettings.fill(tempShape);
-    }  
+        graphicsSettings.fill(rotatedShape);
+    }
 }

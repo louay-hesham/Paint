@@ -29,9 +29,9 @@ import javax.swing.JComponent;
 public class DrawingBoard extends JComponent implements Logging {
 
     protected ShapeArrayList<Shape> shapes = new ShapeArrayList();
-    
+
     protected Stack<ShapeArrayList<Shape>> undoHistory = new Stack();
-    protected Stack<ShapeArrayList<Shape>> redoHistory = new Stack();  
+    protected Stack<ShapeArrayList<Shape>> redoHistory = new Stack();
     public List<String> hist = new ArrayList();
     private Point drawStart, drawEnd;
     private final MainGUI gui;
@@ -138,7 +138,9 @@ public class DrawingBoard extends JComponent implements Logging {
                     default:
                         break;
                 }
-                shapes.add(shape);
+                if (shape != null) {
+                    shapes.add(shape);
+                }
                 drawStart = null;
                 drawEnd = null;
                 repaint();
@@ -206,7 +208,7 @@ public class DrawingBoard extends JComponent implements Logging {
                 shape = getSelectedShape(e.getLocationOnScreen());
                 Cursor moveCursor = new Cursor(Cursor.MOVE_CURSOR);
                 Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
-                if ((gui.currentAction == 9) && (shape != null)) {
+                if ((gui.currentAction == 9 || gui.currentAction == 10) && (shape != null)) {
                     System.out.println("this is mouse moved!");
                     setCursor(moveCursor);
                     shape = null;
@@ -241,16 +243,14 @@ public class DrawingBoard extends JComponent implements Logging {
     public void paint(Graphics g) {
         for (Object s : shapes) {
             try {
-                if (gui.currentAction == 11 && shapeToRotate.equals(s)) {
-                    shapeToRotate.rotate(g, angleOfRotation);
-                    log("Angle is " + angleOfRotation);
-                } else {
-                    ((Shape) s).draw(g);
-                }
+                ((Shape) s).draw(g);
             } catch (NullPointerException n) {
             }
         }
-
+        if (gui.currentAction == 11 && shapeToRotate != null) {
+            shapeToRotate.rotate(g, angleOfRotation);
+            log("Angle is " + angleOfRotation);
+        }
         if (drawStart != null && drawEnd != null) {
             Shape shape = null;
             switch (gui.currentAction) {

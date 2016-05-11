@@ -75,6 +75,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         moveButton = new javax.swing.JButton();
         copyButton = new javax.swing.JButton();
         rotateButton = new javax.swing.JButton();
+        historyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -229,6 +230,13 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        historyButton.setText("History");
+        historyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -260,9 +268,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                                 .addGap(18, 18, 18)
                                 .addComponent(currentModeLabel))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(258, 258, 258)
-                                .addComponent(helperLabel)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(historyButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(helperLabel)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(circleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -311,7 +320,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                     .addComponent(moveButton)
                     .addComponent(helperLabel)
                     .addComponent(copyButton)
-                    .addComponent(rotateButton))
+                    .addComponent(rotateButton)
+                    .addComponent(historyButton))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -430,6 +440,11 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.helperLabel.setText("Press on a shape and drag mouse to rotate.");
     }//GEN-LAST:event_rotateButtonActionPerformed
 
+    private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
+        // TODO add your handling code here:
+        new HistoryFrame(this);
+    }//GEN-LAST:event_historyButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -477,6 +492,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton ellipseButton;
     private javax.swing.JButton fillColorButton;
     protected javax.swing.JLabel helperLabel;
+    private javax.swing.JButton historyButton;
     private javax.swing.JButton lineButton;
     private javax.swing.JLabel modeLabel;
     private javax.swing.JButton moveButton;

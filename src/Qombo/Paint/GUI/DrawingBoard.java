@@ -17,6 +17,8 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import javax.swing.JComponent;
 
@@ -27,10 +29,10 @@ import javax.swing.JComponent;
 public class DrawingBoard extends JComponent implements Logging {
 
     protected ShapeArrayList<Shape> shapes = new ShapeArrayList();
-
+    
     protected Stack<ShapeArrayList<Shape>> undoHistory = new Stack();
-    protected Stack<ShapeArrayList<Shape>> redoHistory = new Stack();
-
+    protected Stack<ShapeArrayList<Shape>> redoHistory = new Stack();  
+    public List<String> hist = new ArrayList();
     private Point drawStart, drawEnd;
     private final MainGUI gui;
     private int triangleClicks = 0;
@@ -67,6 +69,7 @@ public class DrawingBoard extends JComponent implements Logging {
                         shapeToCopyOrMove = getSelectedShape(drawStart);
                         if (shapeToCopyOrMove != null) {
                             registerUserAction();
+                            hist.add("Shape Moved");
                         }
                         break;
                     case 10:
@@ -74,6 +77,7 @@ public class DrawingBoard extends JComponent implements Logging {
                         if (shapeToCopyOrMove != null) {
                             registerUserAction();
                             shapes.add(shapeToCopyOrMove);
+                            hist.add("Shape Copied");
                         }
                         break;
                     case 11:
@@ -87,6 +91,7 @@ public class DrawingBoard extends JComponent implements Logging {
                             selectedShapeCenter = shapeToRotate.getCenter();
                             //registerUserAction();
                         }
+                        hist.add("Shape Rotated");
                         break;
                     default:
                         break;
@@ -100,26 +105,31 @@ public class DrawingBoard extends JComponent implements Logging {
                     case 1: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), RECTANGLE);
                         registerUserAction();
+                        hist.add("Rectangle Drawn");
                         break;
                     }
                     case 2: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), ELLIPSE);
                         registerUserAction();
+                        hist.add("Ellipse Drawn");
                         break;
                     }
                     case 3: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), LINE);
                         registerUserAction();
+                        hist.add("Line Drawn");
                         break;
                     }
                     case 4: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), CIRCLE);
                         registerUserAction();
+                        hist.add("Circle Drawn");
                         break;
                     }
                     case 5: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), SQUARE);
                         registerUserAction();
+                        hist.add("Square Drawn");
                         break;
                     }
                     case 11:
@@ -152,6 +162,7 @@ public class DrawingBoard extends JComponent implements Logging {
                             shapes.add(shape);
                             repaint();
                             log("Triangle painted.");
+                            hist.add("Triangle Drawn");
                         }
                         break;
                     case 7:
@@ -159,6 +170,7 @@ public class DrawingBoard extends JComponent implements Logging {
                         if (shapeToDelete != null) {
                             registerUserAction();
                             shapes.remove(shapeToDelete);
+                            hist.add("Shape Deleted");
                         }
                         repaint();
                         break;
@@ -166,6 +178,7 @@ public class DrawingBoard extends JComponent implements Logging {
                         Shape shapeToColor = getSelectedShape(e.getPoint());
                         registerUserAction();
                         shapeToColor.setColor();
+                        hist.add("Shape Re-Filled");
                         repaint();
                         break;
                     default:

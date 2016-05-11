@@ -7,7 +7,7 @@ package Qombo.Paint.GUI;
 
 /**
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Zanaty
  */
 public class HistoryFrame extends javax.swing.JFrame {
 
@@ -15,28 +15,26 @@ public class HistoryFrame extends javax.swing.JFrame {
      * Creates new form History
      */
     MainGUI gui;
-    String[] string ;
-    int i =0;
+    String[] string;
+    int i = 0;
+
     public HistoryFrame(MainGUI gui) {
         super("History");
-        this.gui=gui;
+        this.gui = gui;
         this.setVisible(true);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        //System.out.println(gui.drawingBoard.hist.get(0));
-        try{
-           string = new String[gui.drawingBoard.hist.size()];
-           for ( String str: gui.drawingBoard.hist) {
-               string[i]=(i+1)+"-"+str;
-               System.out.println(str);
-               i++;
-         }
-      //  System.out.println(string[0]+"2");
-        initComponents();
-        }catch(NullPointerException n)
-        {
+        try {
+            string = new String[gui.drawingBoard.hist.size()];
+            for (String str : gui.drawingBoard.hist) {
+                string[i] = (i + 1) + "-" + str;
+                System.out.println(str);
+                i++;
+            }
+            initComponents();
+            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        } catch (NullPointerException n) {
             System.out.println(n.getCause());
         }
-        
+
     }
 
     /**
@@ -48,75 +46,81 @@ public class HistoryFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        mainPanle = new javax.swing.JPanel();
+        scrollPane = new javax.swing.JScrollPane();
+        historyList = new javax.swing.JList<>();
+        confirmButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String [] strings = string;
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        historyList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = string;
 
-        jButton1.setText("Go Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        });
+        scrollPane.setViewportView(historyList);
+
+        confirmButton.setText("Go Back");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(mainPanle);
+        mainPanle.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(confirmButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cancelButton)
+                        .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(confirmButton)
+                                .addComponent(cancelButton))
+                        .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(mainPanle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(mainPanle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
         );
 
         pack();
@@ -124,27 +128,24 @@ public class HistoryFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int selectedIndex = jList1.getSelectedIndex();
-        int i = gui.drawingBoard.undoHistory.size()-selectedIndex-1;
+        int selectedIndex = historyList.getSelectedIndex();
+        int i = gui.drawingBoard.undoHistory.size() - selectedIndex - 1;
         gui.drawingBoard.redoHistory.push(gui.drawingBoard.shapes);
-        while(i!=1)
-        {
-            try{
-            System.out.println(i);
-            gui.drawingBoard.hist.remove(gui.drawingBoard.hist.size()-1);
-            gui.drawingBoard.undoHistory.pop();
-            i--;
-            }
-            catch(IndexOutOfBoundsException ie)
-            {
+        while (i != 1) {
+            try {
+                System.out.println(i);
+                gui.drawingBoard.hist.remove(gui.drawingBoard.hist.size() - 1);
+                gui.drawingBoard.undoHistory.pop();
+                i--;
+            } catch (IndexOutOfBoundsException ie) {
                 System.out.println(ie.getCause());
             }
-   
+
         }
-         gui.drawingBoard.hist.remove(gui.drawingBoard.hist.size()-1);
+        gui.drawingBoard.hist.remove(gui.drawingBoard.hist.size() - 1);
         gui.drawingBoard.shapes = gui.drawingBoard.undoHistory.peek();
         gui.drawingBoard.repaint();
-        
+
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -189,10 +190,10 @@ public class HistoryFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton confirmButton;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JList<String> historyList;
+    private javax.swing.JPanel mainPanle;
+    private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -78,6 +78,18 @@ public class Triangle extends Polygon implements Shape{
         java.awt.Shape tempShape = a.createTransformedShape(this);
         System.out.println(tempShape.getClass());
         Graphics2D graphicsSettings = (Graphics2D) g;
+        graphicsSettings.setStroke(new BasicStroke(2));
+        graphicsSettings.setPaint(outlineColor);
         graphicsSettings.draw(tempShape);
+        graphicsSettings.setPaint(fillColor);
+        graphicsSettings.fill(tempShape);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return  (o!=null) &&
+                (this.center == ((Triangle)o).center) && 
+                (this.fillColor == ((Triangle)o).fillColor) && 
+                (this.outlineColor == ((Triangle)o).outlineColor);
     }
 }

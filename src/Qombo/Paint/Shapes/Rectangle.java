@@ -77,8 +77,21 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         AffineTransform a = new AffineTransform();
         a.rotate(angle, center.getX(), center.getY());
         java.awt.Shape tempShape = a.createTransformedShape(this);
-        System.out.println(tempShape.getClass());
         Graphics2D graphicsSettings = (Graphics2D) g;
+        graphicsSettings.setStroke(new BasicStroke(2));
+        graphicsSettings.setPaint(outlineColor);
         graphicsSettings.draw(tempShape);
+        graphicsSettings.setPaint(fillColor);
+        graphicsSettings.fill(tempShape);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return  (o!=null) &&
+                (this.x == ((Rectangle)o).x) && 
+                (this.y == ((Rectangle)o).y) && 
+                (this.width == ((Rectangle)o).width) && 
+                (this.height == ((Rectangle)o).height);
+    }
+    
 }

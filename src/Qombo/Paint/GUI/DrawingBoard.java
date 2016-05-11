@@ -34,6 +34,7 @@ public class DrawingBoard extends JComponent implements Logging {
     private Point drawStart, drawEnd;
     private final MainGUI gui;
     private int triangleClicks = 0;
+    private boolean rotateDone = false;
 
     public int getTriangleClicks() {
         return triangleClicks;
@@ -42,7 +43,6 @@ public class DrawingBoard extends JComponent implements Logging {
     private ShapeFactory shapeFactory = ShapeFactory.getFactory();
     private Shape shapeToCopyOrMove = null;
     private Shape shapeToRotate = null;
-    private double startSlope;
     private double angleOfRotation;
     private Point selectedShapeCenter;
 
@@ -77,10 +77,14 @@ public class DrawingBoard extends JComponent implements Logging {
                         }
                         break;
                     case 11:
+                        if (rotateDone) {
+                            shapeToRotate = null;
+                            rotateDone = false;
+                        }
                         shapeToRotate = getSelectedShape(drawStart);
+                        rotateDone = false;
                         if (shapeToRotate != null) {
                             selectedShapeCenter = shapeToRotate.getCenter();
-                            startSlope = (e.getY() - selectedShapeCenter.getY()) / (e.getX() - selectedShapeCenter.getX());
                             //registerUserAction();
                         }
                         break;
@@ -118,6 +122,9 @@ public class DrawingBoard extends JComponent implements Logging {
                         registerUserAction();
                         break;
                     }
+                    case 11:
+                        rotateDone = true;
+                        break;
                     default:
                         break;
                 }
@@ -126,6 +133,7 @@ public class DrawingBoard extends JComponent implements Logging {
                 drawEnd = null;
                 repaint();
                 log("Mouse released.");
+
             }
 
             @Override
@@ -171,34 +179,32 @@ public class DrawingBoard extends JComponent implements Logging {
                 if ((gui.currentAction == 9 || gui.currentAction == 10) && shapeToCopyOrMove != null) {
                     shapeToCopyOrMove.setPosition(e.getPoint());
                 } else if (gui.currentAction == 11 && shapeToRotate != null) {
-                    double slope = (e.getY() - selectedShapeCenter.getY()) / (e.getX() - selectedShapeCenter.getX());
-                    angleOfRotation = Math.atan(slope - startSlope);
+                    angleOfRotation = Math.atan2(e.getY() - selectedShapeCenter.getY(), e.getX() - selectedShapeCenter.getX());
+                    rotateDone = false;
                 } else {
                     drawEnd = e.getPoint();
                 }
                 repaint();
             }
-            
+
             @Override
-            public void mouseMoved (MouseEvent e){
+            public void mouseMoved(MouseEvent e) {
                 Shape shape = null;
                 shape = getSelectedShape(e.getLocationOnScreen());
                 Cursor moveCursor = new Cursor(Cursor.MOVE_CURSOR);
-                Cursor defaultCursor = new Cursor (Cursor.DEFAULT_CURSOR);
-                if((gui.currentAction == 9) && (shape != null) ){
+                Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
+                if ((gui.currentAction == 9) && (shape != null)) {
                     System.out.println("this is mouse moved!");
                     setCursor(moveCursor);
                     shape = null;
-                }
-                else {
+                } else {
                     setCursor(defaultCursor);
                 }
-                
+
             }
         }); // end of addMouseMotionListener
         repaint();
-        
-       
+
     } // end of constructor
 
     private void registerUserAction() {
@@ -220,13 +226,14 @@ public class DrawingBoard extends JComponent implements Logging {
 
     @Override
     public void paint(Graphics g) {
-        if (gui.currentAction == 11 && shapeToRotate != null) {
-            shapeToRotate.rotate(g, angleOfRotation);
-            log("Angle is " + angleOfRotation);
-        }
         for (Object s : shapes) {
             try {
-                ((Shape) s).draw(g);
+                if (gui.currentAction == 11 && shapeToRotate.equals(s)) {
+                    shapeToRotate.rotate(g, angleOfRotation);
+                    log("Angle is " + angleOfRotation);
+                } else {
+                    ((Shape) s).draw(g);
+                }
             } catch (NullPointerException n) {
             }
         }

@@ -14,7 +14,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
 /**
@@ -97,7 +96,17 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
         java.awt.Shape tempShape = a.createTransformedShape(this);
         System.out.println(tempShape.getClass());
         Graphics2D graphicsSettings = (Graphics2D) g;
+        graphicsSettings.setStroke(new BasicStroke(2));
+        graphicsSettings.setPaint(lineColor);
         graphicsSettings.draw(tempShape);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return  (o!=null) &&
+                (this.p1 == ((Line)o).p1) && 
+                (this.p2 == ((Line)o).p2) && 
+                (this.lineColor == ((Line)o).lineColor);
     }
     
 }

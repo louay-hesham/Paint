@@ -87,13 +87,4 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(tempShape);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return  (o!=null) &&
-                (this.x == ((Ellipse)o).x) && 
-                (this.y == ((Ellipse)o).y) && 
-                (this.width == ((Ellipse)o).width) && 
-                (this.height == ((Ellipse)o).height);
-    }
 }

@@ -83,15 +83,5 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         graphicsSettings.draw(tempShape);
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(tempShape);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return  (o!=null) &&
-                (this.x == ((Rectangle)o).x) && 
-                (this.y == ((Rectangle)o).y) && 
-                (this.width == ((Rectangle)o).width) && 
-                (this.height == ((Rectangle)o).height);
-    }
-    
+    }  
 }

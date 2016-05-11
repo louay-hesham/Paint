@@ -84,12 +84,4 @@ public class Triangle extends Polygon implements Shape{
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(tempShape);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return  (o!=null) &&
-                (this.center == ((Triangle)o).center) && 
-                (this.fillColor == ((Triangle)o).fillColor) && 
-                (this.outlineColor == ((Triangle)o).outlineColor);
-    }
 }

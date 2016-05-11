@@ -100,13 +100,4 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
         graphicsSettings.setPaint(lineColor);
         graphicsSettings.draw(tempShape);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return  (o!=null) &&
-                (this.p1 == ((Line)o).p1) && 
-                (this.p2 == ((Line)o).p2) && 
-                (this.lineColor == ((Line)o).lineColor);
-    }
-    
 }

@@ -101,6 +101,7 @@ public class Triangle extends Polygon implements Shape{
         int vertex = getNearestVertex(p);
         xpoints[vertex] = p.x;
         ypoints[vertex] = p.y;
+        this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
     }
 
     private int getNearestVertex(Point p) {

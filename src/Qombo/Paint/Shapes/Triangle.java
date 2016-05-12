@@ -95,4 +95,16 @@ public class Triangle extends Polygon implements Shape{
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(this.rotatedShape);
     }
+    
+   
+
+    @Override
+    public void upSize(double xRatio, double yRatio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void downSize(double xRatio, double yRatio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

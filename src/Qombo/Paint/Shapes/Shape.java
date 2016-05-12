@@ -26,4 +26,8 @@ public interface Shape extends java.awt.Shape {
     public void rotate(Graphics g, double angle);
     
     public Point getCenter();
+    
+    public void upSize(double xRatio, double yRatio);
+    
+    public void downSize (double xRatio, double yRatio);
 }

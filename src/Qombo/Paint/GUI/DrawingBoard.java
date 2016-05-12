@@ -45,8 +45,11 @@ public class DrawingBoard extends JComponent implements Logging {
     private ShapeFactory shapeFactory = ShapeFactory.getFactory();
     private Shape shapeToCopyOrMove = null;
     private Shape shapeToRotate = null;
+    private Shape shapeToResize = null;
     private double angleOfRotation;
+    private double xRatio = 1, yRatio = 1;
     private Point selectedShapeCenter;
+    private Point center = null;
 
     public DrawingBoard(MainGUI gui) {
         super();
@@ -80,6 +83,14 @@ public class DrawingBoard extends JComponent implements Logging {
                             hist.add("Shape Copied");
                         }
                         break;
+                    case 12:
+                        shapeToResize = getSelectedShape(drawStart);
+                        if (shapeToResize != null){
+                            registerUserAction();
+                            shapes.add(shapeToResize);
+                            hist.add("Shape Resized");
+                           
+                        }
                     case 11:
                         if (rotateDone) {
                             shapeToRotate = null;
@@ -136,6 +147,9 @@ public class DrawingBoard extends JComponent implements Logging {
                         rotateDone = true;
                         registerUserAction();
                         break;
+                        
+                    case 12:
+                        drawEnd = e.getPoint();
                     default:
                         break;
                 }
@@ -199,6 +213,27 @@ public class DrawingBoard extends JComponent implements Logging {
                     rotateDone = false;
                 } else {
                     drawEnd = e.getPoint();
+                }
+                
+                if ((gui.currentAction == 12) && shapeToResize != null){
+                    
+                    center = shapeToResize.getCenter();
+                    
+                    if (drawEnd.x > drawStart.x){
+                    xRatio = Math.abs(drawEnd.x / drawStart.x);
+                    yRatio = Math.abs(drawEnd.y / drawStart.y);
+                    shapeToResize.upSize(xRatio, yRatio);
+                    System.out.println(xRatio);
+                    
+                    System.out.println(yRatio);
+                    }
+                    
+                    if(drawStart.x > drawEnd.x){
+                    xRatio = Math.abs(drawStart.x/ drawEnd.x);
+                    yRatio = Math.abs(drawStart.y / drawEnd.y);
+                    shapeToResize.downSize(xRatio, yRatio);
+                    }
+                    
                 }
                 repaint();
             }

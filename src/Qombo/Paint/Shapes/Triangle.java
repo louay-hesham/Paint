@@ -96,15 +96,26 @@ public class Triangle extends Polygon implements Shape{
         graphicsSettings.fill(this.rotatedShape);
     }
     
-   
-
     @Override
-    public void upSize(double xRatio, double yRatio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void resize(Point p) {
+        int vertex = getNearestVertex(p);
+        xpoints[vertex] = p.x;
+        ypoints[vertex] = p.y;
     }
 
-    @Override
-    public void downSize(double xRatio, double yRatio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private int getNearestVertex(Point p) {
+        double[] distances = new double[3];
+        for (int i=0;i<3;i++){
+            distances[i] = new Point(xpoints[i],ypoints[i]).distance(p);
+        }
+        int minIndex = -1;
+        double minDistance = Long.MAX_VALUE;
+        for (int i = 0; i < 3; i++) {
+            if (minDistance > distances[i]) {
+                minDistance = distances[i];
+                minIndex = i;
+            }
+        }
+        return minIndex;
     }
 }

@@ -108,15 +108,21 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
         this.draw(g);
     }
 
-    
-
     @Override
-    public void upSize(double xRatio, double yRatio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void resize(Point p) {
+        int vertex = getNearestVertex(p);
+        switch (vertex){
+            case 1:
+                p1.setLocation(p);
+                break;
+            case 2: 
+                p2.setLocation(p);
+                break;
+        }
+        this.setLine(p1, p2);
     }
 
-    @Override
-    public void downSize(double xRatio, double yRatio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private int getNearestVertex(Point p) {
+        return p1.distance(p)<p2.distance(p)? 1:2;
     }
 }

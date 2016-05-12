@@ -47,9 +47,7 @@ public class DrawingBoard extends JComponent implements Logging {
     private Shape shapeToRotate = null;
     private Shape shapeToResize = null;
     private double angleOfRotation;
-    private double xRatio = 1, yRatio = 1;
     private Point selectedShapeCenter;
-    private Point center = null;
 
     public DrawingBoard(MainGUI gui) {
         super();
@@ -59,10 +57,10 @@ public class DrawingBoard extends JComponent implements Logging {
         this.gui = gui;
         this.setBackground(Color.white);
         log(undoHistory.size());
+        
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-
                 drawStart = e.getPoint();
                 drawEnd = null;
                 repaint();
@@ -92,7 +90,7 @@ public class DrawingBoard extends JComponent implements Logging {
                         rotateDone = false;
                         if (shapeToRotate != null) {
                             selectedShapeCenter = shapeToRotate.getCenter();
-                            //registerUserAction();
+                            registerUserAction();
                         }
                         hist.add("Shape Rotated");
                         break;
@@ -232,10 +230,11 @@ public class DrawingBoard extends JComponent implements Logging {
             }
         }); // end of addMouseMotionListener
         repaint();
-
     } // end of constructor
 
     private void registerUserAction() {
+        ShapeArrayList<Shape> test = shapes.clone();
+        System.out.println("size = "+test.size());
         undoHistory.push(shapes.clone());
         redoHistory.clear();
     }

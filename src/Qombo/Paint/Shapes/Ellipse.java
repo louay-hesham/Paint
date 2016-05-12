@@ -63,7 +63,7 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         Ellipse cloneEllipse= new Ellipse((int)x, (int)y, (int)width, (int)height);
         cloneEllipse.fillColor=this.fillColor;
         cloneEllipse.outlineColor=this.outlineColor;
-        cloneEllipse.rotatedShape = (Path2D.Double)this.rotatedShape.clone();
+        cloneEllipse.rotatedShape = this.rotatedShape==null? null:(Path2D.Double) this.rotatedShape.clone();
         return cloneEllipse;
     }
 

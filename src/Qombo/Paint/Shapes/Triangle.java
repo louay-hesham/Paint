@@ -60,7 +60,7 @@ public class Triangle extends Polygon implements Shape{
         Triangle cloneTriangle = new Triangle(xpoints, ypoints);
         cloneTriangle.fillColor=this.fillColor;
         cloneTriangle.outlineColor=this.outlineColor;
-        cloneTriangle.rotatedShape = (Path2D.Double)this.rotatedShape.clone();
+        cloneTriangle.rotatedShape = this.rotatedShape==null? null:(Path2D.Double) this.rotatedShape.clone();
         return cloneTriangle;
     }
 

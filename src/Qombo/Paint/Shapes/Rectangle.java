@@ -66,7 +66,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         Rectangle cloneRec = new Rectangle((int) x, (int) y, (int) width, (int) height);
         cloneRec.fillColor = this.fillColor;
         cloneRec.outlineColor = this.outlineColor;
-        cloneRec.rotatedShape = (Path2D.Double) this.rotatedShape.clone();
+        cloneRec.rotatedShape = this.rotatedShape==null? null:(Path2D.Double) this.rotatedShape.clone();
         return cloneRec;
     }
 
@@ -124,7 +124,6 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
                 this.height = p.y - this.y;
                 break;
         }
-
     }
 
     protected int getNearestVertex(Point p) {

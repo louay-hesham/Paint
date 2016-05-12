@@ -56,6 +56,8 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="historyButton" min="-2" pref="93" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="resizeButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="helperLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -122,6 +124,7 @@
                   <Component id="copyButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="rotateButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="historyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="resizeButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -347,6 +350,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="historyButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="resizeButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Resize"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resizeButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -76,6 +76,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         copyButton = new javax.swing.JButton();
         rotateButton = new javax.swing.JButton();
         historyButton = new javax.swing.JButton();
+        resizeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -237,6 +238,13 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        resizeButton.setText("Resize");
+        resizeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resizeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -269,6 +277,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(historyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(resizeButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(helperLabel))))
                     .addGroup(layout.createSequentialGroup()
@@ -323,7 +333,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                     .addComponent(helperLabel)
                     .addComponent(copyButton)
                     .addComponent(rotateButton)
-                    .addComponent(historyButton))
+                    .addComponent(historyButton)
+                    .addComponent(resizeButton))
                 .addGap(15, 15, 15))
         );
 
@@ -447,6 +458,14 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         new HistoryFrame(this);
     }//GEN-LAST:event_historyButtonActionPerformed
 
+    private void resizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resizeButtonActionPerformed
+        // TODO add your handling code here:
+        this.currentAction = 12;
+        this.currentModeLabel.setText("Resize mode.");
+        this.helperLabel.setVisible(true);
+        this.helperLabel.setText("Start resizing the shape by choosing a point and dragging it.");
+    }//GEN-LAST:event_resizeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -502,6 +521,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton reColorButton;
     private javax.swing.JButton rectangleButton;
     private javax.swing.JButton resetButton;
+    private javax.swing.JButton resizeButton;
     private javax.swing.JButton rotateButton;
     private javax.swing.JButton squareButton;
     private javax.swing.JButton triangleButton;

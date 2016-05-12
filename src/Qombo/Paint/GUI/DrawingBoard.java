@@ -83,14 +83,6 @@ public class DrawingBoard extends JComponent implements Logging {
                             hist.add("Shape Copied");
                         }
                         break;
-                    case 12:
-                        shapeToResize = getSelectedShape(drawStart);
-                        if (shapeToResize != null){
-                            registerUserAction();
-                            shapes.add(shapeToResize);
-                            hist.add("Shape Resized");
-                           
-                        }
                     case 11:
                         if (rotateDone) {
                             shapeToRotate = null;
@@ -104,6 +96,12 @@ public class DrawingBoard extends JComponent implements Logging {
                         }
                         hist.add("Shape Rotated");
                         break;
+                    case 12:
+                        shapeToResize = getSelectedShape(drawStart);
+                        if (shapeToResize != null) {
+                            registerUserAction();
+                            hist.add("Shape Resized");
+                        }
                     default:
                         break;
                 }
@@ -147,9 +145,6 @@ public class DrawingBoard extends JComponent implements Logging {
                         rotateDone = true;
                         registerUserAction();
                         break;
-                        
-                    case 12:
-                        drawEnd = e.getPoint();
                     default:
                         break;
                 }
@@ -211,30 +206,12 @@ public class DrawingBoard extends JComponent implements Logging {
                 } else if (gui.currentAction == 11 && shapeToRotate != null) {
                     angleOfRotation = Math.atan2(e.getY() - selectedShapeCenter.getY(), e.getX() - selectedShapeCenter.getX());
                     rotateDone = false;
+                } else if ((gui.currentAction == 12) && shapeToResize != null) {
+                    shapeToResize.resize(e.getPoint());
                 } else {
                     drawEnd = e.getPoint();
                 }
-                
-                if ((gui.currentAction == 12) && shapeToResize != null){
-                    
-                    center = shapeToResize.getCenter();
-                    
-                    if (drawEnd.x > drawStart.x){
-                    xRatio = Math.abs(drawEnd.x / drawStart.x);
-                    yRatio = Math.abs(drawEnd.y / drawStart.y);
-                    shapeToResize.upSize(xRatio, yRatio);
-                    System.out.println(xRatio);
-                    
-                    System.out.println(yRatio);
-                    }
-                    
-                    if(drawStart.x > drawEnd.x){
-                    xRatio = Math.abs(drawStart.x/ drawEnd.x);
-                    yRatio = Math.abs(drawStart.y / drawEnd.y);
-                    shapeToResize.downSize(xRatio, yRatio);
-                    }
-                    
-                }
+
                 repaint();
             }
 

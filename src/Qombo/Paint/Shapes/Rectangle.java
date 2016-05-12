@@ -99,20 +99,11 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(rotatedShape);
     }
-    
+   
     @Override
-    public void upSize(double xRatio, double yRatio){
-        
-        this.width += xRatio;
-        this.height += yRatio;
-        
-    }
-
-    @Override
-    public void downSize(double xRatio, double yRatio) {
-           
-        this.width -= xRatio;
-        this.height -= yRatio;
+    public void resize(Point p) {
+        this.width = p.x - this.x;
+        this.height = p.y - this.y;
     }
     
     

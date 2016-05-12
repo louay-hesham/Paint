@@ -27,7 +27,5 @@ public interface Shape extends java.awt.Shape {
     
     public Point getCenter();
     
-    public void upSize(double xRatio, double yRatio);
-    
-    public void downSize (double xRatio, double yRatio);
+    public void resize(Point p);
 }

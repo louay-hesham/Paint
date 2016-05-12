@@ -66,7 +66,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         Rectangle cloneRec = new Rectangle((int) x, (int) y, (int) width, (int) height);
         cloneRec.fillColor = this.fillColor;
         cloneRec.outlineColor = this.outlineColor;
-        cloneRec.rotatedShape = (Path2D.Double)this.rotatedShape.clone();
+        cloneRec.rotatedShape = (Path2D.Double) this.rotatedShape.clone();
         return cloneRec;
     }
 
@@ -84,7 +84,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
 
     @Override
     public boolean contains(Point2D pd) {
-        return this.rotatedShape==null? super.contains(pd):rotatedShape.contains(pd);
+        return this.rotatedShape == null ? super.contains(pd) : rotatedShape.contains(pd);
     }
 
     @Override
@@ -99,12 +99,48 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(rotatedShape);
     }
-   
+
     @Override
     public void resize(Point p) {
-        this.width = p.x - this.x;
-        this.height = p.y - this.y;
+        switch (getNearestVertex(p)) {
+            case 0:
+                this.width -= (p.x - this.x);
+                this.height -= (p.y - this.y);
+                this.x = p.x;
+                this.y = p.y;
+                break;
+            case 1:
+                this.width = p.x - this.x;
+                this.height -= (p.y - this.y);
+                this.y = p.y;
+                break;
+            case 2:
+                this.width = p.x - this.x;
+                this.height = p.y - this.y;
+                break;
+            case 3:
+                this.width -= (p.x - this.x);
+                this.x = p.x;
+                this.height = p.y - this.y;
+                break;
+        }
+
     }
-    
-    
+
+    private int getNearestVertex(Point p) {
+        double[] distances = {p.distance(x, y),
+            p.distance(x + width, y),
+            p.distance(x + width, y + height),
+            p.distance(x, y + height)};
+        int minIndex = -1;
+        double minDistance = Long.MAX_VALUE;
+        for (int i = 0; i < 4; i++) {
+            if (minDistance > distances[i]) {
+                minDistance = distances[i];
+                minIndex = i;
+            }
+        }
+        return minIndex;
+    }
+
 }

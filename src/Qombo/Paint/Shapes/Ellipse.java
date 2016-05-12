@@ -97,16 +97,47 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(this.rotatedShape);
     }
-
-   
-
+    
     @Override
-    public void upSize(double xRatio, double yRatio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void resize(Point p) {
+        switch (getNearestVertex(p)) {
+            case 0:
+                this.width -= (p.x - this.x);
+                this.height -= (p.y - this.y);
+                this.x = p.x;
+                this.y = p.y;
+                break;
+            case 1:
+                this.width = p.x - this.x;
+                this.height -= (p.y - this.y);
+                this.y = p.y;
+                break;
+            case 2:
+                this.width = p.x - this.x;
+                this.height = p.y - this.y;
+                break;
+            case 3:
+                this.width -= (p.x - this.x);
+                this.x = p.x;
+                this.height = p.y - this.y;
+                break;
+        }
+
     }
 
-    @Override
-    public void downSize(double xRatio, double yRatio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected int getNearestVertex(Point p) {
+        double[] distances = {p.distance(x, y),
+            p.distance(x + width, y),
+            p.distance(x + width, y + height),
+            p.distance(x, y + height)};
+        int minIndex = -1;
+        double minDistance = Long.MAX_VALUE;
+        for (int i = 0; i < 4; i++) {
+            if (minDistance > distances[i]) {
+                minDistance = distances[i];
+                minIndex = i;
+            }
+        }
+        return minIndex;
     }
 }

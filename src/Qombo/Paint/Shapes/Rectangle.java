@@ -127,7 +127,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
 
     }
 
-    private int getNearestVertex(Point p) {
+    protected int getNearestVertex(Point p) {
         double[] distances = {p.distance(x, y),
             p.distance(x + width, y),
             p.distance(x + width, y + height),

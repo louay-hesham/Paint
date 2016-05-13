@@ -59,6 +59,7 @@ public class Circle extends Ellipse {
                 break;
             }
         }
+        this.createVertices();
     }
 
     @Override

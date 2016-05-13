@@ -51,7 +51,6 @@ public class Square extends Rectangle {
                 int dy = (int) (p.y - (this.y + this.height));
                 int delta;
                 delta = (int) Math.max(dx, dy);
-                System.out.println(delta);
                 this.width+=delta;
                 this.height+=delta;
                 this.x-=delta;

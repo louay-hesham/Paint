@@ -41,6 +41,7 @@ public class Triangle extends Polygon implements Shape {
         for (int i = 0; i < 3; i++) {
             this.points[i] = new Point.Double(xpoints[i], ypoints[i]);
         }
+        corners = new CornerRectangles(this);
     }
 
     @Override
@@ -118,6 +119,7 @@ public class Triangle extends Polygon implements Shape {
         for (int i = 0; i < 3; i++) {
             this.points[i] = new Point.Double(xpoints[i], ypoints[i]);
         }
+        corners = new CornerRectangles(this);
     }
 
     private int getNearestVertex(Point p) {

@@ -26,16 +26,17 @@ public class CornerRectangles {
     private int i = 0;
 
     public CornerRectangles(Shape shape) {
+        System.out.println(shape);
         if (shape instanceof Line) {
             createLineCornerRectangles();
             cornerRectangles.get(0).setPosition(((Line) shape).getP1());
             cornerRectangles.get(1).setPosition(((Line) shape).getP2());
         } else if (shape instanceof Triangle) {
             createTriangleCornerRectangles();
-            cornerRectangles.get(0).setPosition(((Triangle) shape).getPoints()[0]);
-            cornerRectangles.get(1).setPosition(((Triangle) shape).getPoints()[1]);
-            cornerRectangles.get(2).setPosition(((Triangle) shape).getPoints()[2]);
-
+            System.out.println("Triangle vertices");
+            for (int i = 0; i < 3; i++) {
+                cornerRectangles.get(i).setPosition(((Triangle) shape).getPoints()[i]);
+            }
         } else {
             createSquareCornerRectangles();
             int x = (int) shape.getX();

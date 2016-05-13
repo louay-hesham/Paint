@@ -543,6 +543,8 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
 
     private void qomboButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qomboButtonActionPerformed
         JOptionPane.showMessageDialog(null, "QomboTM "+"\n"+"CEO: Zeyad Zanaty :: 3320 " +"\n"+"CFO: Muhammad Korra :: 3318 " +"\n"+"3amel nazafa(w el program): Louay Hesham  :: 3303","Qombo Paint",JOptionPane.INFORMATION_MESSAGE);
+        String x= JOptionPane.showInputDialog(null, "Name OF File");
+        this.drawingBoard.exportImage(x+".png");
     }//GEN-LAST:event_qomboButtonActionPerformed
 
     public void updateHelperLabel(int i){

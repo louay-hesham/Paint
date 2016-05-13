@@ -92,7 +92,6 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
     @Override
     public void rotate(Graphics g, double angle) {
         
-        angle/=100;
         double xOrigin = p1.x - center.x;
         double yOrigin = p1.y - center.y;
 

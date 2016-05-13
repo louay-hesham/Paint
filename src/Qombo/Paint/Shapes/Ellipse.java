@@ -140,4 +140,9 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         }
         return minIndex;
     }
+
+    @Override
+    public void drawVertices(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

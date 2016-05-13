@@ -27,4 +27,13 @@ public interface Shape extends java.awt.Shape,Cloneable {
     public Point getCenter();
     
     public void resize(Point p);
+    
+    public double getX();
+    public double getY();
+    public double getWidth();
+    public double getHeight();
+    
+    public void drawVertices(Graphics g);
+    
+    public void createVertices();
 }

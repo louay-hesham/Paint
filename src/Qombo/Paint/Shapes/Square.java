@@ -57,6 +57,8 @@ public class Square extends Rectangle {
                 break;
             }
         }
+        
+        this.createVertices();
 
     }
 }

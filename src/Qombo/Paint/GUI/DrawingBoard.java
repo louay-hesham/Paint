@@ -42,8 +42,6 @@ public class DrawingBoard extends JComponent implements Logging {
     private Cursor moveCursor = new Cursor(Cursor.MOVE_CURSOR);
     private Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
 
-    
-
     public int getTriangleClicks() {
         return triangleClicks;
     }
@@ -151,6 +149,8 @@ public class DrawingBoard extends JComponent implements Logging {
                 if (shape != null) {
                     shapes.add(shape);
                 }
+                
+                shape.createVertices();
                 drawStart = null;
                 drawEnd = null;
                 repaint();
@@ -249,6 +249,9 @@ public class DrawingBoard extends JComponent implements Logging {
         for (Object s : shapes) {
             try {
                 ((Shape) s).draw(g);
+                if (gui.currentAction == 12){
+                ((Shape) s).drawVertices(g);
+                }
             } catch (NullPointerException n) {
             }
         }

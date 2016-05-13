@@ -470,6 +470,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.currentModeLabel.setText("Resize mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Start resizing the shape by choosing a point and dragging it.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_resizeButtonActionPerformed
 
     /**

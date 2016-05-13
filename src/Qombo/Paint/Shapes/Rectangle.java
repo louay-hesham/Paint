@@ -15,7 +15,7 @@ import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
-
+import Qombo.Paint.GUI.CornerRectangles;
 /**
  *
  * @author lo2ay
@@ -25,6 +25,8 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
     private Color fillColor, outlineColor;
     private Point center;
     private Path2D.Double rotatedShape = null;
+    public CornerRectangles corners;
+    
     
 
     public Rectangle() {
@@ -39,6 +41,8 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         this.width = width;
         this.height = height;
         this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
+        
+        
     }
 
     @Override
@@ -55,6 +59,21 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         graphicsSettings.draw(shape);
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(shape);
+    }
+    
+    public void drawVertices (Graphics g){
+        if (rotatedShape == null){
+        Graphics2D graphics = (Graphics2D) g;
+        graphics.setStroke(new BasicStroke(3));
+        graphics.setPaint(Color.BLACK);
+        for (Shape s : corners.getCornerRectangles()){
+            graphics.draw(s);
+        }
+        graphics.setPaint(Color.BLACK);
+        for (Shape s : corners.getCornerRectangles()){
+            graphics.fill(s);
+        }
+        }
     }
 
     @Override
@@ -126,6 +145,8 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
                 this.height = p.y - this.y;
                 break;
         }
+        
+        this.createVertices();
     }
 
     protected int getNearestVertex(Point p) {
@@ -142,6 +163,33 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
             }
         }
         return minIndex;
+    }
+    
+    
+
+    @Override
+    public double getX() {
+       return super.getX();
+    }
+
+    @Override
+    public double getY() {
+        return super.getY();
+    }
+
+    @Override
+    public double getWidth() {
+        return super.getWidth();
+    }
+
+    @Override
+    public double getHeight() {
+        return super.getHeight();
+    }
+
+    @Override
+    public void createVertices() {
+        corners = new CornerRectangles(CornerRectangles.RECTANGLE,this);
     }
 
 }

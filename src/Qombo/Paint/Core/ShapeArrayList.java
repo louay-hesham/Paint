@@ -12,7 +12,7 @@ import Qombo.Paint.Shapes.Shape;
  * @author Muhammad Korra
  * @param <E>
  */
-public class ShapeArrayList<E extends Shape> extends java.util.ArrayList {
+public class ShapeArrayList<E extends Shape> extends java.util.ArrayList implements Cloneable {
 
     @Override
     public ShapeArrayList clone(){

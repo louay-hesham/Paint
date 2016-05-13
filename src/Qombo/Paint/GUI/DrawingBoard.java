@@ -58,7 +58,6 @@ public class DrawingBoard extends JComponent implements Logging {
     private double angleOfRotation;
     private Point selectedShapeCenter;
 
-    
     public DrawingBoard(MainGUI gui) {
         super();
         this.shapes = new ShapeArrayList();
@@ -148,7 +147,7 @@ public class DrawingBoard extends JComponent implements Logging {
                     }
                     case 9:
                     case 10:
-                        if (shapeToCopyOrMove!=null){
+                        if (shapeToCopyOrMove != null) {
                             shapeToCopyOrMove.createVertices();
                         }
                         break;
@@ -172,7 +171,7 @@ public class DrawingBoard extends JComponent implements Logging {
                 switch (MainGUI.currentAction) {
                     case 6:
                         triangleVertices[triangleClicks++] = e.getPoint();
-                        gui.updateHelperLabel( triangleClicks == 3 ? 1 : (triangleClicks + 1) );
+                        gui.updateHelperLabel(triangleClicks == 3 ? 1 : (triangleClicks + 1));
                         if (triangleClicks == 3) {
                             triangleClicks = 0;
                             Shape shape = shapeFactory.getShape(triangleVertices);
@@ -256,28 +255,29 @@ public class DrawingBoard extends JComponent implements Logging {
     }
 
     public void exportImage(String imageName) {
-    BufferedImage image = new  BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB_PRE);
-    Graphics2D graphics = image.createGraphics();
-    paint(graphics);
-    graphics.dispose();
-    try {
-        System.out.println("Exporting image: "+imageName);
-        FileOutputStream out = new FileOutputStream(imageName);
-        ImageIO.write(image, "png", out);
-        out.close();
-    } catch (FileNotFoundException e) {
-        e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }  
+        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB_PRE);
+        Graphics2D graphics = image.createGraphics();
+        paint(graphics);
+        graphics.dispose();
+        try {
+            System.out.println("Exporting image: " + imageName);
+            FileOutputStream out = new FileOutputStream(imageName);
+            ImageIO.write(image, "png", out);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
     @Override
     public void paint(Graphics g) {
         for (Object s : shapes) {
             try {
                 ((Shape) s).draw(g);
-                if (MainGUI.currentAction == 12){
-                ((Shape) s).drawVertices(g);
+                if (MainGUI.currentAction == 12) {
+                    ((Shape) s).drawVertices(g);
                 }
             } catch (NullPointerException n) {
             }

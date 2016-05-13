@@ -5,6 +5,7 @@
  */
 package Qombo.Paint.Shapes;
 
+import Qombo.Paint.GUI.CornerRectangles;
 import Qombo.Paint.GUI.MainGUI;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -24,13 +25,14 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
     private Color fillColor, outlineColor;
     private Point center;
     private Path2D.Double rotatedShape = null;
+    public CornerRectangles corners;
 
     public Ellipse(int x, int y, int width, int height) {
-        super(x, y, width, height);             
-        this.x=x;
-        this.y=y;
-        this.width=width;
-        this.height=height;
+        super(x, y, width, height);
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
         this.fillColor = MainGUI.getFillColor();
         this.outlineColor = MainGUI.getOutlineColor();
         this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
@@ -46,7 +48,23 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(shape);
     }
-    
+
+    @Override
+    public void drawVertices(Graphics g) {
+        if (rotatedShape == null) {
+            Graphics2D graphics = (Graphics2D) g;
+            graphics.setStroke(new BasicStroke(3));
+            graphics.setPaint(Color.BLACK);
+            for (Shape s : corners.getCornerRectangles()) {
+                graphics.draw(s);
+            }
+            graphics.setPaint(Color.BLACK);
+            for (Shape s : corners.getCornerRectangles()) {
+                graphics.fill(s);
+            }
+        }
+    }
+
     @Override
     public Point getCenter() {
         return this.center;
@@ -60,10 +78,10 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
 
     @Override
     public Shape clone() {
-        Ellipse cloneEllipse= new Ellipse((int)x, (int)y, (int)width, (int)height);
-        cloneEllipse.fillColor=this.fillColor;
-        cloneEllipse.outlineColor=this.outlineColor;
-        cloneEllipse.rotatedShape = this.rotatedShape==null? null:(Path2D.Double) this.rotatedShape.clone();
+        Ellipse cloneEllipse = new Ellipse((int) x, (int) y, (int) width, (int) height);
+        cloneEllipse.fillColor = this.fillColor;
+        cloneEllipse.outlineColor = this.outlineColor;
+        cloneEllipse.rotatedShape = this.rotatedShape == null ? null : (Path2D.Double) this.rotatedShape.clone();
         return cloneEllipse;
     }
 
@@ -74,21 +92,27 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
             transform.translate(p.getX() - center.getX(), p.getY() - center.getY());
             this.rotatedShape.transform(transform);
         }
-        this.x = (int)p.getX() - width/2;
-        this.y = (int)p.getY() - height/2;
+        this.x = (int) p.getX() - width / 2;
+        this.y = (int) p.getY() - height / 2;
         this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
     }
-    
+
     @Override
     public boolean contains(Point2D pd) {
-        return this.rotatedShape==null? super.contains(pd):rotatedShape.contains(pd);
+        if (this.rotatedShape!=null){
+            return rotatedShape.contains(pd);
+        }
+        if (MainGUI.getCurrentAction() == 12){
+            return this.getBounds().contains(pd);
+        }
+        return super.contains(pd);
     }
-    
+
     @Override
     public void rotate(Graphics g, double angle) {
         AffineTransform transform = new AffineTransform();
         transform.rotate(angle, center.getX(), center.getY());
-        this.rotatedShape = (Path2D.Double)transform.createTransformedShape(this);
+        this.rotatedShape = (Path2D.Double) transform.createTransformedShape(this);
         System.out.println(this.rotatedShape.getClass());
         Graphics2D graphicsSettings = (Graphics2D) g;
         graphicsSettings.setStroke(new BasicStroke(2));
@@ -97,7 +121,7 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(this.rotatedShape);
     }
-    
+
     @Override
     public void resize(Point p) {
         switch (getNearestVertex(p)) {
@@ -122,7 +146,7 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
                 this.height = p.y - this.y;
                 break;
         }
-
+        this.createVertices();
     }
 
     protected int getNearestVertex(Point p) {
@@ -142,8 +166,8 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
     }
 
     @Override
-    public void drawVertices(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createVertices() {
+        corners = new CornerRectangles(CornerRectangles.RECTANGLE, this);
     }
 
     @Override

@@ -9,8 +9,10 @@ import Qombo.Logging.Logging;
 import Qombo.Paint.Core.ShapeArrayList;
 import Qombo.Paint.Shapes.Shape;
 import java.awt.Color;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,8 +20,14 @@ import javax.swing.JColorChooser;
  */
 public class MainGUI extends javax.swing.JFrame implements Logging {
 
-    protected int currentAction = 1;
+    protected static int currentAction = 0;
     protected static Color outlineColor = Color.black, fillColor = Color.cyan;
+
+    public static int getCurrentAction() {
+        return currentAction;
+    }
+    
+    
 
     public static Color getOutlineColor() {
         return outlineColor;
@@ -34,7 +42,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
      * Creates new form MainGUI
      */
     public MainGUI() {
-        super("Paint");
+        super("Qombo Paint");
         initComponents();
         this.currentAction = 1;
         this.drawingBoard = new DrawingBoard(this);
@@ -43,6 +51,10 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         this.CanvasPanel.add(drawingBoard);
         this.fillColorButton.setBackground(fillColor);
         this.outlineColorButton.setBackground(outlineColor);
+        this.qomboButton.setOpaque(false);
+        this.qomboButton.setContentAreaFilled(false);
+        this.qomboButton.setBorderPainted(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("QOMBOTM1.png")).getImage());
         this.setExtendedState(MAXIMIZED_BOTH | this.getExtendedState());
     }
 
@@ -77,6 +89,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         rotateButton = new javax.swing.JButton();
         historyButton = new javax.swing.JButton();
         resizeButton = new javax.swing.JButton();
+        qomboButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -254,6 +267,14 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             }
         });
 
+        qomboButton.setBackground(new java.awt.Color(255, 255, 255));
+        qomboButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Qombo/Paint/GUI/QOMBOTM.png"))); // NOI18N
+        qomboButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                qomboButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -261,9 +282,20 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(CanvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(227, 227, 227)
+                                .addComponent(helperLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(modeLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(currentModeLabel)))
+                        .addGap(721, 721, 721)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(outlineColorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
@@ -304,23 +336,24 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                                 .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(historyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(11, 11, 11))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(227, 227, 227)
-                                .addComponent(helperLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(modeLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(currentModeLabel)))
-                        .addGap(21, 862, Short.MAX_VALUE))))
+                        .addContainerGap())
+                    .addComponent(qomboButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CanvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(helperLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(modeLabel)
+                                    .addComponent(currentModeLabel))
+                                .addGap(25, 25, 25))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(squareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -333,87 +366,87 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(triangleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fillColorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(outlineColorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(deletButton, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                            .addComponent(reColorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(deletButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reColorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(undoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                            .addComponent(RedoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(undoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(RedoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(moveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(copyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(resizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                            .addComponent(rotateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(resizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rotateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(historyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(CanvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(helperLabel)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(modeLabel)
-                            .addComponent(currentModeLabel))
-                        .addGap(25, 25, 25)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(historyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(qomboButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void rectangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectangleButtonActionPerformed
-        this.currentAction = 1;
+        MainGUI.currentAction = 1;
         this.currentModeLabel.setText("Recantgle drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_rectangleButtonActionPerformed
 
     private void ellipseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ellipseButtonActionPerformed
-        this.currentAction = 2;
+        MainGUI.currentAction = 2;
         this.currentModeLabel.setText("Ellipse drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_ellipseButtonActionPerformed
 
     private void lineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineButtonActionPerformed
-        this.currentAction = 3;
+        MainGUI.currentAction = 3;
         this.currentModeLabel.setText("Line drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_lineButtonActionPerformed
 
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
-        this.currentAction = 4;
+        MainGUI.currentAction = 4;
         this.currentModeLabel.setText("Circle drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_circleButtonActionPerformed
 
     private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
-        this.currentAction = 5;
+        MainGUI.currentAction = 5;
         this.currentModeLabel.setText("Square drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_squareButtonActionPerformed
 
     private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
-        this.currentAction = 6;
+        MainGUI.currentAction = 6;
         this.currentModeLabel.setText("Triangle drawing mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Click three times on the canvas. Current click is #1");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_triangleButtonActionPerformed
 
     private void deletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletButtonActionPerformed
-        this.currentAction = 7;
+        MainGUI.currentAction = 7;
         this.currentModeLabel.setText("Delete mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Click on a shape to delete it.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_deletButtonActionPerformed
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
@@ -452,60 +485,74 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         fillColor = JColorChooser.showDialog(null, "Choose Fill Color", fillColor);
         this.fillColorButton.setBackground(fillColor);
         this.reColorButton.setBackground(fillColor);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_fillColorButtonActionPerformed
 
     private void outlineColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outlineColorButtonActionPerformed
         outlineColor = JColorChooser.showDialog(null, "Choose Stroke Color", outlineColor);
         this.outlineColorButton.setBackground(outlineColor);
-        
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_outlineColorButtonActionPerformed
 
     private void reColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reColorButtonActionPerformed
-        this.currentAction = 8;
+        MainGUI.currentAction = 8;
         this.currentModeLabel.setText("Recoloring mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Choose a color first then click on shape to recolor it.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_reColorButtonActionPerformed
 
     private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
-        this.currentAction = 9;
+        MainGUI.currentAction = 9;
         this.currentModeLabel.setText("Move mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Press on a shape and drag to move.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_moveButtonActionPerformed
 
     private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
-        this.currentAction = 10;
+        MainGUI.currentAction = 10;
         this.currentModeLabel.setText("copy mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Press on a shape and drag to copy.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_copyButtonActionPerformed
 
     private void CanvasPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_CanvasPanelComponentResized
         this.drawingBoard.setSize(this.CanvasPanel.getSize());
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_CanvasPanelComponentResized
 
     private void rotateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotateButtonActionPerformed
-        this.currentAction = 11;
+        MainGUI.currentAction = 11;
         this.currentModeLabel.setText("Rotate mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Press on a shape and drag mouse to rotate.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_rotateButtonActionPerformed
 
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
         // TODO add your handling code here:
-        new HistoryFrame(this);
+        HistoryFrame historyFrame = new HistoryFrame(this);
     }//GEN-LAST:event_historyButtonActionPerformed
 
     private void resizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resizeButtonActionPerformed
         // TODO add your handling code here:
-        this.currentAction = 12;
+        MainGUI.currentAction = 12;
         this.currentModeLabel.setText("Resize mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Start resizing the shape by choosing a point and dragging it.");
         this.drawingBoard.repaint();
     }//GEN-LAST:event_resizeButtonActionPerformed
 
+    private void qomboButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qomboButtonActionPerformed
+        JOptionPane.showMessageDialog(null, "QomboTM "+"\n"+"CEO: Zeyad Zanaty :: 3320 " +"\n"+"CFO: Muhammad Korra :: 3318 " +"\n"+"3amel nazafa(w el program): Louay Hesham  :: 3303","Qombo Paint",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_qomboButtonActionPerformed
+
+    public void updateHelperLabel(int i){
+        this.helperLabel.setVisible(true);
+        this.helperLabel.setText("Click three times on the canvas. Current click is #" + i);
+    }
     /**
      * @param args the command line arguments
      */
@@ -552,12 +599,13 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton deletButton;
     private javax.swing.JButton ellipseButton;
     private javax.swing.JButton fillColorButton;
-    protected javax.swing.JLabel helperLabel;
+    private javax.swing.JLabel helperLabel;
     private javax.swing.JButton historyButton;
     private javax.swing.JButton lineButton;
     private javax.swing.JLabel modeLabel;
     private javax.swing.JButton moveButton;
     private javax.swing.JButton outlineColorButton;
+    private javax.swing.JButton qomboButton;
     private javax.swing.JButton reColorButton;
     private javax.swing.JButton rectangleButton;
     private javax.swing.JButton resetButton;

@@ -12,28 +12,31 @@ import java.awt.Point;
  *
  * @author lo2ay
  */
-public interface Shape extends java.awt.Shape,Cloneable {
-    
-    public void draw (Graphics g);
-    
-    public void setColor ();
-    
+public interface Shape extends java.awt.Shape, Cloneable {
+
+    public void draw(Graphics g);
+
+    public void setColor();
+
     public Shape clone();
-    
+
     public void setPosition(Point p);
-    
+
     public void rotate(Graphics g, double angle);
-    
+
     public Point getCenter();
-    
+
     public void resize(Point p);
-    
+
     public double getX();
+
     public double getY();
+
     public double getWidth();
+
     public double getHeight();
-    
+
     public void drawVertices(Graphics g);
-    
+
     public void createVertices();
 }

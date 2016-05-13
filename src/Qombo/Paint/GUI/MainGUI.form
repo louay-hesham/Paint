@@ -23,61 +23,82 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="CanvasPanel" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="triangleButton" alignment="1" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="circleButton" min="-2" pref="54" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="ellipseButton" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="lineButton" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="fillColorButton" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="outlineColorButton" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="squareButton" min="-2" pref="53" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="rectangleButton" min="-2" pref="52" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="reColorButton" max="32767" attributes="0"/>
-                          <Component id="undoButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="RedoButton" max="32767" attributes="0"/>
-                          <Component id="moveButton" min="-2" pref="89" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="copyButton" max="32767" attributes="0"/>
-                          <Component id="resetButton" min="-2" pref="93" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="rotateButton" max="32767" attributes="0"/>
-                          <Component id="deletButton" pref="93" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="modeLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="currentModeLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="historyButton" min="-2" pref="93" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="resizeButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="helperLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
+                      <Component id="helperLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="CanvasPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="modeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="currentModeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="533" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="reColorButton" max="32767" attributes="0"/>
+                  <Component id="moveButton" min="-2" pref="63" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="undoButton" max="32767" attributes="0"/>
+                  <Component id="copyButton" min="-2" pref="61" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Component id="RedoButton" min="-2" pref="57" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="rotateButton" min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="circleButton" alignment="1" max="32767" attributes="0"/>
-                  <Component id="ellipseButton" alignment="1" max="32767" attributes="0"/>
-                  <Component id="triangleButton" alignment="1" max="32767" attributes="0"/>
-                  <Component id="squareButton" alignment="1" max="32767" attributes="0"/>
-                  <Component id="rectangleButton" alignment="1" pref="171" max="32767" attributes="0"/>
-                  <Component id="lineButton" alignment="1" max="32767" attributes="0"/>
-                  <Component id="fillColorButton" max="32767" attributes="0"/>
-                  <Component id="outlineColorButton" max="32767" attributes="0"/>
+                  <Component id="resizeButton" max="32767" attributes="0"/>
+                  <Component id="resetButton" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="deletButton" min="-2" pref="53" max="-2" attributes="0"/>
+                  <Component id="historyButton" min="-2" pref="53" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -86,47 +107,68 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="CanvasPanel" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="squareButton" max="32767" attributes="0"/>
+                          <Component id="rectangleButton" min="-2" pref="47" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="triangleButton" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="circleButton" max="32767" attributes="0"/>
+                          <Component id="ellipseButton" min="-2" pref="48" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="triangleButton" min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="lineButton" min="-2" pref="51" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="fillColorButton" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="squareButton" min="-2" pref="65" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rectangleButton" min="-2" pref="73" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ellipseButton" min="-2" pref="79" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="circleButton" min="-2" pref="76" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lineButton" min="-2" pref="79" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="fillColorButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="outlineColorButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="outlineColorButton" min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="CanvasPanel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="undoButton" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                  <Component id="RedoButton" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="resetButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="deletButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="modeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="currentModeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="resetButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="historyButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="helperLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="modeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="currentModeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="reColorButton" max="32767" attributes="0"/>
+                                      <Component id="undoButton" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="RedoButton" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="copyButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="moveButton" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="rotateButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="resizeButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="deletButton" min="-2" pref="44" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="reColorButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="moveButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="helperLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="copyButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rotateButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="historyButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="resizeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -137,7 +179,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Qombo/Paint/GUI/Rectangle.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Rectangle"/>
+        <Property name="toolTipText" type="java.lang.String" value="Rectangle"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rectangleButtonActionPerformed"/>
@@ -151,7 +193,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Qombo/Paint/GUI/Ellipse.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ellipse"/>
+        <Property name="toolTipText" type="java.lang.String" value="Ellipse"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ellipseButtonActionPerformed"/>
@@ -165,7 +207,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Qombo/Paint/GUI/Line.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Line"/>
+        <Property name="toolTipText" type="java.lang.String" value="Line"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lineButtonActionPerformed"/>
@@ -184,12 +226,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1087" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="622" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -199,7 +241,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Qombo/Paint/GUI/Square.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Square"/>
+        <Property name="toolTipText" type="java.lang.String" value="Square"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="squareButtonActionPerformed"/>
@@ -213,7 +255,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Qombo/Paint/GUI/Circle.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Circle"/>
+        <Property name="toolTipText" type="java.lang.String" value="Circle"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="circleButtonActionPerformed"/>
@@ -224,7 +266,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="triangleButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Triangle"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/Triangle.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Triangle"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="triangleButtonActionPerformed"/>
@@ -232,10 +277,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="deletButton">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/Delete.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="toolTipText" type="java.lang.String" value="Delete Shape"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deletButtonActionPerformed"/>
@@ -246,7 +291,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Qombo/Paint/GUI/Undo.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Undo"/>
+        <Property name="toolTipText" type="java.lang.String" value="Undo"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="undoButtonActionPerformed"/>
@@ -257,7 +302,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Qombo/Paint/GUI/Redo.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Redo"/>
+        <Property name="toolTipText" type="java.lang.String" value="Redo"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RedoButtonActionPerformed"/>
@@ -265,7 +310,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="resetButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Reset"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/Reset.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Reset"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetButtonActionPerformed"/>
@@ -274,9 +322,9 @@
     <Component class="javax.swing.JButton" name="fillColorButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Qombo/Paint/GUI/Fill.png"/>
+          <Image iconType="3" name="/Qombo/Paint/GUI/Color.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Fill Color"/>
+        <Property name="toolTipText" type="java.lang.String" value="Fill Color"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fillColorButtonActionPerformed"/>
@@ -287,7 +335,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Qombo/Paint/GUI/Stroke.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Outline Color"/>
+        <Property name="toolTipText" type="java.lang.String" value="Stroke Color"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="outlineColorButtonActionPerformed"/>
@@ -314,7 +362,13 @@
     </Component>
     <Component class="javax.swing.JButton" name="reColorButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Re-Color"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="this.fillColor" type="code"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/Fill.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Fill Shape"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reColorButtonActionPerformed"/>
@@ -322,7 +376,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="moveButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Move"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/Move (1).png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Move Shape"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moveButtonActionPerformed"/>
@@ -330,7 +387,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="copyButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Copy"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/Copy.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Copy Shape"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyButtonActionPerformed"/>
@@ -338,7 +398,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="rotateButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rotate"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/Rotate.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Rotate Shape"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rotateButtonActionPerformed"/>
@@ -346,7 +409,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="historyButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="History"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/History.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="History"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="historyButtonActionPerformed"/>
@@ -354,7 +420,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="resizeButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Resize"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Qombo/Paint/GUI/Resize.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Resize Shape"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resizeButtonActionPerformed"/>

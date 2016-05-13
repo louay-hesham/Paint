@@ -98,6 +98,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         this.x = (int) p.getX() - width / 2;
         this.y = (int) p.getY() - height / 2;
         this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
+        
     }
 
     @Override

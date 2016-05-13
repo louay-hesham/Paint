@@ -169,4 +169,6 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
     public void createVertices() {
         corners = new CornerRectangles(this);
     }
+
+    
 }

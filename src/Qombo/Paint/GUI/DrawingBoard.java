@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Point;
+import Qombo.Paint.Shapes.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -33,14 +34,15 @@ public class DrawingBoard extends JComponent implements Logging {
     protected Stack<ShapeArrayList<Shape>> undoHistory = new Stack();
     protected Stack<ShapeArrayList<Shape>> redoHistory = new Stack();
     public List<String> hist = new ArrayList();
-    public List<String> oldHist= new ArrayList();
+    public List<String> oldHist = new ArrayList();
     private Point drawStart, drawEnd;
     private final MainGUI gui;
     private int triangleClicks = 0;
     private boolean rotateDone = false;
-
     private Cursor moveCursor = new Cursor(Cursor.MOVE_CURSOR);
     private Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
+
+    
 
     public int getTriangleClicks() {
         return triangleClicks;

@@ -5,7 +5,6 @@
  */
 package Qombo.Paint.Shapes;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -13,7 +12,7 @@ import java.awt.Point;
  *
  * @author lo2ay
  */
-public interface Shape extends java.awt.Shape {
+public interface Shape extends java.awt.Shape,Cloneable {
     
     public void draw (Graphics g);
     

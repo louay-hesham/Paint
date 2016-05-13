@@ -20,7 +20,6 @@ public class ShapeArrayList<E extends Shape> extends java.util.ArrayList {
 
         for (int i = 0; i<this.size(); i++) {
             Shape shape = (Shape)super.get(i);
-            System.out.println("7amada   "+shape.clone());
             try{
             newArrayList.add(shape.clone());
             }catch(NullPointerException n){

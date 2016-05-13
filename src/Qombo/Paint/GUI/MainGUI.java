@@ -31,7 +31,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     protected DrawingBoard drawingBoard;
 
     /**
-     * Creates new form MainGUI2
+     * Creates new form MainGUI
      */
     public MainGUI() {
         super("Paint");

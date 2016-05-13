@@ -5,6 +5,7 @@
  */
 package Qombo.Paint.Shapes;
 
+import Qombo.Paint.GUI.CornerRectangles;
 import Qombo.Paint.GUI.MainGUI;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -24,6 +25,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
     private Color fillColor, outlineColor;
     private Point center;
     private Path2D.Double rotatedShape = null;
+    
 
     public Rectangle() {
     }

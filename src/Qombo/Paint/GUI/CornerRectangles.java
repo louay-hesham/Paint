@@ -14,17 +14,32 @@ import java.util.ArrayList;
  */
 public class CornerRectangles {
 
-    ArrayList<Rectangle> cornerRectangles = new ArrayList();
+    public static int RECTANGLE = 1;
+    public static int TRIANGLE = 2;
+
+    public ArrayList<Rectangle> cornerRectangles = new ArrayList();
     private int i = 0;
 
-    public CornerRectangles() {
-        createCornerRectangles();
+    public CornerRectangles(int shapeName) {
+        if (shapeName == 1) {
+            createSquareCornerRectangles();
+        }
+        if (shapeName == 2) {
+            createTriangleCornerRectangles();
+        }
 
     }
 
-    private void createCornerRectangles() {
+    private void createSquareCornerRectangles() {
         for (i = 0; i <= 3; i++) {
             cornerRectangles.add(new Rectangle(1, 1, 1, 1));
+        }
+
+    }
+
+    private void createTriangleCornerRectangles() {
+        for (i = 0; i <= 2; i++){
+            cornerRectangles.add(new Rectangle(1,1,1,1));
         }
 
     }

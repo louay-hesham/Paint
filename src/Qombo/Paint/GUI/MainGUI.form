@@ -43,13 +43,13 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="squareButton" pref="53" max="32767" attributes="0"/>
+                                  <Component id="squareButton" max="32767" attributes="0"/>
                                   <Component id="circleButton" max="32767" attributes="0"/>
                                   <Component id="triangleButton" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="rectangleButton" pref="52" max="32767" attributes="0"/>
+                                  <Component id="rectangleButton" max="32767" attributes="0"/>
                                   <Component id="ellipseButton" max="32767" attributes="0"/>
                                   <Component id="lineButton" max="32767" attributes="0"/>
                               </Group>
@@ -89,7 +89,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="copyButton" max="32767" attributes="0"/>
-                                  <Component id="RedoButton" pref="57" max="32767" attributes="0"/>
+                                  <Component id="RedoButton" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

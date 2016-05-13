@@ -13,13 +13,19 @@ import static Qombo.Paint.Shapes.ShapeFactory.ShapeType.*;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 /**
@@ -52,6 +58,7 @@ public class DrawingBoard extends JComponent implements Logging {
     private double angleOfRotation;
     private Point selectedShapeCenter;
 
+    
     public DrawingBoard(MainGUI gui) {
         super();
         this.shapes = new ShapeArrayList();
@@ -248,6 +255,22 @@ public class DrawingBoard extends JComponent implements Logging {
         return selectedShape;
     }
 
+    public void exportImage(String imageName) {
+    BufferedImage image = new  BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB_PRE);
+    Graphics2D graphics = image.createGraphics();
+    paint(graphics);
+    graphics.dispose();
+    try {
+        System.out.println("Exporting image: "+imageName);
+        FileOutputStream out = new FileOutputStream(imageName);
+        ImageIO.write(image, "png", out);
+        out.close();
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }  
+    }
     @Override
     public void paint(Graphics g) {
         for (Object s : shapes) {

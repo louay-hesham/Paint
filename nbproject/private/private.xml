@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Muhammad%20Korra/Documents/GitHub/Paint/src/Qombo/Paint/GUI/MainGUI.java</file>
             <file>file:/C:/Users/Muhammad%20Korra/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/Triangle.java</file>
             <file>file:/C:/Users/Muhammad%20Korra/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/Line.java</file>
@@ -12,6 +13,16 @@
             <file>file:/C:/Users/Muhammad%20Korra/Documents/GitHub/Paint/src/Qombo/Paint/GUI/CornerRectangles.java</file>
             <file>file:/C:/Users/Muhammad%20Korra/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/Square.java</file>
             <file>file:/C:/Users/Muhammad%20Korra/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/Rectangle.java</file>
+=======
+            <file>file:/C:/Users/Zeyad/Documents/GitHub/Paint/src/Qombo/Paint/GUI/DrawingBoard.java</file>
+            <file>file:/C:/Users/Zeyad/Documents/GitHub/Paint/src/Qombo/Paint/GUI/HistoryFrame.java</file>
+            <file>file:/C:/Users/Zeyad/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/ShapeFactory.java</file>
+            <file>file:/C:/Users/Zeyad/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/Rectangle.java</file>
+            <file>file:/C:/Users/Zeyad/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/Triangle.java</file>
+            <file>file:/C:/Users/Zeyad/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/Line.java</file>
+            <file>file:/C:/Users/Zeyad/Documents/GitHub/Paint/src/Qombo/Paint/GUI/MainGUI.java</file>
+            <file>file:/C:/Users/Zeyad/Documents/GitHub/Paint/src/Qombo/Paint/Shapes/Ellipse.java</file>
+>>>>>>> 854d85ab03d45e9211f7a7ced6498e5311e1170b
         </group>
     </open-files>
 </project-private>

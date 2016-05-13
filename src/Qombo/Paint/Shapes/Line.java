@@ -5,6 +5,7 @@
  */
 package Qombo.Paint.Shapes;
 
+import Qombo.Paint.GUI.CornerRectangles;
 import Qombo.Paint.GUI.MainGUI;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -23,6 +24,7 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
     private Point.Double p1, p2;
     private Point.Double center;
     private double length;
+    public CornerRectangles corners;
 
     public Line(Point.Double p1, Point.Double p2) {
         super(p1, p2);
@@ -35,7 +37,7 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
 
     @Override
     public Point getCenter() {
-        return new Point((int)center.x,(int)center.y);
+        return new Point((int) center.x, (int) center.y);
     }
 
     @Override
@@ -59,7 +61,7 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
     }
 
     @Override
-    public void setPosition(Point p) {
+    public void setPosition(Point2D p) {
         Point.Double newP1 = new Point.Double((p.getX() - (this.p2.getX() - this.p1.getX()) / 2),
                 (int) (p.getY() - (this.p2.getY() - this.p1.getY()) / 2));
 
@@ -84,16 +86,16 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
 
     @Override
     public void rotate(Graphics g, double angle) {
-        angle/=100;
-        this.p1 = new Point.Double (p1.x-center.x,p1.y-center.y);
-        double x = p1.x*Math.cos(angle) - p1.y*Math.sin(angle);
-        double y = p1.x*Math.sin(angle) + p1.y*Math.cos(angle);
-        p1 = new Point.Double(x,y);
-        p2 = new Point.Double(-x,-y);
-        p1.x+=center.x;
-        p1.y+=center.y;
-        p2.x+=center.x;
-        p2.y+=center.y;
+        angle /= 100;
+        this.p1 = new Point.Double(p1.x - center.x, p1.y - center.y);
+        double x = p1.x * Math.cos(angle) - p1.y * Math.sin(angle);
+        double y = p1.x * Math.sin(angle) + p1.y * Math.cos(angle);
+        p1 = new Point.Double(x, y);
+        p2 = new Point.Double(-x, -y);
+        p1.x += center.x;
+        p1.y += center.y;
+        p2.x += center.x;
+        p2.y += center.y;
         this.setLine(this.p1, this.p2);
         this.draw(g);
     }
@@ -101,21 +103,41 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
     @Override
     public void resize(Point p) {
         int vertex = getNearestVertex(p);
-        switch (vertex){
+        switch (vertex) {
             case 1:
                 p1.setLocation(p);
                 break;
-            case 2: 
+            case 2:
                 p2.setLocation(p);
                 break;
         }
         this.setLine(p1, p2);
         this.length = p1.distance(p2);
         this.center = new Point.Double((int) (p1.getX() + p2.getX()) / 2, (int) (p1.getY() + p2.getY()) / 2);
+        this.createVertices();
     }
 
     private int getNearestVertex(Point p) {
-        return p1.distance(p)<p2.distance(p)? 1:2;
+        return p1.distance(p) < p2.distance(p) ? 1 : 2;
+    }
+
+    @Override
+    public void drawVertices(Graphics g) {
+        Graphics2D graphics = (Graphics2D) g;
+        graphics.setStroke(new BasicStroke(3));
+        graphics.setPaint(Color.BLACK);
+        for (Shape s : corners.getCornerRectangles()) {
+            graphics.draw(s);
+        }
+        graphics.setPaint(Color.BLACK);
+        for (Shape s : corners.getCornerRectangles()) {
+            graphics.fill(s);
+        }
+    }
+
+    @Override
+    public void createVertices() {
+        this.corners = new CornerRectangles(this);
     }
 
     @Override
@@ -135,16 +157,6 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
 
     @Override
     public double getHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void drawVertices(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void createVertices() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

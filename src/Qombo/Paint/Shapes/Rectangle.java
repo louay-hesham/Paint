@@ -43,7 +43,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
     public Point getCenter() {
         return this.center;
     }
-
+    
     @Override
     public void draw(Graphics g) {
         java.awt.Shape shape = (this.rotatedShape == null ? this : rotatedShape);

@@ -101,12 +101,12 @@ public class HistoryFrame extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         int selectedIndex = historyList.getSelectedIndex();
         int i = gui.drawingBoard.undoHistory.size() - selectedIndex - 1;
-        gui.drawingBoard.redoHistory.push(gui.drawingBoard.shapes);
-        while (i != 1) {
+        //gui.drawingBoard.redoHistory.push(gui.drawingBoard.shapes);
+        while (i > 1) {
             try {
-                System.out.println(i);
+                //System.out.println(i);
                 gui.drawingBoard.hist.remove(gui.drawingBoard.hist.size() - 1);
-                gui.drawingBoard.undoHistory.pop();
+                gui.drawingBoard.redoHistory.push(gui.drawingBoard.undoHistory.pop());
                 i--;
             } catch (IndexOutOfBoundsException ie) {
                 System.out.println(ie.getCause());

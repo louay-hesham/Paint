@@ -91,18 +91,14 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
 
     @Override
     public void rotate(Graphics g, double angle) {
-        
+        angle/=90;
         double xOrigin = p1.x - center.x;
         double yOrigin = p1.y - center.y;
-
-        double distX = xOrigin * Math.cos(angle) - yOrigin * Math.sin(angle);
-        double distY = xOrigin * Math.sin(angle) + yOrigin * Math.cos(angle);
-
-        p1.x = (int) (distX + center.x);
-        p1.y = (int) (distY + center.y);
-        p2.x = (int) (-distX + center.x);
-        p2.y = (int) (-distY + center.y);
-        
+        double defaultAngle = Math.atan2(yOrigin, xOrigin);
+        xOrigin = (length/2)*Math.cos(angle+defaultAngle);
+        yOrigin = (length/2)*Math.sin(angle+defaultAngle);
+        this.p1 = new Point(center.x+(int)xOrigin,center.y+(int)yOrigin);
+        this.p2 = new Point(center.x-(int)xOrigin,center.y-(int)yOrigin);
         this.setLine(this.p1, this.p2);
         this.draw(g);
     }
@@ -119,6 +115,7 @@ public class Line extends java.awt.geom.Line2D.Float implements Shape {
                 break;
         }
         this.setLine(p1, p2);
+        this.center = new Point((int) (p1.getX() + p2.getX()) / 2, (int) (p1.getY() + p2.getY()) / 2);
     }
 
     private int getNearestVertex(Point p) {

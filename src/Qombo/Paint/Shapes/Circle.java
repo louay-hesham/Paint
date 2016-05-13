@@ -5,6 +5,7 @@
  */
 package Qombo.Paint.Shapes;
 
+import java.awt.Graphics;
 import java.awt.Point;
 
 /**
@@ -58,6 +59,12 @@ public class Circle extends Ellipse {
                 break;
             }
         }
-
     }
+
+    @Override
+    public void rotate(Graphics g, double angle) {
+        return;
+    }
+    
+    
 }

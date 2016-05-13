@@ -12,10 +12,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
+
 import Qombo.Paint.GUI.CornerRectangles;
+
 /**
  *
  * @author lo2ay
@@ -49,7 +52,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
     public Point getCenter() {
         return this.center;
     }
-
+    
     @Override
     public void draw(Graphics g) {
         java.awt.Shape shape = (this.rotatedShape == null ? this : rotatedShape);

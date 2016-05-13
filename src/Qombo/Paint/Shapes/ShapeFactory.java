@@ -91,7 +91,7 @@ public class ShapeFactory {
     }
 
     private Line drawLine(Point p1, Point p2) {
-        return new Line(p1, p2);
+        return new Line(new Point.Double(p1.x, p1.y),new Point.Double(p2.x, p2.y));
     }
 
     private Circle drawCircle(Point p1, Point p2) {

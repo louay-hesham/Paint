@@ -139,6 +139,10 @@ public class DrawingBoard extends JComponent implements Logging {
                         hist.add("Square Drawn");
                         break;
                     }
+                    case 9:
+                    case 10:
+                        shapeToCopyOrMove.createVertices();
+                        break;
                     case 11:
                         rotateDone = true;
                         break;

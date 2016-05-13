@@ -126,6 +126,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
 
     @Override
     public void resize(Point p) {
+         this.createVertices();
         switch (getNearestVertex(p)) {
             case 0:
                 this.width -= (p.x - this.x);
@@ -149,7 +150,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
                 break;
         }
         
-        this.createVertices();
+       
     }
 
     protected int getNearestVertex(Point p) {

@@ -18,8 +18,14 @@ import javax.swing.JColorChooser;
  */
 public class MainGUI extends javax.swing.JFrame implements Logging {
 
-    protected int currentAction = 1;
+    protected static int currentAction = 0;
     protected static Color outlineColor = Color.black, fillColor = Color.cyan;
+
+    public static int getCurrentAction() {
+        return currentAction;
+    }
+    
+    
 
     public static Color getOutlineColor() {
         return outlineColor;
@@ -373,47 +379,54 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rectangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectangleButtonActionPerformed
-        this.currentAction = 1;
+        MainGUI.currentAction = 1;
         this.currentModeLabel.setText("Recantgle drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_rectangleButtonActionPerformed
 
     private void ellipseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ellipseButtonActionPerformed
-        this.currentAction = 2;
+        MainGUI.currentAction = 2;
         this.currentModeLabel.setText("Ellipse drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_ellipseButtonActionPerformed
 
     private void lineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineButtonActionPerformed
-        this.currentAction = 3;
+        MainGUI.currentAction = 3;
         this.currentModeLabel.setText("Line drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_lineButtonActionPerformed
 
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
-        this.currentAction = 4;
+        MainGUI.currentAction = 4;
         this.currentModeLabel.setText("Circle drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_circleButtonActionPerformed
 
     private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
-        this.currentAction = 5;
+        MainGUI.currentAction = 5;
         this.currentModeLabel.setText("Square drawing mode.");
         this.helperLabel.setVisible(false);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_squareButtonActionPerformed
 
     private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
-        this.currentAction = 6;
+        MainGUI.currentAction = 6;
         this.currentModeLabel.setText("Triangle drawing mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Click three times on the canvas. Current click is #1");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_triangleButtonActionPerformed
 
     private void deletButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletButtonActionPerformed
-        this.currentAction = 7;
+        MainGUI.currentAction = 7;
         this.currentModeLabel.setText("Delete mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Click on a shape to delete it.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_deletButtonActionPerformed
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
@@ -452,60 +465,70 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
         fillColor = JColorChooser.showDialog(null, "Choose Fill Color", fillColor);
         this.fillColorButton.setBackground(fillColor);
         this.reColorButton.setBackground(fillColor);
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_fillColorButtonActionPerformed
 
     private void outlineColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outlineColorButtonActionPerformed
         outlineColor = JColorChooser.showDialog(null, "Choose Stroke Color", outlineColor);
         this.outlineColorButton.setBackground(outlineColor);
-        
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_outlineColorButtonActionPerformed
 
     private void reColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reColorButtonActionPerformed
-        this.currentAction = 8;
+        MainGUI.currentAction = 8;
         this.currentModeLabel.setText("Recoloring mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Choose a color first then click on shape to recolor it.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_reColorButtonActionPerformed
 
     private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
-        this.currentAction = 9;
+        MainGUI.currentAction = 9;
         this.currentModeLabel.setText("Move mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Press on a shape and drag to move.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_moveButtonActionPerformed
 
     private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
-        this.currentAction = 10;
+        MainGUI.currentAction = 10;
         this.currentModeLabel.setText("copy mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Press on a shape and drag to copy.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_copyButtonActionPerformed
 
     private void CanvasPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_CanvasPanelComponentResized
         this.drawingBoard.setSize(this.CanvasPanel.getSize());
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_CanvasPanelComponentResized
 
     private void rotateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotateButtonActionPerformed
-        this.currentAction = 11;
+        MainGUI.currentAction = 11;
         this.currentModeLabel.setText("Rotate mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Press on a shape and drag mouse to rotate.");
+        this.drawingBoard.repaint();
     }//GEN-LAST:event_rotateButtonActionPerformed
 
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
         // TODO add your handling code here:
-        new HistoryFrame(this);
+        HistoryFrame historyFrame = new HistoryFrame(this);
     }//GEN-LAST:event_historyButtonActionPerformed
 
     private void resizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resizeButtonActionPerformed
         // TODO add your handling code here:
-        this.currentAction = 12;
+        MainGUI.currentAction = 12;
         this.currentModeLabel.setText("Resize mode.");
         this.helperLabel.setVisible(true);
         this.helperLabel.setText("Start resizing the shape by choosing a point and dragging it.");
         this.drawingBoard.repaint();
     }//GEN-LAST:event_resizeButtonActionPerformed
 
+    public void updateHelperLabel(int i){
+        this.helperLabel.setVisible(true);
+        this.helperLabel.setText("Click three times on the canvas. Current click is #" + i);
+    }
     /**
      * @param args the command line arguments
      */
@@ -552,7 +575,7 @@ public class MainGUI extends javax.swing.JFrame implements Logging {
     private javax.swing.JButton deletButton;
     private javax.swing.JButton ellipseButton;
     private javax.swing.JButton fillColorButton;
-    protected javax.swing.JLabel helperLabel;
+    private javax.swing.JLabel helperLabel;
     private javax.swing.JButton historyButton;
     private javax.swing.JButton lineButton;
     private javax.swing.JLabel modeLabel;

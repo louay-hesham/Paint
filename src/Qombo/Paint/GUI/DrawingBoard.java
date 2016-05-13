@@ -35,11 +35,11 @@ public class DrawingBoard extends JComponent implements Logging {
     public List<String> hist = new ArrayList();
     public List<String> oldHist = new ArrayList();
     private Point drawStart, drawEnd;
-    private final MainGUI gui;
     private int triangleClicks = 0;
     private boolean rotateDone = false;
     private Cursor moveCursor = new Cursor(Cursor.MOVE_CURSOR);
     private Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
+    private MainGUI gui;
 
     public int getTriangleClicks() {
         return triangleClicks;
@@ -57,15 +57,15 @@ public class DrawingBoard extends JComponent implements Logging {
         this.shapes = new ShapeArrayList();
         this.undoHistory = new Stack();
         this.redoHistory = new Stack();
-        this.gui = gui;
         this.setBackground(Color.white);
+        this.gui = gui;
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 drawStart = e.getPoint();
                 drawEnd = null;
                 repaint();
-                switch (gui.currentAction) {
+                switch (MainGUI.currentAction) {
                     case 9:
                         shapeToCopyOrMove = getSelectedShape(drawStart);
                         if (shapeToCopyOrMove != null) {
@@ -108,7 +108,7 @@ public class DrawingBoard extends JComponent implements Logging {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Shape shape = null;
-                switch (gui.currentAction) {
+                switch (MainGUI.currentAction) {
                     case 1: {
                         shape = shapeFactory.getShape(drawStart, e.getPoint(), RECTANGLE);
                         registerUserAction();
@@ -141,7 +141,9 @@ public class DrawingBoard extends JComponent implements Logging {
                     }
                     case 9:
                     case 10:
-                        shapeToCopyOrMove.createVertices();
+                        if (shapeToCopyOrMove!=null){
+                            shapeToCopyOrMove.createVertices();
+                        }
                         break;
                     case 11:
                         rotateDone = true;
@@ -151,9 +153,8 @@ public class DrawingBoard extends JComponent implements Logging {
                 }
                 if (shape != null) {
                     shapes.add(shape);
+                    shape.createVertices();
                 }
-                
-                shape.createVertices();
                 drawStart = null;
                 drawEnd = null;
                 repaint();
@@ -161,10 +162,10 @@ public class DrawingBoard extends JComponent implements Logging {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                switch (gui.currentAction) {
+                switch (MainGUI.currentAction) {
                     case 6:
                         triangleVertices[triangleClicks++] = e.getPoint();
-                        gui.helperLabel.setText("Click three times on the canvas. Current click is #" + (triangleClicks == 3 ? 1 : (triangleClicks + 1)));
+                        gui.updateHelperLabel( triangleClicks == 3 ? 1 : (triangleClicks + 1) );
                         if (triangleClicks == 3) {
                             triangleClicks = 0;
                             Shape shape = shapeFactory.getShape(triangleVertices);
@@ -200,12 +201,12 @@ public class DrawingBoard extends JComponent implements Logging {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if ((gui.currentAction == 9 || gui.currentAction == 10) && shapeToCopyOrMove != null) {
+                if ((MainGUI.currentAction == 9 || MainGUI.currentAction == 10) && shapeToCopyOrMove != null) {
                     shapeToCopyOrMove.setPosition(e.getPoint());
-                } else if (gui.currentAction == 11 && shapeToRotate != null) {
+                } else if (MainGUI.currentAction == 11 && shapeToRotate != null) {
                     angleOfRotation = Math.atan2(e.getY() - selectedShapeCenter.getY(), e.getX() - selectedShapeCenter.getX());
                     rotateDone = false;
-                } else if ((gui.currentAction == 12) && shapeToResize != null) {
+                } else if ((MainGUI.currentAction == 12) && shapeToResize != null) {
                     shapeToResize.resize(e.getPoint());
                 } else {
                     drawEnd = e.getPoint();
@@ -218,7 +219,7 @@ public class DrawingBoard extends JComponent implements Logging {
             public void mouseMoved(MouseEvent e) {
                 Shape shape = null;
                 shape = getSelectedShape(e.getLocationOnScreen());
-                if ((gui.currentAction == 9 || gui.currentAction == 10 || gui.currentAction == 11 || gui.currentAction == 12) && (shape != null)) {
+                if ((MainGUI.currentAction == 9 || MainGUI.currentAction == 10 || MainGUI.currentAction == 11 || MainGUI.currentAction == 12) && (shape != null)) {
                     setCursor(moveCursor);
                     shape = null;
                 } else {
@@ -252,18 +253,18 @@ public class DrawingBoard extends JComponent implements Logging {
         for (Object s : shapes) {
             try {
                 ((Shape) s).draw(g);
-                if (gui.currentAction == 12){
+                if (MainGUI.currentAction == 12){
                 ((Shape) s).drawVertices(g);
                 }
             } catch (NullPointerException n) {
             }
         }
-        if (gui.currentAction == 11 && shapeToRotate != null) {
+        if (MainGUI.currentAction == 11 && shapeToRotate != null) {
             shapeToRotate.rotate(g, angleOfRotation);
         }
         if (drawStart != null && drawEnd != null) {
             Shape shape = null;
-            switch (gui.currentAction) {
+            switch (MainGUI.currentAction) {
                 case 1:
                     shape = shapeFactory.getShape(drawStart, drawEnd, RECTANGLE);
                     break;

@@ -5,18 +5,15 @@
  */
 package Qombo.Paint.Shapes;
 
-import Qombo.Paint.GUI.CornerRectangles;
 import Qombo.Paint.GUI.MainGUI;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
-
 import Qombo.Paint.GUI.CornerRectangles;
 
 /**
@@ -29,8 +26,6 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
     private Point center;
     private Path2D.Double rotatedShape = null;
     public CornerRectangles corners;
-    
-    
 
     public Rectangle() {
     }
@@ -44,15 +39,13 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         this.width = width;
         this.height = height;
         this.center = new Point((int) this.getBounds().getCenterX(), (int) this.getBounds().getCenterY());
-        
-        
     }
 
     @Override
     public Point getCenter() {
         return this.center;
     }
-    
+
     @Override
     public void draw(Graphics g) {
         java.awt.Shape shape = (this.rotatedShape == null ? this : rotatedShape);
@@ -63,19 +56,20 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         graphicsSettings.setPaint(fillColor);
         graphicsSettings.fill(shape);
     }
-    
-    public void drawVertices (Graphics g){
-        if (rotatedShape == null){
-        Graphics2D graphics = (Graphics2D) g;
-        graphics.setStroke(new BasicStroke(3));
-        graphics.setPaint(Color.BLACK);
-        for (Shape s : corners.getCornerRectangles()){
-            graphics.draw(s);
-        }
-        graphics.setPaint(Color.BLACK);
-        for (Shape s : corners.getCornerRectangles()){
-            graphics.fill(s);
-        }
+
+    @Override
+    public void drawVertices(Graphics g) {
+        if (rotatedShape == null) {
+            Graphics2D graphics = (Graphics2D) g;
+            graphics.setStroke(new BasicStroke(3));
+            graphics.setPaint(Color.BLACK);
+            for (Shape s : corners.getCornerRectangles()) {
+                graphics.draw(s);
+            }
+            graphics.setPaint(Color.BLACK);
+            for (Shape s : corners.getCornerRectangles()) {
+                graphics.fill(s);
+            }
         }
     }
 
@@ -90,7 +84,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         Rectangle cloneRec = new Rectangle((int) x, (int) y, (int) width, (int) height);
         cloneRec.fillColor = this.fillColor;
         cloneRec.outlineColor = this.outlineColor;
-        cloneRec.rotatedShape = this.rotatedShape==null? null:(Path2D.Double) this.rotatedShape.clone();
+        cloneRec.rotatedShape = this.rotatedShape == null ? null : (Path2D.Double) this.rotatedShape.clone();
         return cloneRec;
     }
 
@@ -126,7 +120,6 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
 
     @Override
     public void resize(Point p) {
-         this.createVertices();
         switch (getNearestVertex(p)) {
             case 0:
                 this.width -= (p.x - this.x);
@@ -149,8 +142,7 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
                 this.height = p.y - this.y;
                 break;
         }
-        
-       
+        this.createVertices();
     }
 
     protected int getNearestVertex(Point p) {
@@ -168,32 +160,10 @@ public class Rectangle extends java.awt.geom.Rectangle2D.Float implements Shape 
         }
         return minIndex;
     }
-    
-    
-
-    @Override
-    public double getX() {
-       return super.getX();
-    }
-
-    @Override
-    public double getY() {
-        return super.getY();
-    }
-
-    @Override
-    public double getWidth() {
-        return super.getWidth();
-    }
-
-    @Override
-    public double getHeight() {
-        return super.getHeight();
-    }
 
     @Override
     public void createVertices() {
-        corners = new CornerRectangles(CornerRectangles.RECTANGLE,this);
+        corners = new CornerRectangles(CornerRectangles.RECTANGLE, this);
     }
 
 }

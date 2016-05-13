@@ -33,6 +33,7 @@ public class DrawingBoard extends JComponent implements Logging {
     protected Stack<ShapeArrayList<Shape>> undoHistory = new Stack();
     protected Stack<ShapeArrayList<Shape>> redoHistory = new Stack();
     public List<String> hist = new ArrayList();
+    public List<String> oldHist= new ArrayList();
     private Point drawStart, drawEnd;
     private final MainGUI gui;
     private int triangleClicks = 0;

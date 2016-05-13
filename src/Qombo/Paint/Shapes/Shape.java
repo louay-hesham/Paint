@@ -7,6 +7,7 @@ package Qombo.Paint.Shapes;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  *
@@ -20,7 +21,7 @@ public interface Shape extends java.awt.Shape, Cloneable {
 
     public Shape clone();
 
-    public void setPosition(Point p);
+    public void setPosition(Point2D p);
 
     public void rotate(Graphics g, double angle);
 

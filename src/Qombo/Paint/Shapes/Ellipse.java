@@ -86,7 +86,7 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
     }
 
     @Override
-    public void setPosition(Point p) {
+    public void setPosition(Point2D p) {
         if (this.rotatedShape != null) {
             AffineTransform transform = new AffineTransform();
             transform.translate(p.getX() - center.getX(), p.getY() - center.getY());
@@ -167,6 +167,6 @@ public class Ellipse extends java.awt.geom.Ellipse2D.Float implements Shape {
 
     @Override
     public void createVertices() {
-        corners = new CornerRectangles(CornerRectangles.RECTANGLE, this);
+        corners = new CornerRectangles(this);
     }
 }

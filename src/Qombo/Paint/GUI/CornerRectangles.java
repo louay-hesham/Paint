@@ -5,8 +5,10 @@
  */
 package Qombo.Paint.GUI;
 
+import Qombo.Paint.Shapes.Line;
 import Qombo.Paint.Shapes.Rectangle;
 import Qombo.Paint.Shapes.Shape;
+import Qombo.Paint.Shapes.Triangle;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -16,9 +18,6 @@ import java.util.ArrayList;
  */
 public class CornerRectangles {
 
-    public static int RECTANGLE = 1;
-    public static int TRIANGLE = 2;
-
     public ArrayList<Rectangle> cornerRectangles = new ArrayList();
 
     public ArrayList<Rectangle> getCornerRectangles() {
@@ -26,24 +25,28 @@ public class CornerRectangles {
     }
     private int i = 0;
 
-    public CornerRectangles(int shapeName, Shape shape) {
-        if (shapeName == 1) {
-           
+    public CornerRectangles(Shape shape) {
+        if (shape instanceof Line) {
+            createLineCornerRectangles();
+            cornerRectangles.get(0).setPosition(((Line) shape).getP1());
+            cornerRectangles.get(1).setPosition(((Line) shape).getP2());
+        } else if (shape instanceof Triangle) {
+            createTriangleCornerRectangles();
+            cornerRectangles.get(0).setPosition(((Triangle) shape).getPoints()[0]);
+            cornerRectangles.get(1).setPosition(((Triangle) shape).getPoints()[1]);
+            cornerRectangles.get(2).setPosition(((Triangle) shape).getPoints()[2]);
+
+        } else {
             createSquareCornerRectangles();
             int x = (int) shape.getX();
             int y = (int) shape.getY();
             int width = (int) shape.getWidth();
             int height = (int) shape.getHeight();
-            cornerRectangles.get(0).setPosition(new Point (x,y));
+            cornerRectangles.get(0).setPosition(new Point(x, y));
             cornerRectangles.get(1).setPosition(new Point(x, y + height));
             cornerRectangles.get(2).setPosition(new Point(x + width, y));
-            cornerRectangles.get(3).setPosition(new Point(x + width, y + height));   
+            cornerRectangles.get(3).setPosition(new Point(x + width, y + height));
         }
-        if (shapeName == 2) {
-            createTriangleCornerRectangles();
-        }
-        
-
     }
 
     private void createSquareCornerRectangles() {
@@ -54,8 +57,15 @@ public class CornerRectangles {
     }
 
     private void createTriangleCornerRectangles() {
-        for (i = 0; i <= 2; i++){
-            cornerRectangles.add(new Rectangle(1,1,1,1));
+        for (i = 0; i <= 2; i++) {
+            cornerRectangles.add(new Rectangle(5, 5, 5, 5));
+        }
+
+    }
+
+    private void createLineCornerRectangles() {
+        for (i = 0; i <= 1; i++) {
+            cornerRectangles.add(new Rectangle(5, 5, 5, 5));
         }
 
     }

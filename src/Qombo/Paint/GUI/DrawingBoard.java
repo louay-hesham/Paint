@@ -174,15 +174,17 @@ public class DrawingBoard extends JComponent implements Logging {
                             registerUserAction();
                             shapes.remove(shapeToDelete);
                             hist.add("Shape Deleted");
+                            repaint();
                         }
-                        repaint();
                         break;
                     case 8:
                         Shape shapeToColor = getSelectedShape(e.getPoint());
-                        registerUserAction();
-                        shapeToColor.setColor();
-                        hist.add("Shape Re-Filled");
-                        repaint();
+                        if (shapeToColor != null) {
+                            registerUserAction();
+                            shapeToColor.setColor();
+                            hist.add("Shape Re-colored");
+                            repaint();
+                        }
                         break;
                     default:
                         break;
